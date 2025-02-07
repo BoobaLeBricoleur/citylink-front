@@ -1,45 +1,90 @@
-# citylink-front
+# CityLink Project Documentation
 
-This template should help get you started developing with Vue 3 in Vite.
+## 📋 Overview
 
-## Recommended IDE Setup
+CityLink consists of three repositories:
+- -CityLink-Front (User Interface)
+- CityLink-Back (API)
+- CityLink-Documentation
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Installation and Setup
 
-## Type Support for `.vue` Imports in TS
+### Back
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+1. **Clone the repository**
+```bash
+git clone https://github.com/BoobaLeBricoleur/citylink-back.git
+cd citylink-back
+```
 
-## Customize configuration
+2. **Launch Docker**
+```bash
+docker-compose up -d
+```
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+3. **Import Database**
+- Locate the backup file in the project root
+- Import via:
+  - PhpMyAdmin: http://localhost:8080
+  - Or your preferred IDE
+  - Credentials can be found in the docker-compose.yml file
 
-## Project Setup
+### Frontend
 
-```sh
+1. **Clone the repository**
+```bash
+git clone https://github.com/BoobaLeBricoleur/citylink-front.git
+cd citylink-front
+```
+
+2. **Install dependencies**
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+3. **Launch application**
+```bash
 npm run dev
+# or
+npm start
 ```
 
-### Type-Check, Compile and Minify for Production
+### Documentation
 
-```sh
-npm run build
+1. **Clone the repository**
+```bash
+git clone [documentation-repo-url]
+cd citylink-documentation
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+All documentation is accessible within the project folder.
 
-```sh
-npm run test:unit
+## 🔧 Architecture
+
+```
+CityLink/
+├── CityLink-Front/            # User Interface
+├── CityLink-Back/            # API and business logic
+│   └── database.sql   # Database backup
+└── CityLink-Documentation/     # Complete documentation
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 🛠️ Prerequisites
 
-```sh
-npm run lint
-```
+- Git
+- Docker and Docker Compose
+- Node.js and npm
+- MySQL
+
+## ⚠️ Important Notes
+
+- The project was coded in vueJS framework
+- Ensure required ports are available before launching Docker
+- Database must be imported before starting the backend
+- Verify all environment variables are properly configured
+
+## 📝 Support
+
+For questions or issues, refer to the documentation or contact the development team : 
+- nathan.milito@social.aston-ecole.com
+- matheo.ronval@social.aston-ecole.com
