@@ -5,3 +5,7 @@
 html {
     font-family: "Montserrat", sans-serif;
 }
+
+#app {
+    background-color: var(--cl-normal);
+}
