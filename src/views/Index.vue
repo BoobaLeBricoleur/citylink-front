@@ -114,13 +114,6 @@ export default {
     }
 }
 
-
-
-
-
-
-
-
 .upper-index {
     margin: 0 50px;
     min-height: 100%;
@@ -246,15 +239,12 @@ export default {
     }
 }
 
-
-
-
-
-
 @media (max-width: 700px) {
 
-    .upper-index{
-        div.message-bubble, div.message-bubble-reverse {
+    .upper-index {
+
+        div.message-bubble,
+        div.message-bubble-reverse {
             width: 100%;
         }
 
@@ -267,17 +257,12 @@ export default {
         .lower-index {
             flex-direction: column;
 
-            .merchant-introduction-container, .merchant-presentation {
+            .merchant-introduction-container,
+            .merchant-presentation {
                 margin: 20px auto;
                 width: 80%;
             }
         }
     }
 }
-
-
-
-
-
-
 </style>

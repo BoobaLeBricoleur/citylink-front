@@ -28,7 +28,7 @@ const toggleMenu = () => {
                 <RouterLink to="/events">Events</RouterLink>
                 <RouterLink to="/informations">Informations</RouterLink>
                 <RouterLink to="/announcements">Announcements</RouterLink>
-                <RouterLink to="/login" class="account-button">Login</RouterLink>
+                <RouterLink to="/account" class="account-button">Login</RouterLink>
             </div>
         </div>
     </div>
@@ -53,9 +53,8 @@ const toggleMenu = () => {
         align-items: center;
     }
 
-    /* Styles par défaut pour le menu en mode desktop */
     .links-container {
-        display: flex; /* Le menu est visible en mode desktop */
+        display: flex;
         align-items: center;
         
         .links {
@@ -78,7 +77,6 @@ const toggleMenu = () => {
         }
     }
 
-    /* Icône du menu burger (invisible en mode desktop) */
     .burger-menu {
         display: none;
         flex-direction: column;
@@ -103,7 +101,6 @@ const toggleMenu = () => {
     }
 }
 
-/* Mode mobile (max 700px) */
 @media (max-width: 850px) {
     .header {
         .links-container {
@@ -145,14 +142,12 @@ const toggleMenu = () => {
             }
         }
 
-        /* Quand le menu est actif */
         .links-container.active {
             max-height: 500px;
             visibility: visible;
             opacity: 1;
         }
 
-        /* Affichage du menu burger */
         .burger-menu {
             display: flex;
         }
