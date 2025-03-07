@@ -12,7 +12,7 @@ const toggleMenu = () => {
 <template>
     <div class="header">
         <div class="logo header-component">
-            <img src="../../assets/logo.svg" alt="Logo" height="40px"/>
+            <img src="../../assets/citylink-logo.svg" alt="Logo" height="40px"/>
         </div>
 
         <div class="burger-menu" @click="toggleMenu">
