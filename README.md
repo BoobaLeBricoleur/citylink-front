@@ -1,90 +1,75 @@
-# CityLink Project Documentation
+# Nuxt Minimal Starter
 
-## 📋 Overview
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-CityLink consists of three repositories:
-- -CityLink-Front (User Interface)
-- CityLink-Back (API)
-- CityLink-Documentation
+## Setup
 
-## 🚀 Installation and Setup
+Make sure to install dependencies:
 
-### Back
-
-1. **Clone the repository**
 ```bash
-git clone https://github.com/BoobaLeBricoleur/citylink-back.git
-cd citylink-back
-```
-
-2. **Launch Docker**
-```bash
-docker-compose up -d
-```
-
-3. **Import Database**
-- Locate the backup file in the project root
-- Import via:
-  - PhpMyAdmin: http://localhost:8080
-  - Or your preferred IDE
-  - Credentials can be found in the docker-compose.yml file
-
-### Frontend
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/BoobaLeBricoleur/citylink-front.git
-cd citylink-front
-```
-
-2. **Install dependencies**
-```bash
+# npm
 npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-3. **Launch application**
+## Development Server
+
+Start the development server on `http://localhost:3000`:
+
 ```bash
+# npm
 npm run dev
-# or
-npm start
+
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
 
-### Documentation
+## Production
 
-1. **Clone the repository**
+Build the application for production:
+
 ```bash
-git clone [documentation-repo-url]
-cd citylink-documentation
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
 ```
 
-All documentation is accessible within the project folder.
+Locally preview production build:
 
-## 🔧 Architecture
+```bash
+# npm
+npm run preview
 
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
 ```
-CityLink/
-├── CityLink-Front/            # User Interface
-├── CityLink-Back/            # API and business logic
-│   └── database.sql   # Database backup
-└── CityLink-Documentation/     # Complete documentation
-```
 
-## 🛠️ Prerequisites
-
-- Git
-- Docker and Docker Compose
-- Node.js and npm
-- MySQL
-
-## ⚠️ Important Notes
-
-- The project was coded in vueJS framework
-- Ensure required ports are available before launching Docker
-- Database must be imported before starting the backend
-- Verify all environment variables are properly configured
-
-## 📝 Support
-
-For questions or issues, refer to the documentation or contact the development team : 
-- nathan.milito@social.aston-ecole.com
-- matheo.ronval@social.aston-ecole.com
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

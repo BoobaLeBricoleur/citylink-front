@@ -68,3 +68,7 @@
   margin: 0;
   font-weight: normal;
 }
+
+html {
+  font-family: sans-serif;
+}
