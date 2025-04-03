@@ -1,33 +1,3 @@
-<script>
-import Header from '../components/views/Header.vue'
-import Footer from '../components/views/Footer.vue'
-
-export default {
-    components: {
-        Header,
-        Footer
-    },
-    data() {
-        return {
-            isLogin: true,
-            form: {
-                email: '',
-                password: '',
-                confirmPassword: ''
-            }
-        };
-    },
-    methods: {
-        toggleForm() {
-            this.isLogin = !this.isLogin;
-        },
-        submitForm() {
-
-        }
-    }
-}
-</script>
-
 <template>
     <div class="full-page">
     <Header />
@@ -53,6 +23,92 @@ export default {
     <Footer />
 </div>
 </template>
+
+<script>
+import Header from '../components/views/Header.vue'
+import Footer from '../components/views/Footer.vue'
+import axios from 'axios'
+
+export default {
+    components: {
+        Header,
+        Footer
+    },
+    data() {
+        return {
+            isLogin: true,
+            isLogin: true,
+            form: {
+                firstname: '',
+                lastname: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                company: ''
+            },
+            error: '',
+            loading: false,
+            API_URL: process.env.API_URL || 'http://localhost:3000/api'
+        };
+    },
+    methods: {
+        toggleForm() {
+            this.isLogin = !this.isLogin;
+        },
+        async submitForm() {
+            this.error = '';
+            this.loading = true;
+            
+            try {
+                let response;
+                
+                if (this.isLogin) {
+                    // Connexion - appel direct à l'API
+                    response = await axios.post(`${this.API_URL}/users/login`, {
+                        email: this.form.email,
+                        password: this.form.password
+                    });
+                    // Stocker les données utilisateur et le token
+                    //localStorage.setItem('user', JSON.stringify(response.data.user));
+                    localStorage.setItem('token', response.data.token);
+                    
+                    // Redirection après connexion réussie
+                    this.$router.push('/');
+                } else {
+                    // Vérification que les mots de passe correspondent
+                    if (this.form.password !== this.form.confirmPassword) {
+                        this.error = 'Les mots de passe ne correspondent pas';
+                        this.loading = false;
+                        return;
+                    }
+                    
+                    // Inscription - appel direct à l'API
+                    response = await axios.post(`${this.API_URL}/users/register`, {
+                        firstname: this.form.firstname,
+                        lastname: this.form.lastname,
+                        email: this.form.email,
+                        password: this.form.password,
+                        company: this.form.company || undefined
+                    });
+                    
+                    // Stocker les données utilisateur et le token
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                    localStorage.setItem('token', response.data.token);
+                    
+                    // Redirection après inscription réussie
+                    this.$router.push('/');
+                }
+            } catch (err) {
+                // Gestion des erreurs
+                console.error('Erreur:', err);
+                this.error = err.response?.data?.message || 'Une erreur est survenue';
+            } finally {
+                this.loading = false;
+            }
+        }
+    }
+}
+</script>
 
 <style lang="scss">
 .login-page {
@@ -131,5 +187,19 @@ input {
     .auth-container {
         width: 80%;
     }
+}
+
+.error-message {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 </style>
