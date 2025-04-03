@@ -1,0 +1,57 @@
+
+$header-height: 70px;
+$z-index-header: 1000;
+$z-index-dropdown: 1050;
+$color-primary: #1253a3;
+$color-primary-dark: #0c407e;
+$color-secondary: #f5aa17;
+$color-secondary-light: #ffb938;
+$color-secondary-dark: #e09200;
+
+$color-text: #333;
+$color-text-light: #fff;
+$color-text-muted: #6c757d;
+
+$color-danger: #ff453a;
+$color-success: #4cd964;
+$color-warning: #ffcc00;
+
+// Container
+$container-max-width: 1200px;
+
+// Espacement
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-xxl: 3rem;     // 48px
+
+// Typographie
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+
+// Border-radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+$border-radius-circle: 50%;
+
+// Transitions
+$transition-fast: all 0.2s ease;
+$transition-normal: all 0.3s ease;
+
+// Z-index
+$z-index-header: 1000;
+$z-index-dropdown: 1050;
+$z-index-modal: 2000;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+$breakpoint-xs: 480px;
+$breakpoint-xl: 1400px;
+
+

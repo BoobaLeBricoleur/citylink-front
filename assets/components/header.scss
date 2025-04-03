@@ -1,0 +1,399 @@
+@use '../variables' as *;
+@use '../mixing' as *;
+
+// Ajout d'un espace pour compenser le header fixe
+body {
+    padding-top: $header-height;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $header-height;
+    background-color: $color-primary;
+    z-index: $z-index-header;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+
+    .header-container {
+        @include container;
+        @include flex(row, space-between, center);
+        height: 100%;
+    }
+
+    .logo {
+        margin-right: $spacing-md;
+    }
+
+    // Navigation principale
+    .main-nav {
+        @include flex(row, space-between, center);
+        flex-grow: 1;
+    }
+
+    .nav-list {
+        @include flex(row, flex-start, center);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: $spacing-md;
+
+        li {
+            position: relative;
+        }
+
+        a {
+            color: $color-text-light;
+            text-decoration: none;
+            font-weight: 500;
+            padding: $spacing-sm $spacing-md;
+            border-radius: $border-radius-md;
+            transition: $transition-normal;
+            display: block;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.15);
+            }
+
+            &.router-link-active {
+                background-color: rgba(255, 255, 255, 0.2);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 20px;
+                    height: 3px;
+                    background-color: $color-secondary;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+
+    // Zone de connexion/profil
+    .auth-actions {
+        margin-left: auto;
+    }
+
+    .login-button {
+        @include flex(row, center, center);
+        background: $color-secondary;
+        color: $color-text;
+        border: none;
+        padding: $spacing-xs $spacing-lg;
+        border-radius: $border-radius-md;
+        font-weight: 600;
+        text-decoration: none;
+        transition: $transition-fast;
+
+        &:hover {
+            background: $color-secondary-light;
+        }
+    }
+
+    // Profil utilisateur connecté
+    .user-profile {
+        @include flex(row, center, center);
+        gap: $spacing-sm;
+        cursor: pointer;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-md;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+    }
+
+    .avatar-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: $border-radius-circle;
+        background: $color-secondary;
+        @include flex;
+        font-weight: 600;
+        color: $color-primary-dark;
+    }
+
+    .user-name {
+        color: $color-text-light;
+        font-weight: 500;
+    }
+
+    // Menu déroulant
+    .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 5px);
+        right: 0;
+        width: 250px;
+        background-color: white;
+        border-radius: $border-radius-md;
+        @include elevation(2);
+        overflow: hidden;
+        z-index: $z-index-dropdown;
+    }
+
+    // Menu déroulant - Styles améliorés
+    .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 280px;
+        background-color: white;
+        border-radius: $border-radius-md;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        z-index: $z-index-dropdown;
+        animation: dropdown-appear 0.3s ease;
+        transform-origin: top right;
+    }
+
+    @keyframes dropdown-appear {
+        from {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    // Section header du menu déroulant
+    .dropdown-header {
+        padding: $spacing-md;
+        position: relative;
+        background: linear-gradient(130deg, $color-primary, $color-primary-dark);
+        color: white;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+    }
+
+    .dropdown-user-info {
+        position: relative;
+        padding-left: 48px;
+        min-height: 40px;
+
+        &::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            background: $color-secondary;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: $color-primary-dark;
+        }
+    }
+
+    .dropdown-name {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 2px;
+        color: white;
+    }
+
+    .dropdown-email {
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.8);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 190px;
+    }
+
+    // Section contenu du menu déroulant
+    .dropdown-content {
+        padding: $spacing-xs 0;
+    }
+
+    // Section footer du menu déroulant
+    .dropdown-footer {
+        padding: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        margin-top: $spacing-xs;
+    }
+
+    // Éléments du menu
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: $spacing-sm $spacing-md;
+        text-decoration: none;
+        color: $color-text;
+        transition: all 0.2s ease;
+        font-size: $font-size-base;
+
+        i {
+            margin-right: $spacing-md;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $color-primary;
+            transition: transform 0.2s ease;
+        }
+
+        &:hover {
+            background-color: rgba($color-primary, 0.05);
+            padding-left: calc($spacing-md + 3px);
+
+            i {
+                transform: scale(1.1);
+            }
+        }
+
+        &.logout {
+            color: $color-text;
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+
+            i {
+                color: $color-danger;
+            }
+
+            &:hover {
+                color: $color-danger;
+                background-color: rgba($color-danger, 0.05);
+            }
+        }
+    }
+
+    // Animation pour la transition du menu
+    .dropdown-enter-active,
+    .dropdown-leave-active {
+        transition: all 0.3s;
+    }
+
+    .dropdown-enter-from,
+    .dropdown-leave-to {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+
+    // Bouton burger pour mobile
+    .burger-button {
+        display: none;
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        z-index: $z-index-header + 1;
+
+        .burger-line {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            left: 8px;
+            transition: $transition-normal;
+
+            &:nth-child(1) {
+                top: 12px;
+            }
+
+            &:nth-child(2) {
+                top: 20px;
+            }
+
+            &:nth-child(3) {
+                top: 28px;
+            }
+        }
+
+        &.active {
+            .burger-line:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .burger-line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger-line:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+    }
+
+    // Responsive
+    @include respond-to(md) {
+        .burger-button {
+            display: block;
+        }
+
+        .main-nav {
+            position: fixed;
+            top: $header-height;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $color-primary-dark;
+            flex-direction: column;
+            padding: $spacing-lg;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+
+            &.active {
+                transform: translateX(0);
+            }
+        }
+
+        .nav-list {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+
+            a {
+                text-align: center;
+
+                &.router-link-active::after {
+                    display: none;
+                }
+            }
+        }
+
+        .auth-actions {
+            margin: $spacing-lg 0 0;
+            width: 100%;
+        }
+
+        .login-button,
+        .user-profile {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hide-mobile {
+            display: none;
+        }
+    }
+}

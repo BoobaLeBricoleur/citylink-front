@@ -1,0 +1,23 @@
+
+// Nouvelle syntaxe @use au lieu de @import
+@use 'variables' as *;
+@use 'mixing' as *;   
+
+// Import des composants
+@use 'components/footer';
+@use 'components/header';
+
+// Import des pages
+@use 'pages/account';
+@use 'pages/profile';
+@use 'pages/announcements';
+@use 'pages/events';
+@use 'pages/forum';
+@use 'pages/index';
+@use 'pages/informations';
+@use 'pages/merchants';
+
+// Sert de test pour savoir si le scss est bien prit en compte
+//body {
+//    border: 8px solid red !important; 
+//}  

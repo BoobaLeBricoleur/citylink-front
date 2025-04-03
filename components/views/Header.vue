@@ -1,168 +1,151 @@
-<script setup>
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
-
-const isMenuOpen = ref(false);
-
-const toggleMenu = () => {
-    isMenuOpen.value = !isMenuOpen.value;
-};
-</script>
-
 <template>
-    <div class="header">
-        <div class="logo header-component">
-            <NuxtImg src="/citylink-logo.svg" alt="Logo" height="40px" />
-        </div>
+  <header class="header" :class="{ 'scrolled': isScrolled }">
+    <div class="header-container">
+      <!-- Logo -->
+      <div class="logo">
+        <NuxtLink to="/">
+          <NuxtImg src="/citylink-logo.svg" alt="CityLink" height="40" />
+        </NuxtLink>
+      </div>
 
-        <div class="burger-menu" @click="toggleMenu">
-            <div :class="{ 'bar': true, 'open': isMenuOpen }"></div>
-            <div :class="{ 'bar': true, 'open': isMenuOpen }"></div>
-            <div :class="{ 'bar': true, 'open': isMenuOpen }"></div>
-        </div>
+      <!-- Menu burger mobile -->
+      <button class="burger-button" @click="toggleMenu" :class="{ 'active': isMenuOpen }" aria-label="Menu de navigation">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
 
-        <div class="links-container" :class="{ 'active': isMenuOpen }">
-            <div class="links">
-                <RouterLink to="/forum">Forum</RouterLink>
-                <RouterLink to="/merchants">Merchants</RouterLink>
-                <RouterLink to="/events">Events</RouterLink>
-                <RouterLink to="/informations">Informations</RouterLink>
-                <RouterLink to="/announcements">Announcements</RouterLink>
-                <RouterLink to="/account" class="account-button">Login</RouterLink>
+      <!-- Navigation -->
+      <nav class="main-nav" :class="{ 'active': isMenuOpen }">
+        <ul class="nav-list">
+          <li><NuxtLink to="/forum" @click="isMenuOpen = false">Forum</NuxtLink></li>
+          <li><NuxtLink to="/merchants" @click="isMenuOpen = false">Commerces</NuxtLink></li>
+          <li><NuxtLink to="/events" @click="isMenuOpen = false">Événements</NuxtLink></li>
+          <li><NuxtLink to="/informations" @click="isMenuOpen = false">Informations</NuxtLink></li>
+          <li><NuxtLink to="/announcements" @click="isMenuOpen = false">Annonces</NuxtLink></li>
+        </ul>
+        
+        <!-- Actions de connexion -->
+        <div class="auth-actions">
+          <!-- Si connecté -->
+          <div v-if="isLoggedIn" class="user-profile" @click="toggleDropdown">
+            <div class="avatar-circle">
+              <i class="fa-solid fa-user"></i>
             </div>
+            <span class="user-name hide-mobile">{{ userData.firstname }}</span>
+            
+            <!-- Menu déroulant -->
+            <transition name="dropdown">
+              <div class="dropdown-menu" v-if="isDropdownOpen">
+                <div class="dropdown-header">
+                  <div class="dropdown-user-info">
+                    <div class="dropdown-name">{{ userData.firstname }} {{ userData.lastname }}</div>
+                    <div class="dropdown-email">{{ userData.email }}</div>
+                  </div>
+                </div>
+                
+                <div class="dropdown-content">
+                  <NuxtLink to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
+                    <i class="fa-solid fa-user"></i> Mon profil
+                  </NuxtLink>
+                  <NuxtLink to="/dashboard" class="dropdown-item" @click="isDropdownOpen = false">
+                    <i class="fa-solid fa-user"></i> Tableau de bord
+                  </NuxtLink>
+
+                  <NuxtLink to="/settings" class="dropdown-item" @click="isDropdownOpen = false">
+                    <i class="fa-solid fa-user"></i>Paramètres
+                  </NuxtLink>
+                </div>
+                
+                <div class="dropdown-footer">
+                  <button @click="logout" class="dropdown-item logout">
+                    <i class="fa-solid fa-user"></i> Déconnexion
+                  </button>
+                </div>
+              </div>
+            </transition>
+          </div>
+          
+          <!-- Si non connecté -->
+          <div v-else class="auth-buttons">
+            <NuxtLink to="/account" class="login-button" @click="isMenuOpen = false">
+              <i class="fa-solid fa-user"></i>
+              <span>Se connecter</span>
+            </NuxtLink>
+          </div>
         </div>
+      </nav>
     </div>
+  </header>
 </template>
 
-<style lang="scss">
-@import "@/assets/base.css";
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    background-color: var(--cl-normal);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid white;
-    position: relative;
-    z-index: 100;
+const router = useRouter();
 
-    .header-component {
-        height: 100%;
-        display: flex;
-        align-items: center;
+// État du menu mobile
+const isMenuOpen = ref(false);
+const isDropdownOpen = ref(false);
+const isLoggedIn = ref(false);
+const userData = ref({});
+const isScrolled = ref(false);
+
+// Détecte si l'utilisateur est connecté
+onMounted(() => {
+  if (process.client) {
+    const user = localStorage.getItem('user');
+    if (user) {
+      isLoggedIn.value = true;
+      userData.value = JSON.parse(user);
+    
     }
+    
+    // Détection du scroll pour effet de header transparent/opaque
+    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('click', closeDropdown);
+  }
+});
 
-    .links-container {
-        display: flex;
-        align-items: center;
-        
-        .links {
-            display: flex;
-            gap: 20px;
+onUnmounted(() => {
+  if (process.client) {
+    window.removeEventListener('scroll', handleScroll);
+    document.removeEventListener('click', closeDropdown);
+  }
+});
 
-            .account-button {
-                background-color: white;
-                color: var(--cl-normal);
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10;
+};
 
-                &:hover {
-                    transition: all 0.5s ease-in-out;
-                    background: rgba(255, 255, 255, 0.7);
-                }
-            }
+// Fonctions
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+  if (isMenuOpen.value) {
+    document.body.classList.add('no-scroll');
+  } else {
+    document.body.classList.remove('no-scroll');
+  }
+};
 
-            a {
-                text-decoration: none;
-                color: white;
-                padding: 10px 15px;
-                border-radius: 5px;
-                font-size: 16px;
-                font-weight: bold;
+const toggleDropdown = (event) => {
+  event.stopPropagation();
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
 
-                &:hover {
-                    transition: all 0.5s ease;
-                    background: rgba(255, 255, 255, 0.1);
-                }
-            }
-        }
-    }
+const logout = () => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+  isLoggedIn.value = false;
+  isDropdownOpen.value = false;
+  router.push('/');
+};
 
-    .burger-menu {
-        display: none;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30px;
-        height: 25px;
-        cursor: pointer;
-        z-index: 200;
-
-        .bar {
-            width: 100%;
-            height: 4px;
-            background-color: white;
-            transition: 0.4s;
-        }
-
-        &.open {
-            .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .bar:nth-child(2) { opacity: 0; }
-            .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-        }
-    }
-}
-
-@media (max-width: 850px) {
-    .header {
-        .links-container {
-            position: absolute;
-            top: 60px;
-            right: 0;
-            width: 100%;
-            background: var(--cl-normal);
-            flex-direction: column;
-            text-align: center;
-            overflow: hidden;
-            max-height: 0;
-            visibility: hidden;
-            opacity: 0;
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-
-            .links {
-                display: flex;
-                flex-direction: column;
-                padding: 20px 0;
-
-                a {
-                    padding: 15px 0;
-                    width: 100%;
-                    display: block;
-                    color: white;
-                    text-decoration: none;
-                    font-size: 18px;
-                    font-weight: bold;
-
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.1);
-                        transition: background 0.3s;
-                    }
-                }
-            }
-        }
-
-        .links-container.active {
-            max-height: 500px;
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .burger-menu {
-            display: flex;
-        }
-    }
-}
-</style>
+// Ferme le menu quand l'utilisateur clique en dehors
+const closeDropdown = (event) => {
+  if (!event.target.closest('.user-profile') && isDropdownOpen.value) {
+    isDropdownOpen.value = false;
+  }
+};
+</script>

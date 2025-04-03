@@ -1,0 +1,188 @@
+.login-page {
+    display: flex;
+    height: calc(100% - 60px);
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/bg-lyon-login.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .full-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-page {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .auth-container {
+    width: 450px;
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: rgba(29, 29, 29, 0.85);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+  }
+  
+  .form-centered {
+    width: 100%;
+  }
+  
+  .auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+    
+    .logo-mini {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+    
+    h2 {
+      color: var(--cl-light);
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
+    
+    .auth-subtitle {
+      color: #ccc;
+      font-size: 16px;
+    }
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+    
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 14px;
+    }
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.07);
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--cl-light);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+  
+  .gold-button {
+    width: 100%;
+    background: linear-gradient(90deg, rgba(255, 226, 89, 1) 0%, rgba(255, 167, 81, 1) 100%);
+    color: #333;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &:hover {
+      background: linear-gradient(90deg, rgba(255, 236, 149, 1) 0%, rgba(255, 187, 121, 1) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 197, 85, 0.4);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  .toggle-link {
+    color: #ccc;
+    margin-top: 20px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    
+    &:hover {
+      color: var(--cl-light);
+      text-decoration: underline;
+    }
+  }
+  
+  .error-message {
+    background-color: rgba(255, 69, 58, 0.2);
+    border-left: 4px solid #ff453a;
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    
+    .error-icon {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background-color: #ff453a;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 22px;
+      font-weight: bold;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #333;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  @media (max-width: 700px) {
+    .auth-container {
+      width: 100%;
+    }
+    
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
