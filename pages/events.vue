@@ -11,8 +11,6 @@
             <div class="hero-overlay"></div>
         </section>
 
-        <div class="section-separator"></div>
-
         <section class="filters-section">
             <div class="filters">
                 <div class="filter-item">
@@ -32,8 +30,6 @@
             </div>
         </section>
 
-        <div class="section-separator"></div>
-
         <section class="events-list-section">
             <h2>Événements à Venir</h2>
             <ul class="events-list">
@@ -49,16 +45,6 @@
                     </button>
                 </li>
             </ul>
-        </section>
-
-        <div class="section-separator"></div>
-
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2>Envie d'organiser un événement ?</h2>
-                <p>Rejoignez notre plateforme et partagez vos idées avec la communauté !</p>
-                <button class="cta-button">Créer un événement</button>
-            </div>
         </section>
 
         <Footer />
@@ -81,6 +67,36 @@ export default {
             categories: ["Culture", "Sport", "Musique", "Conférence"],
             events: [
                 {
+                    id: 1,
+                    title: "Concert de Jazz",
+                    date: "2025-04-10",
+                    location: "Salle des Fêtes",
+                    description: "Un concert de jazz avec des artistes locaux.",
+                    category: "Musique",
+                },
+                {
+                    id: 2,
+                    title: "Marathon de la Ville",
+                    date: "2025-04-15",
+                    location: "Centre-ville",
+                    description: "Participez au marathon annuel de la ville.",
+                    category: "Sport",
+                },{
+                    id: 1,
+                    title: "Concert de Jazz",
+                    date: "2025-04-10",
+                    location: "Salle des Fêtes",
+                    description: "Un concert de jazz avec des artistes locaux.",
+                    category: "Musique",
+                },
+                {
+                    id: 2,
+                    title: "Marathon de la Ville",
+                    date: "2025-04-15",
+                    location: "Centre-ville",
+                    description: "Participez au marathon annuel de la ville.",
+                    category: "Sport",
+                },{
                     id: 1,
                     title: "Concert de Jazz",
                     date: "2025-04-10",
@@ -134,7 +150,8 @@ export default {
 
     .hero-section {
         position: relative;
-        height: 70vh;
+        background-image: url('/bg-lyon-login.jpg');
+        height: 85vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -185,6 +202,17 @@ export default {
                     transform: scale(1.1);
                 }
             }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--cl-normal) 100%);
+            pointer-events: none;
         }
     }
 
@@ -241,7 +269,7 @@ export default {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, minmax(300px, 1fr));
             gap: 20px;
 
             .event-item {
@@ -317,22 +345,4 @@ export default {
         }
     }
 }
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.section-separator {
-    height: 50px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
-}
-
-
 </style>
