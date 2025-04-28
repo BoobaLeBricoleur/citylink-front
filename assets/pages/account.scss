@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 // Structure de base de la page
 .full-page {
   height: 100vh;
@@ -19,14 +21,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: $spacing-md;
 }
 
 .auth-container {
   width: 500px;
   max-width: 100%;
   padding: 25px;
-  border-radius: 20px;
+  border-radius: $border-radius-lg;
   background-color: rgba(29, 29, 29, 0.85);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
@@ -44,7 +46,7 @@
   max-height: 400px;
   overflow-y: auto;
   padding-right: 10px;
-  margin-bottom: 15px;
+  margin-bottom: $spacing-sm;
   
   &.login-form {
     max-height: none;
@@ -57,12 +59,12 @@
   }
   
   &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: $color-white-overlay-light;
     border-radius: 10px;
   }
   
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: $color-white-overlay-medium;
     border-radius: 10px;
     
     &:hover {
@@ -74,11 +76,11 @@
 // En-tête du formulaire
 .auth-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: $spacing-md;
   
   .logo-mini {
     width: 60px;
-    margin-bottom: 15px;
+    margin-bottom: $spacing-sm;
   }
   
   h2 {
@@ -88,8 +90,8 @@
   }
   
   .auth-subtitle {
-    color: #ccc;
-    font-size: 16px;
+    color: $color-text-muted;
+    font-size: $font-size-base;
   }
 }
 
@@ -101,8 +103,8 @@
     display: block;
     text-align: left;
     margin-bottom: 5px;
-    color: #fff;
-    font-size: 14px;
+    color: $color-text-light;
+    font-size: $font-size-sm;
   }
 }
 
@@ -115,12 +117,12 @@
 .auth-input {
   width: 100%;
   padding: 11px 14px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 14px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white !important;
-  transition: all 0.2s ease;
+  border-radius: $border-radius-sm;
+  border: 1px solid $color-white-overlay-medium;
+  font-size: $font-size-sm;
+  background-color: $color-white-overlay-light;
+  color: $color-text-light !important;
+  transition: $transition-fast;
   
   &::placeholder {
     color: rgba(255, 255, 255, 0.5);
@@ -128,7 +130,7 @@
   
   &:focus {
     outline: none;
-    border-color: var(--cl-gold);
+    border-color: $color-secondary;
     box-shadow: 0 0 0 2px rgba(255, 197, 85, 0.2);
   }
 }
@@ -136,24 +138,23 @@
 // Bouton principal
 .gold-button {
   width: 100%;
-  background: linear-gradient(90deg, rgba(255, 226, 89, 1) 0%, rgba(255, 167, 81, 1) 100%);
-  color: #333;
+  background: linear-gradient(90deg, rgba($color-secondary, 0.2), rgba($color-secondary-dark, 0.2));  color: $color-text;
   padding: 12px;
-  font-size: 16px;
+  font-size: $font-size-base;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: $border-radius-md;
   margin-top: 10px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: $transition-fast;
   display: flex;
   justify-content: center;
   align-items: center;
   
   &:hover {
-    background: linear-gradient(90deg, rgba(255, 236, 149, 1) 0%, rgba(255, 187, 121, 1) 100%);
+    background: linear-gradient(90deg, $color-secondary-light 0%, $color-secondary 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 197, 85, 0.4);
+    box-shadow: 0 4px 12px rgba($color-secondary, 0.4);
   }
   
   &:active {
@@ -163,27 +164,27 @@
 
 // Lien de basculement
 .toggle-link {
-  color: #ccc;
-  margin-top: 15px;
-  font-size: 14px;
+  color: $color-text-muted;
+  margin-top: $spacing-sm;
+  font-size: $font-size-sm;
   cursor: pointer;
   text-align: center;
   
   &:hover {
-    color: var(--cl-light);
+    color: $color-text-light;
     text-decoration: underline;
   }
 }
 
 // Message d'erreur
 .error-message {
-  background-color: rgba(255, 69, 58, 0.2);
-  border-left: 4px solid #ff453a;
-  color: #fff;
+  background-color: rgba($color-danger, 0.2);
+  border-left: 4px solid $color-danger;
+  color: $color-text-light;
   padding: 10px 12px;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  font-size: 14px;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-sm;
+  font-size: $font-size-sm;
   display: flex;
   align-items: center;
   
@@ -191,7 +192,7 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-color: #ff453a;
+    background-color: $color-danger;
     border-radius: 50%;
     text-align: center;
     line-height: 20px;
@@ -207,9 +208,9 @@
   width: 18px;
   height: 18px;
   margin-right: 8px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid $color-white-overlay-medium;
   border-radius: 50%;
-  border-top-color: #333;
+  border-top-color: $color-text;
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -220,29 +221,28 @@
 // Sélecteur de type de compte
 .account-type-selector {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: $spacing-sm;
   gap: 10px;
 }
 
 .account-type-btn {
   flex: 1;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ccc;
+  background-color: $color-white-overlay-light;
+  border: 1px solid $color-white-overlay-medium;
+  color: $color-text-muted;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: $border-radius-sm;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  font-size: $font-size-sm;
+  transition: $transition-normal;
   
   &.active {
-    background: linear-gradient(90deg, rgba(255, 226, 89, 0.2), rgba(255, 167, 81, 0.2));
-    border-color: var(--cl-gold);
-    color: var(--cl-gold);
+    background: linear-gradient(90deg, rgba($color-secondary, 0.2), rgba($color-secondary-dark, 0.2));    border-color: $color-secondary;
+    color: $color-secondary;
   }
   
   &:hover:not(.active) {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: $color-white-overlay-medium;
   }
   
   i {
@@ -268,7 +268,7 @@
   margin-bottom: 8px;
   cursor: pointer;
   font-size: 13px;
-  color: #ccc;
+  color: $color-text-muted;
   
   input {
     position: absolute;
@@ -278,7 +278,7 @@
     width: 0;
     
     &:checked ~ .checkmark {
-      background-color: var(--cl-gold);
+      background-color: $color-secondary;
       
       &:after {
         display: block;
@@ -287,7 +287,7 @@
   }
   
   &:hover input ~ .checkmark {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: $color-white-overlay-medium;
   }
   
   .checkmark {
@@ -296,9 +296,9 @@
     left: 0;
     height: 18px;
     width: 18px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: $color-white-overlay-light;
     border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid $color-white-overlay-medium;
     
     &:after {
       content: "";
@@ -308,7 +308,7 @@
       top: 2px;
       width: 4px;
       height: 9px;
-      border: solid white;
+      border: solid $color-white;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
