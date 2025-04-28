@@ -8,7 +8,7 @@
           <div v-if="!user.avatar" class="profile-avatar-placeholder">
             {{ userInitials }}
           </div>
-          <img v-else :src="user.avatar" alt="Photo de profil" />
+          <img v-else :src="user.avatar" :alt="$t('profile.photo_alt')" />
         </div>
         <h2>{{ user.firstname }} {{ user.lastname }}</h2>
         <p class="user-email">{{ user.email }}</p>
@@ -16,13 +16,13 @@
         
         <div class="profile-menu">
           <button class="profile-menu-item" :class="{ active: activeTab === 'info' }" @click="setActiveTab('info')">
-            <i class="fas fa-user"></i> Informations personnelles
+            <i class="fas fa-user"></i> {{ $t('menu.personal_info') }}
           </button>
           <button class="profile-menu-item" :class="{ active: activeTab === 'activities' }" @click="setActiveTab('activities')">
-            <i class="fas fa-calendar-alt"></i> Mes activités
+            <i class="fas fa-calendar-alt"></i> {{ $t('menu.my_activities') }}
           </button>
           <button class="profile-menu-item" :class="{ active: activeTab === 'settings' }" @click="setActiveTab('settings')">
-            <i class="fas fa-cog"></i> Paramètres
+            <i class="fas fa-cog"></i> {{ $t('menu.settings') }}
           </button>
         </div>
       </div>
@@ -35,68 +35,68 @@
         
         <!-- Informations personnelles -->
         <div v-if="activeTab === 'info'" class="profile-section">
-          <h3>Mes informations</h3>
+          <h3>{{ $t('personal_info.title') }}</h3>
           <form @submit.prevent="updateProfile" class="profile-form">
             <div class="form-grid">
               <div class="form-group">
-                <label for="firstname">Prénom</label>
+                <label for="firstname">{{ $t('personal_info.firstname') }}</label>
                 <input type="text" id="firstname" v-model="form.firstname" required />
               </div>
               <div class="form-group">
-                <label for="lastname">Nom</label>
+                <label for="lastname">{{ $t('personal_info.lastname') }}</label>
                 <input type="text" id="lastname" v-model="form.lastname" required />
               </div>
             </div>
             
             <div class="form-group">
-              <label for="email">Email</label>
+              <label for="email">{{ $t('personal_info.email') }}</label>
               <input type="email" id="email" v-model="form.email" required />
             </div>
             
             <div class="form-group">
-              <label for="company">Entreprise</label>
+              <label for="company">{{ $t('personal_info.company') }}</label>
               <input type="text" id="company" v-model="form.company" />
             </div>
             
             <div class="form-actions">
               <button type="submit" class="gold-button" :disabled="loading">
                 <span v-if="loading" class="spinner"></span>
-                Mettre à jour
+                {{ $t('personal_info.update_button') }}
               </button>
             </div>
           </form>
           
           <div class="password-section">
-            <h3>Changer mon mot de passe</h3>
+            <h3>{{ $t('personal_info.password_section.title') }}</h3>
             <form @submit.prevent="updatePassword" class="profile-form">
               <div class="form-group">
-                <label for="currentPassword">Mot de passe actuel</label>
+                <label for="currentPassword">{{ $t('personal_info.password_section.current') }}</label>
                 <input type="password" id="currentPassword" v-model="passwords.current" required />
               </div>
               
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="newPassword">Nouveau mot de passe</label>
+                  <label for="newPassword">{{ $t('personal_info.password_section.new') }}</label>
                   <input type="password" id="newPassword" v-model="passwords.new" required />
                 </div>
                 <div class="form-group">
-                  <label for="confirmPassword">Confirmation</label>
+                  <label for="confirmPassword">{{ $t('personal_info.password_section.confirm') }}</label>
                   <input type="password" id="confirmPassword" v-model="passwords.confirm" required />
                 </div>
               </div>
               <div class="form-actions">
-              <button type="submit" class="gold-button" :disabled="loading">
-                <span v-if="passwordLoading" class="spinner"></span>
-                Changer le mot de passe
-              </button>
-            </div>
+                <button type="submit" class="gold-button" :disabled="passwordLoading">
+                  <span v-if="passwordLoading" class="spinner"></span>
+                  {{ $t('personal_info.password_section.button') }}
+                </button>
+              </div>
             </form>
           </div>
         </div>
         
         <!-- Mes activités -->
         <div v-if="activeTab === 'activities'" class="profile-section">
-          <h3>Événements à venir</h3>
+          <h3>{{ $t('activities.upcoming.title') }}</h3>
           <div v-if="upcomingEvents.length" class="events-list">
             <div v-for="event in upcomingEvents" :key="event.id" class="activity-card">
               <div class="activity-date">{{ formatDate(event.date) }}</div>
@@ -111,11 +111,11 @@
           </div>
           <div v-else class="empty-state">
             <i class="fas fa-calendar-alt empty-icon"></i>
-            <p>Vous n'avez pas encore d'événements à venir</p>
-            <router-link to="/events" class="gold-button-small">Découvrir les événements</router-link>
+            <p>{{ $t('activities.upcoming.empty') }}</p>
+            <router-link to="/events" class="gold-button-small">{{ $t('activities.upcoming.discover') }}</router-link>
           </div>
           
-          <h3>Historique</h3>
+          <h3>{{ $t('activities.history.title') }}</h3>
           <div v-if="pastEvents.length" class="events-list">
             <div v-for="event in pastEvents" :key="event.id" class="activity-card past">
               <div class="activity-date">{{ formatDate(event.date) }}</div>
@@ -127,24 +127,24 @@
           </div>
           <div v-else class="empty-state">
             <i class="fas fa-history empty-icon"></i>
-            <p>Aucun historique d'événement</p>
+            <p>{{ $t('activities.history.empty') }}</p>
           </div>
         </div>
         
         <!-- Paramètres -->
         <div v-if="activeTab === 'settings'" class="profile-section">
-          <h3>Préférences</h3>
+          <h3>{{ $t('settings.title') }}</h3>
           
           <div class="settings-group">
-            <h4>Notifications</h4>
+            <h4>{{ $t('settings.notifications.title') }}</h4>
             <div class="setting-option">
               <label class="switch">
                 <input type="checkbox" v-model="settings.emailNotifications">
                 <span class="slider"></span>
               </label>
               <div class="setting-label">
-                <p>Notifications par email</p>
-                <span>Recevez des emails sur les nouveaux événements et mises à jour</span>
+                <p>{{ $t('settings.notifications.email.title') }}</p>
+                <span>{{ $t('settings.notifications.email.description') }}</span>
               </div>
             </div>
             
@@ -154,22 +154,22 @@
                 <span class="slider"></span>
               </label>
               <div class="setting-label">
-                <p>Rappels d'événements</p>
-                <span>Recevez un rappel avant vos événements</span>
+                <p>{{ $t('settings.notifications.reminders.title') }}</p>
+                <span>{{ $t('settings.notifications.reminders.description') }}</span>
               </div>
             </div>
           </div>
           
           <div class="settings-group">
-            <h4>Confidentialité</h4>
+            <h4>{{ $t('settings.privacy.title') }}</h4>
             <div class="setting-option">
               <label class="switch">
                 <input type="checkbox" v-model="settings.publicProfile">
                 <span class="slider"></span>
               </label>
               <div class="setting-label">
-                <p>Profil public</p>
-                <span>Permettre aux autres utilisateurs de voir votre profil</span>
+                <p>{{ $t('settings.privacy.public_profile.title') }}</p>
+                <span>{{ $t('settings.privacy.public_profile.description') }}</span>
               </div>
             </div>
           </div>
@@ -177,14 +177,14 @@
           <div class="form-actions">
             <button class="gold-button" @click="saveSettings" :disabled="settingsLoading">
               <span v-if="settingsLoading" class="spinner"></span>
-              Enregistrer les préférences
+              {{ $t('settings.save_button') }}
             </button>
           </div>
           
           <div class="danger-zone">
-            <h4>Zone de danger</h4>
+            <h4>{{ $t('settings.danger_zone.title') }}</h4>
             <button class="danger-button" @click="confirmDeleteAccount">
-              Supprimer mon compte
+              {{ $t('settings.danger_zone.delete_account') }}
             </button>
           </div>
         </div>
@@ -285,7 +285,7 @@ export default {
     
     formatDate(dateString) {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      return new Date(dateString).toLocaleDateString('fr-FR', options);
+      return new Date(dateString).toLocaleDateString(this.$i18n.locale, options);
     },
     
     showMessage(msg, type = 'success') {
@@ -322,7 +322,7 @@ export default {
           this.$router.push('/account');
         } else {
           this.showMessage(
-            err.response?.data?.message || 'Erreur lors du chargement du profil', 
+            err.response?.data?.message || this.$t('alerts.error.load_profile'), 
             'error'
           );
         }
@@ -353,11 +353,11 @@ export default {
           ...this.form
         };
         
-        this.showMessage('Profil mis à jour avec succès');
+        this.showMessage(this.$t('alerts.profile_updated'));
       } catch (err) {
         console.error('Erreur lors de la mise à jour du profil:', err);
         this.showMessage(
-          err.response?.data?.message || 'Erreur lors de la mise à jour du profil', 
+          err.response?.data?.message || this.$t('alerts.error.update_profile'), 
           'error'
         );
       } finally {
@@ -368,7 +368,7 @@ export default {
     // Changer le mot de passe
     async updatePassword() {
       if (this.passwords.new !== this.passwords.confirm) {
-        this.showMessage('Les mots de passe ne correspondent pas', 'error');
+        this.showMessage(this.$t('alerts.password_mismatch'), 'error');
         return;
       }
       
@@ -386,11 +386,11 @@ export default {
         
         // Réinitialiser le formulaire
         this.passwords = { current: '', new: '', confirm: '' };
-        this.showMessage('Mot de passe mis à jour avec succès');
+        this.showMessage(this.$t('alerts.password_updated'));
       } catch (err) {
         console.error('Erreur lors du changement de mot de passe:', err);
         this.showMessage(
-          err.response?.data?.message || 'Erreur lors du changement de mot de passe', 
+          err.response?.data?.message || this.$t('alerts.error.change_password'), 
           'error'
         );
       } finally {
@@ -404,20 +404,20 @@ export default {
       // Simulation d'une API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       this.settingsLoading = false;
-      this.showMessage('Préférences enregistrées');
+      this.showMessage(this.$t('alerts.settings_saved'));
     },
     
     // Annuler la participation à un événement (simulation)
     cancelParticipation(eventId) {
-      if (confirm('Êtes-vous sûr de vouloir annuler votre participation à cet événement?')) {
+      if (confirm(this.$t('alerts.confirm_cancel'))) {
         this.upcomingEvents = this.upcomingEvents.filter(event => event.id !== eventId);
-        this.showMessage('Participation annulée');
+        this.showMessage(this.$t('alerts.participation_canceled'));
       }
     },
     
     // Supprimer le compte utilisateur
     async confirmDeleteAccount() {
-      if (confirm('Êtes-vous certain de vouloir supprimer votre compte? Cette action est irréversible.')) {
+      if (confirm(this.$t('alerts.confirm_delete'))) {
         try {
           await axios.delete(`${this.API_URL}/users/${this.user.id}`, this.axiosConfig);
           
@@ -426,11 +426,11 @@ export default {
           localStorage.removeItem('user');
           
           this.$router.push('/');
-          this.showMessage('Compte supprimé avec succès');
+          this.showMessage(this.$t('alerts.account_deleted'));
         } catch (err) {
           console.error('Erreur lors de la suppression du compte:', err);
           this.showMessage(
-            err.response?.data?.message || 'Erreur lors de la suppression du compte', 
+            err.response?.data?.message || this.$t('alerts.error.delete_account'), 
             'error'
           );
         }

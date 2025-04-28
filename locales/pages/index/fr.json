@@ -1,0 +1,40 @@
+{
+    "hero": {
+      "title": "CityLink prend vie",
+      "subtitle": "Rejoignez le futur de la vie citoyenne avec CityLink, la plateforme qui rapproche citoyens, commerces et services municipaux.",
+      "discover_button": "Découvrir CityLink",
+      "events_button": "Voir les événements"
+    },
+    "about": {
+      "title": "Qu'est-ce que CityLink ?",
+      "features": {
+        "connect": {
+          "title": "Connecter",
+          "description": "CityLink représente un pas majeur dans la digitalisation et la mise en relation entre les citoyens de la ville de CityLink. Vous êtes au cœur de ce projet."
+        },
+        "centralize": {
+          "title": "Centraliser",
+          "description": "Un site internet mis en place par la mairie de CityLink pour faciliter la relation entre les citoyens, l'administration et les commerçants de la ville."
+        },
+        "participate": {
+          "title": "Participer",
+          "description": "Restez informé des événements locaux, participez à la vie de votre quartier et contribuez à l'évolution de votre ville."
+        }
+      }
+    },
+    "shop": {
+      "title": "Commerçants, valorisez votre activité",
+      "description": "CityLink offre une vitrine digitale à tous les commerces lyonnais. Gagnez en visibilité et connectez-vous directement avec vos clients.",
+      "benefits": {
+        "profile": "Créez votre profil commercial gratuitement",
+        "share": "Partagez vos actualités et promotions",
+        "reach": "Touchez une clientèle locale et engagée"
+      },
+      "discover_button": "Découvrir les commerces"
+    },
+    "cta": {
+      "title": "Prêt à rejoindre la communauté CityLink ?",
+      "description": "Créez votre compte en quelques minutes et participez à la vie de votre ville.",
+      "button": "Créer mon compte"
+    }
+  }

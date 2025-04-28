@@ -1,0 +1,35 @@
+{
+    "hero": {
+      "title": "Discover our local merchants",
+      "subtitle": "Support your neighborhood by shopping at local stores near you."
+    },
+    "featured": {
+      "badge": "Merchant of the week",
+      "cta": "Discover"
+    },
+    "section": {
+      "title": "Discover merchants in your city"
+    },
+    "merchants": {
+      "boulangerie": {
+        "name": "Old Lyon Bakery",
+        "address": "12 Rue Saint-Jean, Lyon",
+        "description": "An artisanal bakery with fresh products every day."
+      },
+      "librairie": {
+        "name": "Lumière Bookstore",
+        "address": "5 Place Bellecour, Lyon",
+        "description": "A cozy place for book lovers."
+      },
+      "cafe": {
+        "name": "Artists Café",
+        "address": "25 Quai Saint-Vincent, Lyon",
+        "description": "A cozy café with a local artistic atmosphere."
+      },
+      "westfield": {
+        "name": "WestField Lyon Part-Dieu",
+        "address": "Part-Dieu Shopping Center, Lyon",
+        "description": "The largest shopping mall in Lyon with over 260 stores."
+      }
+    }
+  }

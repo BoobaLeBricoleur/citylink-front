@@ -1,0 +1,43 @@
+{
+    "hero": {
+      "title": "Découvrez les Événements de Votre Ville",
+      "subtitle": "Plongez au cœur de la vie locale et participez aux activités qui animent votre communauté.",
+      "button": "Voir les événements"
+    },
+    "filters": {
+      "search": {
+        "label": "Rechercher :",
+        "placeholder": "Recherchez un événement..."
+      },
+      "category": {
+        "label": "Catégorie :",
+        "all": "Toutes"
+      }
+    },
+    "eventsList": {
+      "title": "Événements à Venir",
+      "participate": "Participer",
+      "details": "Détails de l'événement"
+    },
+    "categories": {
+      "culture": "Culture",
+      "sport": "Sport",
+      "music": "Musique",
+      "conference": "Conférence"
+    },
+    "events": {
+      "jazzConcert": {
+        "title": "Concert de Jazz",
+        "location": "Salle des Fêtes",
+        "description": "Un concert de jazz avec des artistes locaux."
+      },
+      "marathon": {
+        "title": "Marathon de la Ville",
+        "location": "Centre-ville",
+        "description": "Participez au marathon annuel de la ville."
+      }
+    },
+    "alerts": {
+      "participation": "Vous avez choisi de participer à l'événement {id}!"
+    }
+  }

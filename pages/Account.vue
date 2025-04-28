@@ -6,8 +6,8 @@
         <div class="auth-container">
           <div class="form-centered">
             <div class="auth-header">
-              <h2>{{ isLogin ? 'Bienvenue' : 'Rejoignez-nous' }}</h2>
-              <p class="auth-subtitle">{{ isLogin ? 'Connectez-vous pour accéder à votre espace' : 'Créez votre compte en quelques étapes' }}</p>
+              <h2>{{ isLogin ? $t('welcome') : $t('join_us') }}</h2>
+              <p class="auth-subtitle">{{ isLogin ? $t('login_subtitle') : $t('register_subtitle') }}</p>
             </div>
             
             <div v-if="error" class="error-message">
@@ -20,12 +20,12 @@
                 <!-- Formulaire de connexion -->
                 <template v-if="isLogin">
                   <div class="form-group">
-                    <label>Email</label>
+                    <label>{{ $t('email') }}</label>
                     <input type="email" v-model="form.email" placeholder="votre@email.com" required class="auth-input">
                   </div>
                   
                   <div class="form-group">
-                    <label>Mot de passe</label>
+                    <label>{{ $t('password') }}</label>
                     <input type="password" v-model="form.password" placeholder="••••••••" required class="auth-input">
                   </div>
                 </template>
@@ -38,73 +38,73 @@
                             class="account-type-btn" 
                             :class="{ active: !isCompany }"
                             @click="isCompany = false">
-                      <i class="fas fa-user"></i> Particulier
+                      <i class="fas fa-user"></i> {{ $t('individual') }}
                     </button>
                     <button type="button" 
                             class="account-type-btn" 
                             :class="{ active: isCompany }"
                             @click="isCompany = true">
-                      <i class="fas fa-building"></i> Professionnel
+                      <i class="fas fa-building"></i> {{ $t('professional') }}
                     </button>
                   </div>
                   
                   <!-- Informations de base -->
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>Prénom</label>
+                      <label>{{ $t('firstname') }}</label>
                       <input type="text" v-model="form.firstname" placeholder="Votre prénom" required class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>Nom</label>
+                      <label>{{ $t('lastname') }}</label>
                       <input type="text" v-model="form.lastname" placeholder="Votre nom" required class="auth-input">
                     </div>
                   </div>
                   
                   <!-- Champ entreprise (uniquement si professionnel) -->
                   <div v-if="isCompany" class="form-group">
-                    <label>Entreprise</label>
+                    <label>{{ $t('company') }}</label>
                     <input type="text" v-model="form.company" placeholder="Nom de votre entreprise" required class="auth-input">
                   </div>
                   
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>Email</label>
+                      <label>{{ $t('email') }}</label>
                       <input type="email" v-model="form.email" placeholder="votre@email.com" required class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>Téléphone</label>
+                      <label>{{ $t('phone') }}</label>
                       <input type="tel" v-model="form.phone" placeholder="06 12 34 56 78" class="auth-input">
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label>Adresse</label>
+                    <label>{{ $t('address') }}</label>
                     <input type="text" v-model="form.address" placeholder="Votre adresse" class="auth-input">
                   </div>
                   
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>Code postal</label>
+                      <label>{{ $t('postal_code') }}</label>
                       <input type="text" v-model="form.postal_code" placeholder="Code postal" class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>Ville</label>
+                      <label>{{ $t('city') }}</label>
                       <input type="text" v-model="form.city" placeholder="Votre ville" class="auth-input">
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label>Date de naissance</label>
+                    <label>{{ $t('birthday') }}</label>
                     <input type="date" v-model="form.birthday" class="auth-input">
                   </div>
                   
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>Mot de passe</label>
+                      <label>{{ $t('password') }}</label>
                       <input type="password" v-model="form.password" placeholder="••••••••" required class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>Confirmation</label>
+                      <label>{{ $t('confirm_password') }}</label>
                       <input type="password" v-model="form.confirmPassword" placeholder="••••••••" required class="auth-input">
                     </div>
                   </div>
@@ -114,7 +114,7 @@
                       <label class="checkbox-container">
                         <input type="checkbox" v-model="form.mail_new_events" checked>
                         <span class="checkmark"></span>
-                        Recevoir des notifications pour les nouveaux événements
+                        {{ $t('notify_new_events') }}
                       </label>
                     </div>
                     
@@ -122,7 +122,7 @@
                       <label class="checkbox-container">
                         <input type="checkbox" v-model="form.mail_events" checked>
                         <span class="checkmark"></span>
-                        Recevoir des rappels pour mes événements
+                        {{ $t('notify_my_events') }}
                       </label>
                     </div>
                     
@@ -130,7 +130,7 @@
                       <label class="checkbox-container">
                         <input type="checkbox" v-model="form.public_profile">
                         <span class="checkmark"></span>
-                        Profil public (visible par les autres utilisateurs)
+                        {{ $t('public_profile') }}
                       </label>
                     </div>
                   </div>
@@ -138,13 +138,13 @@
                 
                 <button type="submit" class="gold-button" :disabled="loading">
                   <span v-if="loading" class="spinner"></span>
-                  {{ isLogin ? 'Se connecter' : 'Créer mon compte' }}
+                  {{ isLogin ? $t('login_button') : $t('register_button') }}
                 </button>
               </form>
             </div>
             
             <p @click="toggleForm" class="toggle-link">
-              {{ isLogin ? "Pas encore de compte ? Inscrivez-vous." : "Déjà un compte ? Connectez-vous." }}
+              {{ isLogin ? $t('to_register') : $t('to_login') }}
             </p>
           </div>
         </div>
@@ -236,7 +236,7 @@ export default {
         } else {
           // Vérification des mots de passe
           if (this.form.password !== this.form.confirmPassword) {
-            this.error = 'Les mots de passe ne correspondent pas';
+            this.error = this.$t('errors.password_mismatch');
             this.loading = false;
             return;
           }
@@ -278,7 +278,7 @@ export default {
         }
       } catch (err) {
         console.error('Erreur:', err);
-        this.error = err.response?.data?.message || 'Une erreur est survenue';
+        this.error = err.response?.data?.message || this.$t('errors.default');
       } finally {
         this.loading = false;
       }

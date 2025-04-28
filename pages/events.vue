@@ -5,25 +5,25 @@
         <section class="hero-section">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1>Découvrez les Événements de Votre Ville</h1>
-                <p>Plongez au cœur de la vie locale et participez aux activités qui animent votre communauté.</p>
-                <button class="cta-button" @click="scrollToEvents">Voir les événements</button>
+                <h1>{{ $t('hero.title') }}</h1>
+                <p>{{ $t('hero.subtitle') }}</p>
+                <button class="cta-button" @click="scrollToEvents">{{ $t('hero.button') }}</button>
             </div>
         </section>
 
         <section class="filters-section">
             <div class="filters">
                 <div class="filter-item">
-                    <label for="search">Rechercher :</label>
-                    <input id="search" type="text" v-model="searchQuery" placeholder="Recherchez un événement..."
-                        aria-label="Rechercher un événement" />
+                    <label for="search">{{ $t('filters.search.label') }}</label>
+                    <input id="search" type="text" v-model="searchQuery" :placeholder="$t('filters.search.placeholder')"
+                        :aria-label="$t('filters.search.placeholder')" />
                 </div>
                 <div class="filter-item">
-                    <label for="category">Catégorie :</label>
-                    <select id="category" v-model="selectedCategory" aria-label="Filtrer par catégorie">
-                        <option value="">Toutes</option>
-                        <option v-for="category in categories" :key="category" :value="category">
-                            {{ category }}
+                    <label for="category">{{ $t('filters.category.label') }}</label>
+                    <select id="category" v-model="selectedCategory" :aria-label="$t('filters.category.label')">
+                        <option value="">{{ $t('filters.category.all') }}</option>
+                        <option v-for="category in categories" :key="category.value" :value="category.value">
+                            {{ category.label }}
                         </option>
                     </select>
                 </div>
@@ -31,17 +31,17 @@
         </section>
 
         <section class="events-list-section">
-            <h2>Événements à Venir</h2>
+            <h2>{{ $t('eventsList.title') }}</h2>
             <ul class="events-list">
                 <li v-for="event in filteredEvents" :key="event.id" class="event-item" tabindex="0"
-                    aria-label="Détails de l'événement">
+                    :aria-label="$t('eventsList.details')">
                     <div class="event-content">
                         <h3>{{ event.title }}</h3>
                         <p class="event-date">{{ event.date }} - {{ event.location }}</p>
                         <p class="event-description">{{ event.description }}</p>
                     </div>
-                    <button @click="participate(event.id)" aria-label="Participer à cet événement">
-                        Participer
+                    <button @click="participate(event.id)" :aria-label="$t('eventsList.participate')">
+                        {{ $t('eventsList.participate') }}
                     </button>
                 </li>
             </ul>
@@ -64,56 +64,134 @@ export default {
         return {
             searchQuery: "",
             selectedCategory: "",
-            categories: ["Culture", "Sport", "Musique", "Conférence"],
+            categories: [
+                { value: "Culture", label: this.$t('categories.culture') },
+                { value: "Sport", label: this.$t('categories.sport') },
+                { value: "Musique", label: this.$t('categories.music') },
+                { value: "Conférence", label: this.$t('categories.conference') }
+            ],
             events: [
                 {
                     id: 1,
-                    title: "Concert de Jazz",
+                    title: this.$t('events.jazzConcert.title'),
                     date: "2025-04-10",
-                    location: "Salle des Fêtes",
-                    description: "Un concert de jazz avec des artistes locaux.",
+                    location: this.$t('events.jazzConcert.location'),
+                    description: this.$t('events.jazzConcert.description'),
                     category: "Musique",
                 },
                 {
                     id: 2,
-                    title: "Marathon de la Ville",
+                    title: this.$t('events.marathon.title'),
                     date: "2025-04-15",
-                    location: "Centre-ville",
-                    description: "Participez au marathon annuel de la ville.",
+                    location: this.$t('events.marathon.location'),
+                    description: this.$t('events.marathon.description'),
                     category: "Sport",
-                },{
-                    id: 1,
-                    title: "Concert de Jazz",
+                },
+                {
+                    id: 3,
+                    title: this.$t('events.jazzConcert.title'),
                     date: "2025-04-10",
-                    location: "Salle des Fêtes",
-                    description: "Un concert de jazz avec des artistes locaux.",
+                    location: this.$t('events.jazzConcert.location'),
+                    description: this.$t('events.jazzConcert.description'),
                     category: "Musique",
                 },
                 {
-                    id: 2,
-                    title: "Marathon de la Ville",
+                    id: 4,
+                    title: this.$t('events.marathon.title'),
                     date: "2025-04-15",
-                    location: "Centre-ville",
-                    description: "Participez au marathon annuel de la ville.",
+                    location: this.$t('events.marathon.location'),
+                    description: this.$t('events.marathon.description'),
                     category: "Sport",
-                },{
-                    id: 1,
-                    title: "Concert de Jazz",
+                },
+                {
+                    id: 5,
+                    title: this.$t('events.jazzConcert.title'),
                     date: "2025-04-10",
-                    location: "Salle des Fêtes",
-                    description: "Un concert de jazz avec des artistes locaux.",
+                    location: this.$t('events.jazzConcert.location'),
+                    description: this.$t('events.jazzConcert.description'),
                     category: "Musique",
                 },
                 {
-                    id: 2,
-                    title: "Marathon de la Ville",
+                    id: 6,
+                    title: this.$t('events.marathon.title'),
                     date: "2025-04-15",
-                    location: "Centre-ville",
-                    description: "Participez au marathon annuel de la ville.",
+                    location: this.$t('events.marathon.location'),
+                    description: this.$t('events.marathon.description'),
                     category: "Sport",
                 },
             ],
         };
+    },
+    methods: {
+        updateTranslations() {
+            this.categories = [
+                { value: "Culture", label: this.$t('categories.culture') },
+                { value: "Sport", label: this.$t('categories.sport') },
+                { value: "Musique", label: this.$t('categories.music') },
+                { value: "Conférence", label: this.$t('categories.conference') }
+            ];
+            
+            this.events = [
+                {
+                    id: 1,
+                    title: this.$t('events.jazzConcert.title'),
+                    date: "2025-04-10",
+                    location: this.$t('events.jazzConcert.location'),
+                    description: this.$t('events.jazzConcert.description'),
+                    category: "Musique",
+                },
+                {
+                    id: 2,
+                    title: this.$t('events.marathon.title'),
+                    date: "2025-04-15",
+                    location: this.$t('events.marathon.location'),
+                    description: this.$t('events.marathon.description'),
+                    category: "Sport",
+                },
+                {
+                    id: 3,
+                    title: this.$t('events.jazzConcert.title'),
+                    date: "2025-04-10",
+                    location: this.$t('events.jazzConcert.location'),
+                    description: this.$t('events.jazzConcert.description'),
+                    category: "Musique",
+                },
+                {
+                    id: 4,
+                    title: this.$t('events.marathon.title'),
+                    date: "2025-04-15",
+                    location: this.$t('events.marathon.location'),
+                    description: this.$t('events.marathon.description'),
+                    category: "Sport",
+                },
+                {
+                    id: 5,
+                    title: this.$t('events.jazzConcert.title'),
+                    date: "2025-04-10",
+                    location: this.$t('events.jazzConcert.location'),
+                    description: this.$t('events.jazzConcert.description'),
+                    category: "Musique",
+                },
+                {
+                    id: 6,
+                    title: this.$t('events.marathon.title'),
+                    date: "2025-04-15",
+                    location: this.$t('events.marathon.location'),
+                    description: this.$t('events.marathon.description'),
+                    category: "Sport",
+                },
+            ];
+        },
+        participate(eventId) {
+            const message = this.$t('alerts.participation').replace('{id}', eventId);
+            alert(message);
+        },
+        scrollToEvents() {
+            const eventsSection = document.querySelector(".events-list-section");
+            if (eventsSection) {
+                eventsSection.scrollIntoView({ behavior: "smooth" });
+            }
+        },
     },
     computed: {
         filteredEvents() {
@@ -127,16 +205,13 @@ export default {
             });
         },
     },
-    methods: {
-        participate(eventId) {
-            alert(`Vous avez choisi de participer à l'événement ${eventId}!`);
-        },
-        scrollToEvents() {
-            const eventsSection = document.querySelector(".events-list-section");
-            if (eventsSection) {
-                eventsSection.scrollIntoView({ behavior: "smooth" });
-            }
-        },
+    watch: {
+        '$i18n.locale'() {
+            this.updateTranslations();
+        }
     },
+    mounted() {
+        this.updateTranslations();
+    }
 };
 </script>

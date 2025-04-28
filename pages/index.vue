@@ -17,14 +17,13 @@ export default {
         <!-- Hero Section -->
         <section class="hero-section">
             <div class="hero-content">
-                <h1>CityLink prend vie</h1>
+                <h1>{{ $t('hero.title') }}</h1>
                 <p class="hero-subtitle">
-                    Rejoignez le futur de la vie citoyenne avec CityLink, la plateforme qui rapproche citoyens, 
-                    commerces et services municipaux.
+                    {{ $t('hero.subtitle') }}
                 </p>
                 <div class="hero-cta">
-                    <a href="#about" class="secondary-button">Découvrir CityLink</a>
-                    <a href="/events" class="secondary-button">Voir les événements</a>
+                    <a href="#about" class="secondary-button">{{ $t('hero.discover_button') }}</a>
+                    <a href="/events" class="secondary-button">{{ $t('hero.events_button') }}</a>
                 </div>
             </div>
             <div class="hero-overlay"></div>
@@ -34,7 +33,7 @@ export default {
         <section id="about" class="about-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Qu'est-ce que CityLink ?</h2>
+                    <h2>{{ $t('about.title') }}</h2>
                     <div class="section-divider"></div>
                 </div>
                 
@@ -43,27 +42,24 @@ export default {
                         <div class="feature-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <h3>Connecter</h3>
-                        <p>CityLink représente un pas majeur dans la digitalisation et la mise en relation entre les citoyens 
-                        de la ville de CityLink. Vous êtes au cœur de ce projet.</p>
+                        <h3>{{ $t('about.features.connect.title') }}</h3>
+                        <p>{{ $t('about.features.connect.description') }}</p>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <h3>Centraliser</h3>
-                        <p>Un site internet mis en place par la mairie de CityLink pour faciliter la relation entre 
-                        les citoyens, l'administration et les commerçants de la ville.</p>
+                        <h3>{{ $t('about.features.centralize.title') }}</h3>
+                        <p>{{ $t('about.features.centralize.description') }}</p>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <h3>Participer</h3>
-                        <p>Restez informé des événements locaux, participez à la vie de votre quartier et 
-                        contribuez à l'évolution de votre ville.</p>
+                        <h3>{{ $t('about.features.participate.title') }}</h3>
+                        <p>{{ $t('about.features.participate.description') }}</p>
                     </div>
                 </div>
             </div>
@@ -83,17 +79,16 @@ export default {
             <div class="container">
                 <div class="shop-content">
                     <div class="shop-info">
-                        <h2>Commerçants, valorisez votre activité</h2>
+                        <h2>{{ $t('shop.title') }}</h2>
                         <div class="section-divider light"></div>
-                        <p>CityLink offre une vitrine digitale à tous les commerces lyonnais. Gagnez en visibilité et connectez-vous 
-                        directement avec vos clients.</p>
+                        <p>{{ $t('shop.description') }}</p>
                         <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Créez votre profil commercial gratuitement</li>
-                            <li><i class="fas fa-check-circle"></i> Partagez vos actualités et promotions</li>
-                            <li><i class="fas fa-check-circle"></i> Touchez une clientèle locale et engagée</li>
+                            <li><i class="fas fa-check-circle"></i> {{ $t('shop.benefits.profile') }}</li>
+                            <li><i class="fas fa-check-circle"></i> {{ $t('shop.benefits.share') }}</li>
+                            <li><i class="fas fa-check-circle"></i> {{ $t('shop.benefits.reach') }}</li>
                         </ul>
                         <NuxtLink to="/merchants" class="shop-cta-button">
-                            Découvrir les commerces
+                            {{ $t('shop.discover_button') }}
                         </NuxtLink>
                     </div>
                     
@@ -107,9 +102,9 @@ export default {
         <!-- CTA Section -->
         <section class="cta-section">
             <div class="container">
-                <h2>Prêt à rejoindre la communauté CityLink ?</h2>
-                <p>Créez votre compte en quelques minutes et participez à la vie de votre ville.</p>
-                <NuxtLink to="/account" class="cta-button">Créer mon compte</NuxtLink>
+                <h2>{{ $t('cta.title') }}</h2>
+                <p>{{ $t('cta.description') }}</p>
+                <NuxtLink to="/account" class="cta-button">{{ $t('cta.button') }}</NuxtLink>
             </div>
         </section>
         
