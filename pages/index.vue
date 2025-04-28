@@ -92,7 +92,7 @@ export default {
                             <li><i class="fas fa-check-circle"></i> Partagez vos actualités et promotions</li>
                             <li><i class="fas fa-check-circle"></i> Touchez une clientèle locale et engagée</li>
                         </ul>
-                        <NuxtLink to="/shops" class="shop-cta-button">
+                        <NuxtLink to="/merchants" class="shop-cta-button">
                             Découvrir les commerces
                         </NuxtLink>
                     </div>
