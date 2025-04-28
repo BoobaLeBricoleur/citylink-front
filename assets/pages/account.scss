@@ -1,188 +1,333 @@
+// Structure de base de la page
+.full-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .login-page {
-    display: flex;
-    height: calc(100% - 60px);
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/bg-lyon-login.jpg');
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  height: calc(100% - 60px);
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/bg-lyon-login.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.auth-container {
+  width: 500px;
+  max-width: 100%;
+  padding: 25px;
+  border-radius: 20px;
+  background-color: rgba(29, 29, 29, 0.85);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+.form-centered {
+  width: 100%;
+}
+
+// Conteneur scrollable
+.form-scroll-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-bottom: 15px;
+  
+  &.login-form {
+    max-height: none;
+    overflow-y: visible;
   }
   
-  .full-page {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+  // Style de la scrollbar
+  &::-webkit-scrollbar {
+    width: 5px;
   }
   
-  .auth-page {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
   }
   
-  .auth-container {
-    width: 450px;
-    max-width: 100%;
-    padding: 30px;
-    border-radius: 20px;
-    background-color: rgba(29, 29, 29, 0.85);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-  }
-  
-  .form-centered {
-    width: 100%;
-  }
-  
-  .auth-header {
-    text-align: center;
-    margin-bottom: 25px;
-    
-    .logo-mini {
-      width: 60px;
-      margin-bottom: 15px;
-    }
-    
-    h2 {
-      color: var(--cl-light);
-      margin-bottom: 8px;
-      font-size: 28px;
-    }
-    
-    .auth-subtitle {
-      color: #ccc;
-      font-size: 16px;
-    }
-  }
-  
-  .form-group {
-    margin-bottom: 16px;
-    
-    label {
-      display: block;
-      text-align: left;
-      margin-bottom: 6px;
-      color: #fff;
-      font-size: 14px;
-    }
-  }
-  
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 12px 15px;
-    margin: 0;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(255, 255, 255, 0.07);
-    color: white;
-    font-size: 16px;
-    transition: all 0.2s ease;
-    
-    &:focus {
-      outline: none;
-      border-color: var(--cl-light);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-    }
-  }
-  
-  .gold-button {
-    width: 100%;
-    background: linear-gradient(90deg, rgba(255, 226, 89, 1) 0%, rgba(255, 167, 81, 1) 100%);
-    color: #333;
-    padding: 14px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 8px;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     
     &:hover {
-      background: linear-gradient(90deg, rgba(255, 236, 149, 1) 0%, rgba(255, 187, 121, 1) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 197, 85, 0.4);
-    }
-    
-    &:active {
-      transform: translateY(0);
+      background: rgba(255, 255, 255, 0.3);
     }
   }
+}
+
+// En-tête du formulaire
+.auth-header {
+  text-align: center;
+  margin-bottom: 20px;
   
-  .toggle-link {
+  .logo-mini {
+    width: 60px;
+    margin-bottom: 15px;
+  }
+  
+  h2 {
+    color: var(--cl-light);
+    margin-bottom: 8px;
+    font-size: 28px;
+  }
+  
+  .auth-subtitle {
     color: #ccc;
-    margin-top: 20px;
-    font-size: 15px;
-    cursor: pointer;
-    text-align: center;
-    
-    &:hover {
-      color: var(--cl-light);
-      text-decoration: underline;
-    }
+    font-size: 16px;
   }
+}
+
+// Formulaires et champs
+.form-group {
+  margin-bottom: 13px;
   
-  .error-message {
-    background-color: rgba(255, 69, 58, 0.2);
-    border-left: 4px solid #ff453a;
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
     color: #fff;
-    padding: 12px 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    
-    .error-icon {
-      display: inline-block;
-      width: 22px;
-      height: 22px;
-      background-color: #ff453a;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 22px;
-      font-weight: bold;
-      margin-right: 10px;
-      flex-shrink: 0;
-    }
+    font-size: 14px;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
   }
   
-  .spinner {
+  &:focus {
+    outline: none;
+    border-color: var(--cl-gold);
+    box-shadow: 0 0 0 2px rgba(255, 197, 85, 0.2);
+  }
+}
+
+// Bouton principal
+.gold-button {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255, 226, 89, 1) 0%, rgba(255, 167, 81, 1) 100%);
+  color: #333;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &:hover {
+    background: linear-gradient(90deg, rgba(255, 236, 149, 1) 0%, rgba(255, 187, 121, 1) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 197, 85, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Lien de basculement
+.toggle-link {
+  color: #ccc;
+  margin-top: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  
+  &:hover {
+    color: var(--cl-light);
+    text-decoration: underline;
+  }
+}
+
+// Message d'erreur
+.error-message {
+  background-color: rgba(255, 69, 58, 0.2);
+  border-left: 4px solid #ff453a;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  
+  .error-icon {
     display: inline-block;
     width: 20px;
     height: 20px;
-    margin-right: 10px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    background-color: #ff453a;
     border-radius: 50%;
-    border-top-color: #333;
-    animation: spin 1s ease-in-out infinite;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+}
+
+// Indicateur de chargement
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #333;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Sélecteur de type de compte
+.account-type-selector {
+  display: flex;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.account-type-btn {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  
+  &.active {
+    background: linear-gradient(90deg, rgba(255, 226, 89, 0.2), rgba(255, 167, 81, 0.2));
+    border-color: var(--cl-gold);
+    color: var(--cl-gold);
   }
   
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+  &:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.15);
   }
   
-  @media (max-width: 700px) {
-    .auth-container {
-      width: 100%;
-    }
+  i {
+    margin-right: 8px;
+  }
+}
+
+// Cases à cocher
+.checkboxes-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.checkbox-group {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #ccc;
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
     
-    .form-grid {
-      grid-template-columns: 1fr;
-      gap: 10px;
+    &:checked ~ .checkmark {
+      background-color: var(--cl-gold);
+      
+      &:after {
+        display: block;
+      }
     }
   }
+  
+  &:hover input ~ .checkmark {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 6px;
+      top: 2px;
+      width: 4px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 700px) {
+  .auth-container {
+    width: 100%;
+    max-height: 90vh;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .form-scroll-container {
+    max-height: 350px;
+  }
+}
