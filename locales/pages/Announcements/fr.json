@@ -1,0 +1,34 @@
+{
+    "hero": {
+      "title": "Dernières Annonces de la Ville",
+      "subtitle": "Restez informé des actualités et des annonces importantes de votre communauté."
+    },
+    "featured": {
+      "badge": "Annonce à la une",
+      "date": "Date"
+    },
+    "recent": {
+      "title": "Annonces Récentes",
+      "mainButton": "Annonce principale",
+      "setAsMainButton": "Définir comme principale"
+    },
+    "form": {
+      "sectionTitle": "Ajouter une Nouvelle Annonce",
+      "titleLabel": "Titre :",
+      "titlePlaceholder": "Titre de l'annonce",
+      "descriptionLabel": "Description :",
+      "descriptionPlaceholder": "Description de l'annonce",
+      "submitButton": "Publier",
+      "successMessage": "Annonce ajoutée avec succès !"
+    },
+    "demoData": {
+      "roadwork": {
+        "title": "Travaux sur la Route Principale",
+        "description": "Des travaux auront lieu sur la route principale du 5 au 10 avril."
+      },
+      "playground": {
+        "title": "Nouvelle Aire de Jeux",
+        "description": "Une nouvelle aire de jeux a été inaugurée au parc central."
+      }
+    }
+}

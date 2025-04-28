@@ -1,0 +1,34 @@
+{
+    "hero": {
+      "title": "Latest City Announcements",
+      "subtitle": "Stay informed about news and important announcements from your community."
+    },
+    "featured": {
+      "badge": "Featured Announcement",
+      "date": "Date"
+    },
+    "recent": {
+      "title": "Recent Announcements",
+      "mainButton": "Main Announcement",
+      "setAsMainButton": "Set as Main"
+    },
+    "form": {
+      "sectionTitle": "Add a New Announcement",
+      "titleLabel": "Title:",
+      "titlePlaceholder": "Announcement title",
+      "descriptionLabel": "Description:",
+      "descriptionPlaceholder": "Announcement description",
+      "submitButton": "Publish",
+      "successMessage": "Announcement added successfully!"
+    },
+    "demoData": {
+      "roadwork": {
+        "title": "Work on Main Road",
+        "description": "Road work will take place on the main road from April 5 to April 10."
+      },
+      "playground": {
+        "title": "New Playground",
+        "description": "A new playground has been inaugurated in the central park."
+      }
+    }
+  }

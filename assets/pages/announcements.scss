@@ -1,0 +1,406 @@
+@import "@/assets/base.css";
+
+/* --- Animations --- */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(15px, 15px) rotate(5deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.announcements-page {
+    background-color: #f0f4f8;
+
+    .hero-section {
+        position: relative;
+        background-image: linear-gradient(to bottom, #383838, rgba(15, 15, 15, 0.306)), url('/bg-lyon-login.jpg');
+        background-blend-mode: multiply;
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            display: none; // Replaced with the ::before pseudo-element
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 800px;
+            padding: 20px;
+
+            h1 {
+                font-size: 3rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            }
+
+            p {
+                font-size: 1.2rem;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        // Wave transition removed
+    }
+
+    .featured-announcement-section {
+        padding: 80px 20px 100px;
+        background: linear-gradient(170deg, #f0f7fd 0%, #ebf4f9 50%, #e7f0f7 100%);
+        position: relative;
+        overflow: visible;
+        
+        &::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(41, 128, 185, 0.1), rgba(109, 213, 250, 0.1));
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .featured-announcement {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            
+            .featured-badge {
+                display: inline-block;
+                margin-bottom: 15px;
+                background: linear-gradient(135deg, #2980B9, #6DD5FA);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 30px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+                color: #2c3e50;
+                font-weight: 700;
+            }
+            
+            .featured-date {
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1rem;
+                color: #7f8c8d;
+            }
+            
+            .featured-description {
+                font-size: 1.2rem;
+                line-height: 1.6;
+                color: #34495e;
+            }
+        }
+
+        // Wave transition removed
+    }
+
+    .announcements-list-section {
+        padding: 60px 50px 80px;
+        background-color: #f0f4f8;
+        position: relative;
+        z-index: 1;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .announcements-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            justify-content: center;
+
+            .announcement-item {
+                background: linear-gradient(135deg, #6DD5FA, #2980B9);
+                border-radius: 20px;
+                padding: 25px;
+                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+                transition: transform 0.5s ease, box-shadow 0.5s ease, border-radius 0.5s ease;
+                position: relative;
+                overflow: hidden;
+
+                &:hover {
+                    transform: rotate(-3deg) scale(1.05);
+                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+                    border-radius: 25px;
+                }
+
+                &.is-featured {
+                    background: linear-gradient(135deg, #f39c12, #e74c3c);
+                    border: none;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    z-index: 0;
+                    top: 0;
+                    left: -50%;
+                    width: 200%;
+                    height: 0%;
+                    background: linear-gradient(135deg, #0074D9, #7FDBFF);
+                    transform: rotate(45deg);
+                    transition: all 0.4s ease;
+                }
+
+                &:hover::before {
+                    height: 250%;
+                }
+
+                .announcement-content {
+                    position: relative;
+                    z-index: 1;
+
+                    h3 {
+                        color: white;
+                        margin: 0 0 10px;
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                    }
+
+                    .announcement-date {
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                        color: white;
+                        opacity: 0.9;
+                    }
+
+                    .announcement-description {
+                        margin-bottom: 20px;
+                        color: white;
+                        font-size: 1rem;
+                        line-height: 1.5;
+                    }
+
+                    .feature-button {
+                        background: rgba(255, 255, 255, 0.2);
+                        color: white;
+                        border: 1px solid rgba(255, 255, 255, 0.4);
+                        padding: 10px 20px;
+                        border-radius: 30px;
+                        cursor: pointer;
+                        margin-top: 10px;
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                        backdrop-filter: blur(5px);
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                        
+                        &:hover:not(:disabled) {
+                            background: rgba(255, 255, 255, 0.3);
+                            transform: translateY(-3px);
+                        }
+                        
+                        &:disabled {
+                            background: rgba(40, 167, 69, 0.7);
+                            cursor: default;
+                            border: 1px solid rgba(255, 255, 255, 0.6);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .add-announcement-section {
+        padding: 80px 20px;
+        background: linear-gradient(170deg, #f0f4f8 0%, #e6edf3 50%, #dce6f0 100%);
+        position: relative;
+        border-radius: 0;
+        margin: 0;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(41, 128, 185, 0.05), rgba(109, 213, 250, 0.05));
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            position: relative;
+            z-index: 1;
+        }
+
+        .announcement-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    color: #2c3e50;
+                    font-size: 1.1rem;
+                }
+
+                input,
+                textarea {
+                    padding: 15px;
+                    border: 1px solid #e1e8ed;
+                    border-radius: 10px;
+                    font-size: 1rem;
+                    background-color: #f9fafb;
+                    transition: all 0.3s ease;
+                    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+
+                    &:focus {
+                        border-color: #3498db;
+                        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+                        outline: none;
+                    }
+                }
+
+                textarea {
+                    min-height: 150px;
+                    resize: vertical;
+                }
+            }
+
+            .cta-button {
+                align-self: center;
+                background: linear-gradient(135deg, #2980B9, #6DD5FA);
+                color: white;
+                padding: 15px 40px;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                font-size: 1.1rem;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+                margin-top: 10px;
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 20px rgba(41, 128, 185, 0.4);
+                    background: linear-gradient(135deg, #3498db, #85d6ff);
+                }
+            }
+        }
+    }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .announcements-page {
+        .featured-announcement-section .featured-announcement {
+            padding: 20px;
+        }
+
+        .announcements-list-section .announcements-list {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .announcements-page {
+        .hero-section {
+            height: auto;
+            padding: 70px 0 50px;
+
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+        }
+
+        .featured-announcement-section {
+            padding: 70px 15px 90px;
+
+            .featured-announcement h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .announcements-list-section {
+            padding: 50px 20px 70px;
+        }
+
+        .add-announcement-section .announcement-form {
+            padding: 30px 20px;
+        }
+    }
+}
