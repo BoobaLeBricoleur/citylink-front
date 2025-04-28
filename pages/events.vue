@@ -3,12 +3,12 @@
         <Header />
 
         <section class="hero-section">
+            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>Découvrez les Événements de Votre Ville</h1>
                 <p>Plongez au cœur de la vie locale et participez aux activités qui animent votre communauté.</p>
                 <button class="cta-button" @click="scrollToEvents">Voir les événements</button>
             </div>
-            <div class="hero-overlay"></div>
         </section>
 
         <section class="filters-section">

@@ -1,11 +1,9 @@
 @import "@/assets/base.css";
 
 .events-page {
-    font-family: 'Inter', 'Helvetica Neue', sans-serif;
     background-color: #f8f9fa;
     min-height: 100vh;
 
-    // Hero Section - Plus élégante et moins imposante
     .hero-section {
         position: relative;
         background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/index_city.jpg');
@@ -38,7 +36,7 @@
 
             h1 {
                 font-size: 2.5rem;
-                font-weight: 600;
+                font-weight: 400;
                 margin-bottom: 1rem;
                 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
                 letter-spacing: -0.5px;
@@ -310,7 +308,7 @@
         .hero-section {
             .hero-content {
                 h1 {
-                    font-size: 2rem;
+                    font-size: 2rem
                 }
                 
                 p {

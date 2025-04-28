@@ -3,11 +3,11 @@
         <Header />
 
         <section class="hero-section">
+            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>Dernières Annonces de la Ville</h1>
                 <p>Restez informé des actualités et des annonces importantes de votre communauté.</p>
             </div>
-            <div class="hero-overlay"></div>
         </section>
 
         <!-- Nouvelle section pour l'annonce mise en valeur -->
@@ -119,7 +119,6 @@ export default {
 @import "@/assets/base.css";
 
 .announcements-page {
-    font-family: Arial, sans-serif;
     background-color: var(--cl-normal);
 
     .hero-section {
