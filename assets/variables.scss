@@ -11,6 +11,7 @@ $color-secondary-dark: #e09200;
 $color-text: #333;
 $color-text-light: #fff;
 $color-text-muted: #6c757d;
+$color-text-dark: #222;
 
 $color-danger: #ff453a;
 $color-success: #4cd964;
@@ -60,5 +61,6 @@ $color-white-overlay-light: rgba(255, 255, 255, 0.15);
 $color-white-overlay-medium: rgba(255, 255, 255, 0.2);
 $color-white-overlay-heavy: rgba(255, 255, 255, 0.8);
 $color-black-overlay-light: rgba(0, 0, 0, 0.08);
+$color-black-overlay-medium: rgba(0, 0, 0, 0.2);
 $color-primary-overlay-light: rgba($color-primary, 0.05);
 $color-danger-overlay-light: rgba($color-danger, 0.05);
