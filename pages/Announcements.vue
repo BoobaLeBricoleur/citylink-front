@@ -1,114 +1,82 @@
 <template>
-    <div class="announcements-page">
-        <Header />
+  <div class="announcements-page">
+    <Header />
 
-        <section class="hero-section">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>{{ $t('hero.title') }}</h1>
-                <p>{{ $t('hero.subtitle') }}</p>
-            </div>
-        </section>
+    <section class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>{{ $t('hero.title') }}</h1>
+        <p>{{ $t('hero.subtitle') }}</p>
+      </div>
+    </section>
 
-        <!-- Nouvelle section pour l'annonce mise en valeur -->
-        <section v-if="featuredAnnouncement" class="featured-announcement-section">
-            <div class="featured-announcement">
-                <div class="featured-badge">{{ $t('featured.badge') }}</div>
-                <h2>{{ featuredAnnouncement.title }}</h2>
-                <p class="featured-date">{{ featuredAnnouncement.date }}</p>
-                <p class="featured-description">{{ featuredAnnouncement.description }}</p>
-            </div>
-        </section>
-        
-        <section class="announcements-list-section">
-            <h2>{{ $t('recent.title') }}</h2>
-            <ul class="announcements-list">
-                <li v-for="announcement in announcements" :key="announcement.id" class="announcement-item"
-                    :class="{ 'is-featured': announcement === featuredAnnouncement }">
-                    <div class="announcement-content">
-                        <h3>{{ announcement.title }}</h3>
-                        <p class="announcement-date">{{ announcement.date }}</p>
-                        <p class="announcement-description">{{ announcement.description }}</p>
-                        <button @click="setFeaturedAnnouncement(announcement)"
-                            :disabled="announcement === featuredAnnouncement" class="feature-button">
-                            {{ announcement === featuredAnnouncement ? $t('recent.mainButton') : $t('recent.setAsMainButton') }}
-                        </button>
-                    </div>
-                </li>
-            </ul>
-        </section>
+    <!-- Section pour les annonces mises en valeur -->
+    <section v-if="featuredAnnouncements.length > 0" class="featured-announcement-section">
+      <div v-for="announcement in featuredAnnouncements" :key="announcement.id" class="featured-announcement">
+        <div class="featured-badge">{{ $t('featured.badge') }}</div>
+        <h2>{{ announcement.title }}</h2>
+        <p class="featured-date">{{ formatDate(announcement.publication_date) }}</p>
+        <p class="featured-description">{{ announcement.content }}</p>
+      </div>
+    </section>
 
-        <section class="add-announcement-section">
-            <h2>{{ $t('form.sectionTitle') }}</h2>
-            <form @submit.prevent="addAnnouncement" class="announcement-form">
-                <div class="form-group">
-                    <label for="title">{{ $t('form.titleLabel') }}</label>
-                    <input id="title" v-model="newAnnouncement.title" type="text" 
-                           :placeholder="$t('form.titlePlaceholder')" required />
-                </div>
-                <div class="form-group">
-                    <label for="description">{{ $t('form.descriptionLabel') }}</label>
-                    <textarea id="description" v-model="newAnnouncement.description"
-                        :placeholder="$t('form.descriptionPlaceholder')" required></textarea>
-                </div>
-                <button type="submit" class="cta-button">{{ $t('form.submitButton') }}</button>
-            </form>
-        </section>
+    <section class="announcements-list-section">
+      <h2>{{ $t('recent.title') }}</h2>
+      <ul class="announcements-list">
+        <li v-for="announcement in regularAnnouncements" :key="announcement.id" class="announcement-item">
+          <div class="announcement-content">
+            <h3>{{ announcement.title }}</h3>
+            <p class="announcement-date">{{ formatDate(announcement.publication_date) }}</p>
+            <p class="announcement-description">{{ announcement.content }}</p>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-        <Footer />
-    </div>
+    <Footer />
+  </div>
 </template>
 
 <script>
 import Header from "../components/views/Header.vue";
 import Footer from "../components/views/Footer.vue";
+import axios from 'axios';
 
 export default {
-    components: {
-        Header,
-        Footer,
+  components: {
+    Header,
+    Footer,
+  },
+  data() {
+    return {
+      featuredAnnouncements: [],
+      regularAnnouncements: [],
+      API_URL: process.env.API_URL || 'http://localhost:3000/api'
+    };
+  },
+  mounted() {
+    this.fetchAnnouncements();
+  },
+  methods: {
+    async fetchAnnouncements() {
+      try {
+        const token = localStorage.getItem('token');
+        const { data } = await axios.get(`${this.API_URL}/announcements/`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        // Séparation directe des annonces
+        console.log(data);
+        this.featuredAnnouncements = data.filter(ann => ann.is_featured === 1);
+        this.regularAnnouncements = data.filter(ann => ann.is_featured !== 1);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des annonces :', error);
+      }
     },
-    data() {
-        return {
-            announcements: [
-                {
-                    id: 1,
-                    title: this.$t('demoData.roadwork.title'),
-                    date: "2025-04-01",
-                    description: this.$t('demoData.roadwork.description'),
-                },
-                {
-                    id: 2,
-                    title: this.$t('demoData.playground.title'),
-                    date: "2025-03-28",
-                    description: this.$t('demoData.playground.description'),
-                },
-            ],
-            newAnnouncement: {
-                title: "",
-                description: "",
-            },
-            featuredAnnouncement: null,
-        };
-    },
-    methods: {
-        addAnnouncement() {
-            const newId = this.announcements.length + 1;
-            const newDate = new Date().toISOString().split("T")[0];
-            this.announcements.unshift({
-                id: newId,
-                title: this.newAnnouncement.title,
-                date: newDate,
-                description: this.newAnnouncement.description,
-                isFeatured: false,
-            });
-            this.newAnnouncement.title = "";
-            this.newAnnouncement.description = "";
-            alert(this.$t('form.successMessage'));
-        },
-        setFeaturedAnnouncement(announcement) {
-            this.featuredAnnouncement = announcement;
-        }
-    },
+    formatDate(dateString) {
+      if (!dateString) return '';
+      return new Date(dateString).toLocaleDateString('fr-FR');
+    }
+  },
 };
 </script>
