@@ -1,24 +1,6 @@
 <template>
     <div class="admin-portal">
-        <!-- Sidebar for navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <span class="city">CITY</span><span class="link">LINK</span>
-                </div>
-                <p class="tagline">Premium Urban Experience</p>
-            </div>
-            <nav class="sidebar-nav">
-                <nuxt-link to="/admin" exact>Dashboard</nuxt-link>
-                <nuxt-link to="/admin/users">Utilisateurs</nuxt-link>
-                <nuxt-link to="/admin/shops">Commerçants</nuxt-link>
-                <nuxt-link to="/admin/events">Événements</nuxt-link>
-                <nuxt-link to="/admin/announcements">Annonces</nuxt-link>
-                <nuxt-link to="/admin/info">Informations</nuxt-link>
-            </nav>
-        </aside>
-
-        <!-- Main content area -->
+        <AdminSidebar />
         <div class="main">
             <div class="intro">
                 <h1>Admin Dashboard</h1>
@@ -98,74 +80,11 @@ body {
     background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 50%, $color-primary-dark 100%);
     color: $color-text-light;
 
-    .sidebar {
-        width: 280px;
-        background: $color-primary-dark;
-        box-shadow: 2px 0 10px $color-black-overlay-light;
-        display: flex;
-        flex-direction: column;
-
-        .sidebar-header {
-            text-align: center;
-            padding: 2rem 1rem;
-            border-bottom: 1px solid $color-white-overlay-light;
-
-            .logo {
-                font-size: 2rem;
-                font-weight: 700;
-                letter-spacing: -1px;
-                background: linear-gradient(to right, $color-text-light, $color-text-muted);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                margin-bottom: 0.5rem;
-
-                .city {
-                    font-weight: 300;
-                }
-
-                .link {
-                    font-weight: 700;
-                }
-            }
-
-            .tagline {
-                font-size: 0.9rem;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                color: $color-text-muted;
-                margin: 0;
-            }
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            margin-top: 1rem;
-
-            a {
-                padding: 0.8rem 1.2rem;
-                color: $color-text-light;
-                text-decoration: none;
-                font-weight: 500;
-                border-bottom: 1px solid $color-white-overlay-light;
-                transition: $transition-fast;
-
-                &:hover {
-                    background: $color-white-overlay-light;
-                }
-
-                &.nuxt-link-exact-active {
-                    background: $color-white-overlay-medium;
-                }
-            }
-        }
-    }
+    
 
     .main {
         flex: 1;
         padding: 2rem;
-        display: flex;
-        flex-direction: column;
         overflow-y: auto;
 
         .intro {
