@@ -9,10 +9,10 @@
         <nav class="sidebar-nav">
             <nuxt-link to="/admin">Dashboard</nuxt-link>
             <nuxt-link to="/admin/users">Utilisateurs</nuxt-link>
-            <nuxt-link to="/admin/shops">Commerçants</nuxt-link>
-            <nuxt-link to="/admin/events">Événements</nuxt-link>
+<!--            <nuxt-link to="/admin/shops">Commerçants</nuxt-link>-->
+<!--            <nuxt-link to="/admin/events">Événements</nuxt-link>-->
             <nuxt-link to="/admin/announcements">Annonces</nuxt-link>
-            <nuxt-link to="/admin/info">Informations</nuxt-link>
+<!--            <nuxt-link to="/admin/info">Informations</nuxt-link>-->
         </nav>
     </aside>
 </template>

@@ -15,22 +15,22 @@
                     <h3>Utilisateurs</h3>
                     <p>Gérer et visualiser la liste des utilisateurs de la ville.</p>
                 </nuxt-link>
-                <nuxt-link to="/admin/shops" class="feature-card">
-                    <h3>Commerçants</h3>
-                    <p>Gérer et visualiser les commerçants partenaires.</p>
-                </nuxt-link>
-                <nuxt-link to="/admin/events" class="feature-card">
-                    <h3>Événements</h3>
-                    <p>Créer et gérer les événements pour la communauté urbaine.</p>
-                </nuxt-link>
+<!--                <nuxt-link to="/admin/shops" class="feature-card">-->
+<!--                    <h3>Commerçants</h3>-->
+<!--                    <p>Gérer et visualiser les commerçants partenaires.</p>-->
+<!--                </nuxt-link>-->
+<!--                <nuxt-link to="/admin/events" class="feature-card">-->
+<!--                    <h3>Événements</h3>-->
+<!--                    <p>Créer et gérer les événements pour la communauté urbaine.</p>-->
+<!--                </nuxt-link>-->
                 <nuxt-link to="/admin/announcements" class="feature-card">
                     <h3>Annonces</h3>
                     <p>Publier des annonces et informer les citoyens.</p>
                 </nuxt-link>
-                <nuxt-link to="/admin/info" class="feature-card">
-                    <h3>Informations</h3>
-                    <p>Gérer le contenu informatif pour la ville.</p>
-                </nuxt-link>
+<!--                <nuxt-link to="/admin/info" class="feature-card">-->
+<!--                    <h3>Informations</h3>-->
+<!--                    <p>Gérer le contenu informatif pour la ville.</p>-->
+<!--                </nuxt-link>-->
             </div>
         </div>
     </div>
