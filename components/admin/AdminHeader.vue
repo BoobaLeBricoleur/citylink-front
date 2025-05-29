@@ -23,10 +23,12 @@
         <div class="header-actions">
             <div class="user-profile">
                 <div class="avatar">
-                    <span>{{ (this.user.firstname[0] + this.user.lastname[0])}}</span>
+                    <span>{{ // (this.user.firstname[0] + this.user.lastname[0])}}</span>
+                    <span>t t</span>
                 </div>
                 <div class="user-info">
-                    <span class="user-name">{{this.user.firstname}} {{this.user.lastname}}</span>
+<!--                    <span class="user-name">{{this.user.firstname}} {{this.user.lastname}}</span>-->
+                    <span class="user-name">test test</span>
 
                     <!-- TODO: remplacer avec le role dynamiquement -->
                     <span class="user-role">Administrator</span>
@@ -44,47 +46,45 @@
 </template>
 
 <script>
-import axios from 'axios'
-
-export default {
-    name: 'AdminHeader',
-    data() {
-      return {
-        user: { firstname: '', lastname: '' }
-      }
-    },
-    async mounted() {
-        await this.fetchUser()
-    },
-    methods: {
-      async fetchUser() {
-        // Récupérer depuis localStorage comme fallback
-        const storedUser = localStorage.getItem('user')
-        if (storedUser) {
-          this.user = JSON.parse(storedUser)
-        }
-
-        // Pour être plus cohérent avec les autres composants,
-        // vous pourriez utiliser verifyAndLoadProfile ici
-        try {
-          const API_URL = process.env.API_URL || 'http://localhost:3000/api'
-          const token = localStorage.getItem('token')
-          if (token) {
-            const response = await axios.get(`${API_URL}/users/profile`, {
-              headers: { 'Authorization': `Bearer ${token}` }
-            })
-            if (response.data) {
-              this.user = response.data
-              // Mettre à jour le localStorage
-              localStorage.setItem('user', JSON.stringify(this.user))
-            }
-          }
-        } catch (error) {
-          console.error('Erreur lors de la récupération du profil:', error)
-        }
-      }
-    }
-}
+// import axios from 'axios'
+//
+// export default {
+//     name: 'AdminHeader',
+//     data() {
+//       return {
+//         user: { firstname: '', lastname: '' }
+//       }
+//     },
+//     async mounted() {
+//         await this.fetchUser()
+//     },
+//     methods: {
+//       async fetchUser() {
+//         // Récupérer depuis localStorage comme fallback
+//         const storedUser = localStorage.getItem('user')
+//         if (storedUser) {
+//           this.user = JSON.parse(storedUser)
+//         }
+//
+//         try {
+//           const API_URL = process.env.API_URL || 'http://localhost:3000/api'
+//           const token = localStorage.getItem('token')
+//           if (token) {
+//             const response = await axios.get(`${API_URL}/users/profile`, {
+//               headers: { 'Authorization': `Bearer ${token}` }
+//             })
+//             if (response.data) {
+//               this.user = response.data
+//               // Mettre à jour le localStorage
+//               localStorage.setItem('user', JSON.stringify(this.user))
+//             }
+//           }
+//         } catch (error) {
+//           console.error('Erreur lors de la récupération du profil:', error)
+//         }
+//       }
+//     }
+// }
 </script>
 
 <style scoped lang="scss">
