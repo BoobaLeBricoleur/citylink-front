@@ -159,7 +159,7 @@ export default {
     data() {
         return {
             user: {},
-            API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/'
+            API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
         }
     },
     async mounted() {

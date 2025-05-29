@@ -207,7 +207,7 @@ export default {
   },
   data() {
     return {
-      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/',
+      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api',
       activeTab: 'info',
       loading: false,
       passwordLoading: false,

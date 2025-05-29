@@ -45,7 +45,7 @@ export default {
         return {
             user: {},
             form: { firstname: '', lastname: '', email: '' },
-            API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/'
+            API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
         }
     },
     mounted() {
