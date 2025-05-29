@@ -3,7 +3,17 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/fonts', '@nuxt/icon', '@nuxt/image','nuxt-i18n-micro'],
 
-  // Configuration for Nuxt I18nm Micro
+  ssr: false,
+  nitro: {
+    preset: 'static',
+    serveStatic: true
+  },
+
+  app: {
+    baseURL: '/'
+  },
+
+  // Configuration I18n
   i18n: {
     locales: [
       { code: 'en', iso: 'en-US', dir: 'ltr' },
@@ -13,8 +23,7 @@ export default defineNuxtConfig({
     translationDir: 'locales',
     meta: true,
   },
-  
-  // Configuration CSS
+
   css: [
     '@fortawesome/fontawesome-free/css/all.css',
     '~/assets/main.scss'
