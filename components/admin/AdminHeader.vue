@@ -23,7 +23,7 @@
         <div class="header-actions">
             <div class="user-profile">
                 <div class="avatar">
-                    <span>{{ // (this.user.firstname[0] + this.user.lastname[0])}}</span>
+<!--                    <span>{{ (this.user.firstname[0] + this.user.lastname[0])}}</span>-->
                     <span>t t</span>
                 </div>
                 <div class="user-info">
