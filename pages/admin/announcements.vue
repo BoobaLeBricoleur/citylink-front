@@ -7,17 +7,92 @@
     <div class="main">
       <AdminHeader />
       <div class="intro">
-        <h1>Liste des Annonces</h1>
+        <div class="intro-header">
+          <h1>Liste des Annonces</h1>
+          <button @click="showCreateModal = true" class="btn btn-primary">
+            <font-awesome-icon icon="plus" /> Nouvelle annonce
+          </button>
+        </div>
         <p>Ci-dessous, vous trouverez toutes les annonces publiées sur la plateforme.</p>
+      </div>
+
+      <div class="search-bar">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input 
+              type="text"
+              v-model="searchQuery"
+              placeholder="Rechercher une annonce..."
+              class="search-input"
+            >
+          </div>
+      </div>
+
+        <!-- Modal de création d'annonce -->
+        <div v-if="showCreateModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Créer une nouvelle annonce</h2>
+            <button class="close-btn" @click="showCreateModal = false">×</button>
+          </div>
+          <form @submit.prevent="createAnnouncement" class="announcement-form">
+            <div class="form-group">
+              <label for="title">Titre*</label>
+              <input 
+                type="text" 
+                id="title" 
+                v-model="newAnnouncement.title" 
+                required 
+                class="form-control"
+              >
+            </div>
+            <div class="form-group">
+              <label for="content">Contenu*</label>
+              <textarea 
+                id="content" 
+                v-model="newAnnouncement.content" 
+                required 
+                class="form-control"
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="form-check">
+              <input 
+                type="checkbox" 
+                id="is_featured" 
+                v-model="newAnnouncement.is_featured"
+              >
+              <label for="is_featured">Mettre en avant</label>
+            </div>
+            <div class="form-check">
+              <input 
+                type="checkbox" 
+                id="is_active" 
+                v-model="newAnnouncement.is_active"
+              >
+              <label for="is_active">Activer immédiatement</label>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" @click="showCreateModal = false">
+                Annuler
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Créer l'annonce
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
       <!-- Announcements list -->
       <div class="announcement-list">
-        <div v-if="announcements.length === 0" class="no-announcements">
+        <div v-if="filteredAnnouncements.length === 0" class="no-announcements">
           Aucune annonce trouvée.
         </div>
         <ul v-else>
-          <li v-for="(item, index) in announcements"
+          <li v-for="(item, index) in filteredAnnouncements"
               :key="index"
               class="announcement-item"
               @click="viewAnnouncementDetails(item.id)">
@@ -49,7 +124,26 @@ export default {
   data() {
     return {
       announcements: [],
-      API_URL: process.env.API_URL || 'http://localhost:3000/api'
+      API_URL: process.env.API_URL || 'http://localhost:3000/api',
+      showCreateModal: false,
+      searchQuery: '',
+      newAnnouncement: {
+        title: '',
+        content: '',
+        is_featured: false,
+        is_active: true
+      }
+    }
+  },
+  computed: {
+    filteredAnnouncements() {
+      if (!this.searchQuery) return this.announcements;
+      
+      const query = this.searchQuery.toLowerCase();
+      return this.announcements.filter(announcement => 
+        announcement.title.toLowerCase().includes(query) ||
+        announcement.content.toLowerCase().includes(query)
+      );
     }
   },
   async mounted() {
@@ -57,6 +151,37 @@ export default {
     await this.fetchAnnouncements()
   },
   methods: {
+    async createAnnouncement() {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.post(
+          `${this.API_URL}/announcements/`, 
+          this.newAnnouncement,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+        
+        // Réinitialiser le formulaire
+        this.newAnnouncement = {
+          title: '',
+          content: '',
+          is_featured: false,
+          is_active: true
+        };
+        
+        // Fermer le modal
+        this.showCreateModal = false;
+        
+        // Rafraîchir la liste
+        await this.fetchAnnouncements();
+        
+      } catch (error) {
+        console.error('Erreur lors de la création de l\'annonce:', error);
+      }
+    },
     async initAuth() {
       const userData = await verifyAndLoadProfile(this.$router, this.API_URL)
     },
@@ -88,126 +213,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@use '../../assets/variables.scss' as *;
-
-.admin-portal {
-  display: flex;
-  height: 100vh;
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 50%, $color-primary-dark 100%);
-  color: $color-text-light;
-
-  .main {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-
-    .intro {
-      background: $color-white-overlay-medium;
-      padding: 2rem;
-      border-radius: $border-radius-md;
-      box-shadow: 0 4px 12px $color-black-overlay-light;
-      margin-bottom: 2rem;
-      border: 1px solid $color-white-overlay-light;
-
-      h1 {
-        margin-top: 0;
-        margin-bottom: 1rem;
-        color: $color-text-light;
-        font-size: 1.8rem;
-      }
-
-      p {
-        margin: 0.25rem 0;
-      }
-    }
-
-    .announcement-list {
-      background: $color-white-overlay-medium;
-      padding: 1rem;
-      border-radius: $border-radius-md;
-      box-shadow: 0 4px 12px $color-black-overlay-light;
-      border: 1px solid $color-white-overlay-light;
-
-      .no-announcements {
-        text-align: center;
-        font-size: 1.1rem;
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-
-        .announcement-item {
-          padding: 1rem;
-          margin-bottom: 1rem;
-          border-bottom: 1px solid $color-white-overlay-light;
-          cursor: pointer;
-          transition: background-color 0.2s ease;
-          border-radius: 4px;
-
-          &:hover {
-            background-color: $color-primary-dark;
-          }
-
-          &:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-          }
-
-          .announcement-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-
-            strong {
-              font-weight: 600;
-              font-size: 1.1rem;
-            }
-
-            .date {
-              font-size: 0.85rem;
-              opacity: 0.8;
-            }
-          }
-
-          .announcement-content {
-            margin: 0.5rem 0;
-            line-height: 1.4;
-            max-height: 3em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          }
-
-          .announcement-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.5rem;
-
-            .announcement-author {
-              font-size: 0.85rem;
-              font-style: italic;
-            }
-
-            .view-details {
-              font-size: 0.85rem;
-              color: $color-secondary;
-              display: flex;
-              align-items: center;
-              gap: 0.3rem;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>

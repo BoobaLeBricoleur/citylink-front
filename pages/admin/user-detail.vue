@@ -6,7 +6,6 @@
       <!-- Header avec retour et actions -->
       <div class="page-header">
         <div class="back-button" @click="$router.push('/admin/users')">
-          <i class="fas fa-arrow-left"></i>
           <span>Retour à la liste</span>
         </div>
         <div class="actions">

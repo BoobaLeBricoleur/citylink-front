@@ -19,6 +19,12 @@
 @use 'pages/informations';
 @use 'pages/merchants';
 
+@use 'pages/admin/AdminIndex.scss';
+@use 'pages/admin/AdminAnnouncements.scss';
+@use 'pages/admin/AdminAnnouncementsDetails.scss';
+@use 'pages/admin/Adminuser.scss';
+
+
 // Sert de test pour savoir si le scss est bien prit en compte
 //body {
 //    border: 8px solid red !important; 
