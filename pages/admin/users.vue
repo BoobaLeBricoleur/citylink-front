@@ -8,14 +8,29 @@
                 <p>Ci-dessous, vous trouverez tous les comptes enregistrés.</p>
             </div>
 
+            <!-- Barre de recherche -->
+            <div class="search-bar">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input 
+                        type="text"
+                        v-model="searchQuery"
+                        placeholder="Rechercher un utilisateur..."
+                        class="search-input"
+                    >
+                </div>
+            </div>
+
             <!-- Users list avec navigation au clic -->
             <div class="user-list">
-                <div v-if="users.length === 0" class="no-users">
+                <div v-if="filteredUsers.length === 0" class="no-users">
                     Aucun utilisateur trouvé.
                 </div>
                 <ul v-else>
                     <li 
-                        v-for="(item, index) in users" 
+                        v-for="(item, index) in filteredUsers" 
                         :key="index" 
                         class="user-item"
                         @click="goToUserDetail(item.id)"
@@ -45,7 +60,18 @@ export default {
         return {
             users: [],
             user: {},
+            searchQuery: '', 
             API_URL: process.env.API_URL || 'http://localhost:3000/api'
+        }
+    },
+    computed: {
+        filteredUsers() {
+            if (!this.searchQuery) return this.users;
+            
+            const query = this.searchQuery.toLowerCase();
+            return this.users.filter(user => 
+                user.lastname.toLowerCase().includes(query)
+            );
         }
     },
     async mounted() {
