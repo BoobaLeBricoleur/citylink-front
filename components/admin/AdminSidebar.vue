@@ -9,13 +9,13 @@
         <nav class="sidebar-nav">
             <nuxt-link to="/admin">Dashboard</nuxt-link>
             <nuxt-link to="/admin/users">Utilisateurs</nuxt-link>
-            <nuxt-link to="/admin/shops">Commerçants</nuxt-link>
+            <nuxt-link to="/admin/business">Commerçants</nuxt-link>
             <nuxt-link to="/admin/events">Événements</nuxt-link>
             <nuxt-link to="/admin/announcements">Annonces</nuxt-link>
             <nuxt-link to="/admin/info">Informations</nuxt-link>
         </nav>
         <div class="back-to-site">
-            <nuxt-link to="/">
+            <nuxt-link to="/">  
                 Retour au site
             </nuxt-link>
         </div>
