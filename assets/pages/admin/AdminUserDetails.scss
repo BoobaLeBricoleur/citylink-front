@@ -1,203 +1,4 @@
-<template>
-    <div class="admin-portal">
-        <AdminSidebar />
-        <div class="main">
-            <AdminHeader />
-      <!-- Header avec retour et actions -->
-      <div class="page-header">
-        <div class="back-button" @click="$router.push('/admin/users')">
-          <span>Retour à la liste</span>
-        </div>
-        <div class="actions">
-          <button class="btn btn-secondary"><i class="fas fa-envelope"></i> Message</button>
-          <button class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
-        </div>
-      </div>
-
-      <!-- Profil principal -->
-      <div class="profile-container">
-        <!-- Carte d'identité -->
-        <div class="profile-card identity-card">
-          <div class="profile-header">
-            <div class="avatar">
-              <span>{{ user.firstname ? user.firstname[0] : '' }}{{ user.lastname ? user.lastname[0] : '' }}</span>
-            </div>
-            <div class="user-status" :class="user.active ? 'active' : 'inactive'">
-              {{ user.active ? 'Actif' : 'Inactif' }}
-            </div>
-          </div>
-          
-          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
-          <p class="user-id">ID: {{ $route.query.id }}</p>
-          
-          <div class="contact-info">
-            <div class="info-item">
-              <i class="fas fa-envelope"></i>
-              <p>{{ user.email }}</p>
-            </div>
-            <div class="info-item" v-if="user.phone">
-              <i class="fas fa-phone"></i>
-              <p>{{ user.phone }}</p>
-            </div>
-            <div class="info-item" v-if="user.address">
-              <i class="fas fa-map-marker-alt"></i>
-              <p>{{ user.address }}</p>
-            </div>
-          </div>
-          
-          <div class="member-since">
-            <span class="label">Membre depuis:</span>
-            <span class="value">{{ user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Inconnu' }}</span>
-          </div>
-        </div>
-        
-        <!-- Statistiques -->
-        <div class="profile-card stats-card">
-          <h3>Statistiques d'activité</h3>
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-value">25</div>
-              <div class="stat-label">Connexions</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value">12</div>
-              <div class="stat-label">Événements</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value">5</div>
-              <div class="stat-label">Commerces favoris</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value">89%</div>
-              <div class="stat-label">Profil complété</div>
-            </div>
-          </div>
-          
-          <div class="activity-graph">
-            <h4>Activité mensuelle</h4>
-            <div class="graph-placeholder">
-              <div class="bar" style="height: 30%"></div>
-              <div class="bar" style="height: 50%"></div>
-              <div class="bar" style="height: 80%"></div>
-              <div class="bar" style="height: 60%"></div>
-              <div class="bar" style="height: 90%"></div>
-              <div class="bar" style="height: 40%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Onglets d'information supplémentaire -->
-      <div class="tabs-container">
-        <div class="tabs-header">
-          <div class="tab active">Préférences</div>
-          <div class="tab">Activités récentes</div>
-          <div class="tab">Paramètres</div>
-        </div>
-        
-        <div class="tab-content">
-          <div class="preferences-section">
-            <h3>Préférences utilisateur</h3>
-            
-            <div class="preferences-grid">
-              <div class="pref-item">
-                <span class="pref-label">Notifications par email</span>
-                <div class="toggle active"></div>
-              </div>
-              <div class="pref-item">
-                <span class="pref-label">Notifications push</span>
-                <div class="toggle active"></div>
-              </div>
-              <div class="pref-item">
-                <span class="pref-label">Partage de position</span>
-                <div class="toggle"></div>
-              </div>
-              <div class="pref-item">
-                <span class="pref-label">Recommandations</span>
-                <div class="toggle active"></div>
-              </div>
-            </div>
-            
-            <div class="categories-section">
-              <h4>Catégories d'intérêt</h4>
-              <div class="categories-container">
-                <div class="category-tag">Restaurants</div>
-                <div class="category-tag">Culture</div>
-                <div class="category-tag">Sport</div>
-                <div class="category-tag">Mode</div>
-                <div class="category-tag">Technologie</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Actions administratives -->
-      <div class="admin-actions">
-        <h3>Actions administratives</h3>
-        <div class="actions-grid">
-          <button class="action-btn"><i class="fas fa-ban"></i> Suspendre le compte</button>
-          <button class="action-btn"><i class="fas fa-trash"></i> Supprimer le compte</button>
-          <button class="action-btn"><i class="fas fa-key"></i> Réinitialiser mot de passe</button>
-          <button class="action-btn"><i class="fas fa-shield-alt"></i> Vérifier l'identité</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-import axios from 'axios'
-import { verifyAndLoadProfile } from '~/utils/authGuard.js'
-import AdminSidebar from '~/components/admin/AdminSidebar.vue'
-import AdminHeader from '~/components/admin/AdminHeader.vue'
-
-export default {
-    components: { AdminSidebar, AdminHeader },
-    name: 'AdminUserDetail',
-    data() {
-        return {
-            user: {},
-            API_URL: process.env.API_URL || 'http://localhost:3000/api'
-        }
-    },
-    async mounted() {
-        await this.initAuth()
-        await this.fetchUserDetails()
-    },
-    methods: {
-        async initAuth() {
-            const userData = await verifyAndLoadProfile(this.$router, this.API_URL)
-            if (!userData) {
-                return
-            }
-        },
-        async fetchUserDetails() {
-            try {
-                const userId = this.$route.query.id
-                if (!userId) {
-                    console.error("ID d'utilisateur manquant")
-                    return
-                }
-                
-                const token = localStorage.getItem('token')
-                const { data } = await axios.get(`${this.API_URL}/users/${userId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                
-                this.user = data
-            } catch (error) {
-                console.error('Erreur lors de la récupération du user :', error)
-            }
-        }
-    }
-}
-</script>
-
-<style lang="scss">
-@use '../../assets/variables.scss' as *;
+@use '../../variables.scss' as *;
 
 .admin-portal {
   display: flex;
@@ -257,10 +58,6 @@ export default {
           &.btn-primary {
             background: $color-secondary;
             color: #fff;
-
-            &:hover {
-              background: lighten($color-secondary, 5%);
-            }
           }
         }
       }
@@ -500,12 +297,6 @@ export default {
                   transition: 0.4s;
                 }
 
-                &.active {
-                  &::before {
-                    transform: translateX(20px);
-                    background: lighten($color-primary, 20%);
-                  }
-                }
               }
             }
           }
@@ -576,12 +367,8 @@ export default {
             font-size: 1rem;
           }
 
-          &:hover {
-            background: darken($color-primary-dark, 5%);
-          }
         }
       }
     }
   }
 }
-</style>
