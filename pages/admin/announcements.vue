@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       announcements: [],
-      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/apiapi'
+      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
     }
   },
   async mounted() {
