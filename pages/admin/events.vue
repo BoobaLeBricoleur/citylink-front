@@ -34,7 +34,7 @@
                         <h2>Créer un nouvel événement</h2>
                         <button class="close-btn" @click="showCreateModal = false">×</button>
                     </div>
-                    <form @submit.prevent="createEvent" class="event-form">
+                    <form @submit.prevent="createEvent" class="business-form">
                         <div class="form-group">
                             <label for="name">Titre*</label>
                             <input 
@@ -57,39 +57,42 @@
                                 placeholder="Description détaillée de l'événement"
                             ></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="event_date">Date de l'événement*</label>
-                            <input 
-                                type="datetime-local" 
-                                id="event_date" 
-                                v-model="newEvent.event_date" 
-                                required 
-                                class="form-control"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label for="business_id">Commerce associé*</label>
-                            <select 
-                                id="business_id" 
-                                v-model="newEvent.business_id" 
-                                required 
-                                class="form-control"
-                            >
-                                <option value="">Sélectionner un commerce</option>
-                                <option 
-                                    v-for="business in businesses" 
-                                    :key="business.id" 
-                                    :value="business.id"
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="event_date">Date de l'événement*</label>
+                                <input 
+                                    type="datetime-local" 
+                                    id="event_date" 
+                                    v-model="newEvent.event_date" 
+                                    required 
+                                    class="form-control"
                                 >
-                                    {{ business.name }}
-                                </option>
-                            </select>
+                            </div>
+                            <div class="form-group half">
+                                <label for="business_id">Commerce associé*</label>
+                                <select 
+                                    id="business_id" 
+                                    v-model="newEvent.business_id" 
+                                    required 
+                                    class="form-control"
+                                >
+                                    <option value="">Sélectionner un commerce</option>
+                                    <option 
+                                        v-for="business in businesses" 
+                                        :key="business.id" 
+                                        :value="business.id"
+                                    >
+                                        {{ business.name }}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="checkbox-label">
                                 <input 
                                     type="checkbox" 
                                     v-model="newEvent.is_reservable"
+                                    class="form-control-checkbox"
                                 >
                                 Réservation possible
                             </label>

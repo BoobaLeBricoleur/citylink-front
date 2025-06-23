@@ -15,7 +15,7 @@
                     <h3>Utilisateurs</h3>
                     <p>Gérer et visualiser la liste des utilisateurs de la ville.</p>
                 </nuxt-link>
-                <nuxt-link to="/admin/shops" class="feature-card">
+                <nuxt-link to="/admin/business" class="feature-card">
                     <h3>Commerçants</h3>
                     <p>Gérer et visualiser les commerçants partenaires.</p>
                 </nuxt-link>
@@ -26,10 +26,6 @@
                 <nuxt-link to="/admin/announcements" class="feature-card">
                     <h3>Annonces</h3>
                     <p>Publier des annonces et informer les citoyens.</p>
-                </nuxt-link>
-                <nuxt-link to="/admin/info" class="feature-card">
-                    <h3>Informations</h3>
-                    <p>Gérer le contenu informatif pour la ville.</p>
                 </nuxt-link>
             </div>
         </div>
