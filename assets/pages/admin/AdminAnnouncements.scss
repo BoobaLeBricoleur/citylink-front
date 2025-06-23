@@ -38,11 +38,11 @@
         margin-bottom: 1.5rem;
     
         h1 {
-          margin: 0;  // Supprime la marge par défaut du h1
+          margin: 0;
         }
 
         .btn-primary {
-                background: linear-gradient(135deg, lighten($color-primary, 5%) 0%, $color-primary 100%);
+                background: linear-gradient(135deg, $color-primary 0%, $color-primary 100%);
                 color: white;
                 padding: 0.8rem 1.5rem;
                 border: none;
@@ -364,7 +364,6 @@
           color: white;
           
           &:hover {
-            background: darken($color-primary, 5%);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba($color-primary, 0.2);
           }
