@@ -48,7 +48,7 @@
                   <NuxtLink to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
                     <i class="fa-solid fa-user"></i> Mon profil
                   </NuxtLink>
-                  <NuxtLink to="/dashboard" class="dropdown-item" @click="isDropdownOpen = false">
+                  <NuxtLink to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
                     <i class="fa-solid fa-user"></i> Tableau de bord
                   </NuxtLink>
 

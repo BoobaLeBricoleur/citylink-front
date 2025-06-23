@@ -14,6 +14,11 @@
             <nuxt-link to="/admin/announcements">Annonces</nuxt-link>
             <nuxt-link to="/admin/info">Informations</nuxt-link>
         </nav>
+        <div class="back-to-site">
+            <nuxt-link to="/">
+                Retour au site
+            </nuxt-link>
+        </div>
     </aside>
 </template>
 
@@ -22,70 +27,3 @@ export default {
     name: 'AdminSidebar'
 }
 </script>
-
-<style scoped lang="scss">
-@use '../../assets/variables.scss' as *;
-
-.sidebar {
-    width: 280px;
-    background: $color-primary-dark;
-    box-shadow: 2px 0 10px $color-black-overlay-light;
-    display: flex;
-    flex-direction: column;
-
-    .sidebar-header {
-        text-align: center;
-        padding: 2rem 1rem;
-        border-bottom: 1px solid $color-white-overlay-light;
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            background: linear-gradient(to right, $color-text-light, $color-text-muted);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-
-            .city {
-                font-weight: 300;
-            }
-
-            .link {
-                font-weight: 700;
-            }
-        }
-
-        .tagline {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: $color-text-muted;
-            margin: 0;
-        }
-    }
-
-    .sidebar-nav {
-        display: flex;
-        flex-direction: column;
-        margin-top: 1rem;
-
-        a {
-            padding: 0.8rem 1.2rem;
-            color: $color-text-light;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid $color-white-overlay-light;
-            transition: $transition-fast;
-
-            &:hover {
-                background: $color-white-overlay-light;
-            }
-
-            &.nuxt-link-exact-active {
-                background: $color-white-overlay-medium;
-            }
-        }
-    }
-}
-</style>

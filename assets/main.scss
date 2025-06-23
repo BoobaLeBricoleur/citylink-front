@@ -6,6 +6,8 @@
 // Import des composants
 @use 'components/footer';
 @use 'components/header';
+@use 'components/sidebaradmin';
+@use 'components/headeradmin';
 
 // Import des pages
 @use 'pages/account';
