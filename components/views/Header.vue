@@ -23,6 +23,7 @@
           <li><NuxtLink to="/events" @click="isMenuOpen = false">Événements</NuxtLink></li>
           <li><NuxtLink to="/informations" @click="isMenuOpen = false">Informations</NuxtLink></li>
           <li><NuxtLink to="/announcements" @click="isMenuOpen = false">Annonces</NuxtLink></li>
+          <li><NuxtLink to="/emergency" @click="isMenuOpen = false">Urgences</NuxtLink></li>
         </ul>
         
         <!-- Actions de connexion -->
