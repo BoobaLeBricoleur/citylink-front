@@ -1,41 +1,40 @@
 <template>
-    <Header />
-    <section class="hero">
-        <div class="hero-content">
-            <h1>{{ $t('hero.title') }}</h1>
-            <p>{{ $t('hero.subtitle') }}</p>
-        </div>
-    </section>
+    <div class="events-page">
+        <Header />
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Événements à venir</h1>
+                <p>Découvrez les événements de votre ville</p>
+            </div>
+        </section>
 
-    <div class="featured-container" v-if="featuredMerchant">
-        <div class="featured-image">
-            <div class="image-frame">
-                <img :src="featuredMerchant.image || defaultImage" :alt="featuredMerchant.name" />
-            </div>
-        </div>
-        <div class="featured-content">
-            <div class="premium-badge">
-                <span>{{ $t('featured.badge') }}</span>
-            </div>
-            <h2>{{ featuredMerchant.name }}</h2>
-            <p class="featured-address">{{ featuredMerchant.address }}</p>
-            <p class="featured-description">{{ featuredMerchant.description }}</p>
-            <div class="featured-cta">
-                <button class="btn-discover">{{ $t('featured.cta') }}</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="merchants-page">
-        <div class="merchants-container">
-            <div v-for="merchant in merchants" 
-                 :key="merchant.id" 
-                 class="merchant-card"
-                 @click="viewMerchantDetails(merchant.id)">
-                <img :src="merchant.image || defaultImage" :alt="merchant.name" />
-                <h3>{{ merchant.name }}</h3>
-                <p class="address">{{ merchant.address }}</p>
-                <p class="description">{{ merchant.description }}</p>
+        <div class="events-container">
+            <div class="events-grid">
+                <div v-for="event in events" 
+                     :key="event.id" 
+                     class="event-card">
+                    <div class="event-image">
+                        <img :src="event.image || '/default-event.jpg'" :alt="event.name">
+                    </div>
+                    <div class="event-info">
+                        <h3>{{ event.name }}</h3>
+                        <p class="event-date">{{ formatDate(event.event_date) }}</p>
+                        <p class="event-description">{{ event.description }}</p>
+                        <p class="event-location">{{ event.business_name }}</p>
+                        
+                        <div class="event-actions">
+                            <button 
+                                v-if="event.is_reservable && isLoggedIn"
+                                @click="toggleReservation(event)"
+                                :class="['btn-reserve', {
+                                    'reserved': isEventReserved(event.id)
+                                }]"
+                            >
+                                {{ isEventReserved(event.id) ? 'Annuler' : 'Réserver' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -45,7 +44,6 @@
 <script>
 import Header from '../components/views/Header.vue'
 import Footer from '../components/views/Footer.vue'
-import defaultImage from '/shop-logo.png'
 import axios from 'axios'
 
 export default {
@@ -53,41 +51,103 @@ export default {
         Header,
         Footer
     },
+    computed: {
+        isLoggedIn() {
+            return !!localStorage.getItem('token');
+        }
+    },
     data() {
         return {
-            merchants: [],
-            featuredMerchant: null,
-            defaultImage,
+            events: [],
+            userRegistrations: [],
             API_URL: process.env.API_URL || 'http://localhost:3000/api'
         }
     },
     methods: {
-        async fetchMerchants() {
+        async fetchEvents() {
             try {
                 const token = localStorage.getItem('token')
-                const response = await axios.get(`${this.API_URL}/business/`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                const response = await axios.get(`${this.API_URL}/events/`, {
+                    headers: token ? { Authorization: `Bearer ${token}` } : {}
                 })
-                this.merchants = response.data || []
-                
-                // Sélectionner le premier commerce comme featured si existe
-                if (this.merchants.length > 0) {
-                    this.featuredMerchant = this.merchants[0]
-                    // Retirer le featured merchant de la liste principale
-                    this.merchants = this.merchants.slice(1)
-                }
+                this.events = response.data
             } catch (error) {
-                console.error('Erreur lors de la récupération des commerces:', error)
+                console.error('Erreur lors de la récupération des événements:', error)
             }
         },
-        viewMerchantDetails(id) {
-            this.$router.push(`/merchant/${id}`)
+        async fetchUserRegistrations() {
+            try {
+                const token = localStorage.getItem('token')
+                const response = await axios.get(`${this.API_URL}/event-registrations/user`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                this.userRegistrations = response.data
+            } catch (error) {
+                console.error('Erreur lors de la récupération des réservations:', error)
+            }
+        },
+        async toggleReservation(event) {
+            try {
+                const token = localStorage.getItem('token')
+                const isRegistered = this.isEventReserved(event.id)
+
+                if (isRegistered) {
+                    // Trouver l'ID de la réservation
+                    const registration = this.userRegistrations.find(
+                        reg => reg.event_id === event.id && reg.reserved
+                    )
+                    
+                    // Supprimer la réservation
+                    await axios.delete(
+                        `${this.API_URL}/event-registrations/${event.id}`,
+                        {
+                            headers: { Authorization: `Bearer ${token}` }
+                        }
+                    )
+                } else {
+                    // Créer une nouvelle réservation
+                    await axios.post(
+                        `${this.API_URL}/event-registrations`,
+                        { 
+                            event_id: event.id,
+                            reserved: true
+                        },
+                        { headers: { Authorization: `Bearer ${token}` } }
+                    )
+                }
+                
+                // Rafraîchir les réservations
+                await this.fetchUserRegistrations()
+                
+                // Afficher une notification
+                const message = isRegistered 
+                    ? 'Réservation annulée avec succès'
+                    : 'Événement réservé avec succès'
+            } catch (error) {
+                console.error('Erreur:', error)
+            }
+        },
+        isEventReserved(eventId) {
+            return this.userRegistrations.some(
+                reg => reg.event_id === eventId && reg.reserved
+            )
+        },
+        formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
         }
     },
     async mounted() {
-        await this.fetchMerchants()
+        await Promise.all([
+            this.fetchEvents(),
+            this.fetchUserRegistrations()
+        ])
     }
 }
 </script>

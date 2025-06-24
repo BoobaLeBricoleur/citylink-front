@@ -59,19 +59,17 @@ export default {
   },
   methods: {
     async fetchAnnouncements() {
-      try {
-        const token = localStorage.getItem('token');
-        const { data } = await axios.get(`${this.API_URL}/announcements/`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-
-        // Séparation directe des annonces
-        console.log(data);
-        this.featuredAnnouncements = data.filter(ann => ann.is_featured === 1);
-        this.regularAnnouncements = data.filter(ann => ann.is_featured !== 1);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des annonces :', error);
-      }
+        try {
+            const token = localStorage.getItem('token');
+            const { data } = await axios.get(`${this.API_URL}/announcements/`, {
+                headers: token ? { Authorization: `Bearer ${token}` } : {}
+            });
+            
+            this.featuredAnnouncements = data.filter(ann => ann.is_featured === 1);
+            this.regularAnnouncements = data.filter(ann => ann.is_featured !== 1);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des annonces :', error);
+        }
     },
     formatDate(dateString) {
       if (!dateString) return '';

@@ -67,16 +67,12 @@ export default {
             try {
                 const token = localStorage.getItem('token')
                 const response = await axios.get(`${this.API_URL}/business/`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                    headers: token ? { Authorization: `Bearer ${token}` } : {}
                 })
                 this.merchants = response.data || []
                 
-                // Sélectionner le premier commerce comme featured si existe
                 if (this.merchants.length > 0) {
                     this.featuredMerchant = this.merchants[0]
-                    // Retirer le featured merchant de la liste principale
                     this.merchants = this.merchants.slice(1)
                 }
             } catch (error) {
