@@ -259,7 +259,7 @@ export default {
             color: #fff;
 
             &:hover {
-              background: lighten($color-secondary, 5%);
+              background: $color-secondary;
             }
           }
         }
@@ -503,7 +503,7 @@ export default {
                 &.active {
                   &::before {
                     transform: translateX(20px);
-                    background: lighten($color-primary, 20%);
+                    background: $color-primary;
                   }
                 }
               }
@@ -577,7 +577,7 @@ export default {
           }
 
           &:hover {
-            background: darken($color-primary-dark, 5%);
+            background: $color-primary-dark;
           }
         }
       }
