@@ -1,44 +1,44 @@
 <template>
-    <div class="events-page">
-        <Header />
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Événements à venir</h1>
-                <p>Découvrez les événements de votre ville</p>
-            </div>
-        </section>
+  <div class="events-page">
+    <Header />
+    <section class="hero">
+      <div class="hero-content">
+        <h1>{{ $t('pages.events.eventsList.title') }}</h1>
+        <p>{{ $t('pages.events.hero.subtitle') }}</p>
+      </div>
+    </section>
 
-        <div class="events-container">
-            <div class="events-grid">
-                <div v-for="event in events" 
-                     :key="event.id" 
-                     class="event-card">
-                    <div class="event-image">
-                        <img :src="event.image || '/default-event.jpg'" :alt="event.name">
-                    </div>
-                    <div class="event-info">
-                        <h3>{{ event.name }}</h3>
-                        <p class="event-date">{{ formatDate(event.event_date) }}</p>
-                        <p class="event-description">{{ event.description }}</p>
-                        <p class="event-location">{{ event.business_name }}</p>
-                        
-                        <div class="event-actions">
-                            <button 
-                                v-if="event.is_reservable && isLoggedIn"
-                                @click="toggleReservation(event)"
-                                :class="['btn-reserve', {
+    <div class="events-container">
+      <div class="events-grid">
+        <div v-for="event in events"
+             :key="event.id"
+             class="event-card">
+          <div class="event-image">
+            <img :src="event.image || '/default-event.jpg'" :alt="event.name">
+          </div>
+          <div class="event-info">
+            <h3>{{ event.name }}</h3>
+            <p class="event-date">{{ formatDate(event.event_date) }}</p>
+            <p class="event-description">{{ event.description }}</p>
+            <p class="event-location">{{ event.business_name }}</p>
+
+            <div class="event-actions">
+              <button
+                  v-if="event.is_reservable && isLoggedIn"
+                  @click="toggleReservation(event)"
+                  :class="['btn-reserve', {
                                     'reserved': isEventReserved(event.id)
                                 }]"
-                            >
-                                {{ isEventReserved(event.id) ? 'Annuler' : 'Réserver' }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
+              >
+                {{ isEventReserved(event.id) ? $t('pages.events.actions.cancel') : $t('pages.events.actions.reserve') }}
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <Footer />
+  </div>
+  <Footer />
 </template>
 
 <script>
@@ -120,10 +120,9 @@ export default {
                 await this.fetchUserRegistrations()
                 
                 // Afficher une notification
-                const message = isRegistered 
-                    ? 'Réservation annulée avec succès'
-                    : 'Événement réservé avec succès'
-            } catch (error) {
+              const message = isRegistered
+                  ? this.$t('pages.events.alerts.cancel_success')
+                  : this.$t('pages.events.alerts.reserve_success')            } catch (error) {
                 console.error('Erreur:', error)
             }
         },

@@ -1,0 +1,369 @@
+{
+  "footer": {
+    "copyright": "© 2025 CityLink. All rights reserved."
+  },
+  "header": {
+    "navigation_menu": "Navigation menu",
+    "menu": {
+      "forum": "Forum",
+      "merchants": "Merchants",
+      "events": "Events",
+      "information": "Information",
+      "announcements": "Announcements",
+      "emergency": "Emergency"
+    },
+    "dropdown": {
+      "profile": "Profile",
+      "dashboard": "Dashboard",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "login": "Login"
+  },
+  "pages": {
+    "index": {
+      "hero": {
+        "title": "CityLink comes to life",
+        "subtitle": "Join the future of civic life with CityLink, the platform that brings citizens, businesses, and municipal services closer together.",
+        "discover_button": "Discover CityLink",
+        "events_button": "View events"
+      },
+      "about": {
+        "title": "What is CityLink?",
+        "features": {
+          "connect": {
+            "title": "Connect",
+            "description": "CityLink represents a major step in digitalization and connecting citizens of CityLink. You are at the heart of this project."
+          },
+          "centralize": {
+            "title": "Centralize",
+            "description": "A website set up by the CityLink municipality to facilitate the relationship between citizens, administration, and local merchants."
+          },
+          "participate": {
+            "title": "Participate",
+            "description": "Stay informed about local events, participate in the life of your neighborhood, and contribute to the evolution of your city."
+          }
+        }
+      },
+      "shop": {
+        "title": "Merchants, promote your business",
+        "description": "CityLink offers a digital showcase for all local businesses. Gain visibility and connect directly with your customers.",
+        "benefits": {
+          "profile": "Create your business profile for free",
+          "share": "Share your news and promotions",
+          "reach": "Reach a local and engaged customer base"
+        },
+        "discover_button": "Discover local shops"
+      },
+      "cta": {
+        "title": "Ready to join the CityLink community?",
+        "description": "Create your account in just a few minutes and participate in the life of your city.",
+        "button": "Create my account"
+      }
+    },
+    "account": {
+      "welcome": "Welcome",
+      "join_us": "Join us",
+      "login_subtitle": "Log in to access your account",
+      "register_subtitle": "Create your account in a few steps",
+      "email": "Email",
+      "password": "Password",
+      "individual": "Individual",
+      "professional": "Professional",
+      "firstname": "First name",
+      "lastname": "Last name",
+      "company": "Company",
+      "phone": "Phone",
+      "address": "Address",
+      "postal_code": "Postal code",
+      "city": "City",
+      "birthday": "Date of birth",
+      "confirm_password": "Confirm password",
+      "notify_new_events": "Receive notifications for new events",
+      "notify_my_events": "Receive reminders for my events",
+      "public_profile": "Public profile (visible to other users)",
+      "login_button": "Log in",
+      "register_button": "Create my account",
+      "to_register": "No account yet? Sign up.",
+      "to_login": "Already have an account? Log in.",
+      "errors": {
+        "password_mismatch": "Passwords do not match",
+        "default": "An error occurred"
+      }
+    },
+    "announcements": {
+      "hero": {
+        "title": "Latest City Announcements",
+        "subtitle": "Stay informed about news and important announcements from your community."
+      },
+      "featured": {
+        "badge": "Featured Announcement",
+        "date": "Date"
+      },
+      "recent": {
+        "title": "Recent Announcements",
+        "mainButton": "Main Announcement",
+        "setAsMainButton": "Set as Main"
+      },
+      "form": {
+        "sectionTitle": "Add a New Announcement",
+        "titleLabel": "Title:",
+        "titlePlaceholder": "Announcement title",
+        "descriptionLabel": "Description:",
+        "descriptionPlaceholder": "Announcement description",
+        "submitButton": "Publish",
+        "successMessage": "Announcement added successfully!"
+      },
+      "demoData": {
+        "roadwork": {
+          "title": "Work on Main Road",
+          "description": "Road work will take place on the main road from April 5 to April 10."
+        },
+        "playground": {
+          "title": "New Playground",
+          "description": "A new playground has been inaugurated in the central park."
+        }
+      }
+    },
+    "emergency": {
+      "title": "Emergency Services",
+      "intro": "In case of emergency, immediately contact the appropriate services below.",
+      "numbers": {
+        "samu": {
+          "name": "EMS",
+          "description": "Emergency Medical Service"
+        },
+        "police": {
+          "name": "Police",
+          "description": "National Police / Gendarmerie"
+        },
+        "firefighters": {
+          "name": "Fire Dept",
+          "description": "Fire Department"
+        },
+        "europe": {
+          "name": "Europe",
+          "description": "European Emergency Number"
+        }
+      },
+      "report": {
+        "title": "Report an Emergency",
+        "form": {
+          "type": {
+            "label": "Emergency type*",
+            "placeholder": "Select emergency type",
+            "options": {
+              "medical": "Medical",
+              "security": "Security",
+              "fire": "Fire",
+              "other": "Other"
+            }
+          },
+          "description": {
+            "label": "Emergency description*",
+            "placeholder": "Describe the emergency situation in detail..."
+          },
+          "submit": "Report emergency"
+        }
+      },
+      "alerts": {
+        "success": "Your emergency report has been successfully sent",
+        "error": "An error occurred while sending the report"
+      }
+    },
+    "events": {
+      "hero": {
+        "title": "Discover Your City's Events",
+        "subtitle": "Dive into local life and participate in activities that bring your community together.",
+        "button": "View events"
+      },
+      "filters": {
+        "search": {
+          "label": "Search:",
+          "placeholder": "Search for an event..."
+        },
+        "category": {
+          "label": "Category:",
+          "all": "All"
+        }
+      },
+      "eventsList": {
+        "title": "Upcoming Events",
+        "participate": "Participate",
+        "details": "Event details"
+      },
+      "categories": {
+        "culture": "Culture",
+        "sport": "Sport",
+        "music": "Music",
+        "conference": "Conference"
+      },
+      "events": {
+        "jazzConcert": {
+          "title": "Jazz Concert",
+          "location": "Community Hall",
+          "description": "A jazz concert featuring local artists."
+        },
+        "marathon": {
+          "title": "City Marathon",
+          "location": "City Center",
+          "description": "Participate in the annual city marathon."
+        }
+      },
+      "alerts": {
+        "participation": "You have chosen to participate in event {id}!",
+        "reserve_success": "Event successfully reserved",
+        "cancel_success": "Reservation successfully cancelled"
+      },
+      "actions": {
+        "reserve": "Reserve",
+        "cancel": "Cancel"
+      }
+    },
+    "informations": {
+      "hero": {
+        "title": "Stay informed about local life",
+        "subtitle": "Discover the latest news, events and public works in your city"
+      },
+      "search": {
+        "placeholder": "Search for information..."
+      },
+      "filters": {
+        "all": "All",
+        "events": "Events",
+        "works": "Works",
+        "news": "News"
+      },
+      "categories": {
+        "event": "Event",
+        "works": "Works",
+        "news": "News"
+      },
+      "card": {
+        "readMore": "Read more"
+      },
+      "newsletter": {
+        "title": "Subscribe to our newsletter",
+        "description": "Receive the latest information and updates directly in your inbox",
+        "emailPlaceholder": "Your email address",
+        "subscribe": "Subscribe"
+      },
+      "meta": {
+        "description": "Check out the latest information, events and news from your city on CityLink"
+      }
+    },
+    "merchants": {
+      "hero": {
+        "title": "Discover our local merchants",
+        "subtitle": "Support your neighborhood by shopping at local stores near you."
+      },
+      "featured": {
+        "badge": "Merchant of the week",
+        "cta": "Discover"
+      },
+      "section": {
+        "title": "Discover merchants in your city"
+      },
+      "merchants": {
+        "boulangerie": {
+          "name": "Old Lyon Bakery",
+          "address": "12 Rue Saint-Jean, Lyon",
+          "description": "An artisanal bakery with fresh products every day."
+        },
+        "librairie": {
+          "name": "Lumière Bookstore",
+          "address": "5 Place Bellecour, Lyon",
+          "description": "A cozy place for book lovers."
+        },
+        "cafe": {
+          "name": "Artists Café",
+          "address": "25 Quai Saint-Vincent, Lyon",
+          "description": "A cozy café with a local artistic atmosphere."
+        },
+        "westfield": {
+          "name": "WestField Lyon Part-Dieu",
+          "address": "Part-Dieu Shopping Center, Lyon",
+          "description": "The largest shopping mall in Lyon with over 260 stores."
+        }
+      }
+    },
+    "profile": {
+      "profile": {
+        "photo_alt": "Profile picture"
+      },
+      "menu": {
+        "personal_info": "Personal information",
+        "my_activities": "My activities",
+        "settings": "Settings"
+      },
+      "personal_info": {
+        "title": "My information",
+        "firstname": "First name",
+        "lastname": "Last name",
+        "email": "Email",
+        "company": "Company",
+        "update_button": "Update",
+        "password_section": {
+          "title": "Change my password",
+          "current": "Current password",
+          "new": "New password",
+          "confirm": "Confirm",
+          "button": "Change password"
+        }
+      },
+      "activities": {
+        "upcoming": {
+          "title": "Upcoming events",
+          "empty": "You don't have any upcoming events yet",
+          "discover": "Discover events"
+        },
+        "history": {
+          "title": "History",
+          "empty": "No event history"
+        }
+      },
+      "settings": {
+        "title": "Preferences",
+        "notifications": {
+          "title": "Notifications",
+          "email": {
+            "title": "Email notifications",
+            "description": "Receive emails about new events and updates"
+          },
+          "reminders": {
+            "title": "Event reminders",
+            "description": "Receive a reminder before your events"
+          }
+        },
+        "privacy": {
+          "title": "Privacy",
+          "public_profile": {
+            "title": "Public profile",
+            "description": "Allow other users to see your profile"
+          }
+        },
+        "save_button": "Save preferences",
+        "danger_zone": {
+          "title": "Danger zone",
+          "delete_account": "Delete my account"
+        }
+      },
+      "alerts": {
+        "password_mismatch": "Passwords do not match",
+        "profile_updated": "Profile updated successfully",
+        "password_updated": "Password updated successfully",
+        "settings_saved": "Preferences saved",
+        "participation_canceled": "Participation canceled",
+        "confirm_cancel": "Are you sure you want to cancel your participation in this event?",
+        "confirm_delete": "Are you sure you want to delete your account? This action is irreversible.",
+        "account_deleted": "Account deleted successfully",
+        "error": {
+          "load_profile": "Error loading profile",
+          "update_profile": "Error updating profile",
+          "change_password": "Error changing password",
+          "delete_account": "Error deleting account"
+        }
+      }
+    }
+  },
+}

@@ -1,46 +1,46 @@
 <template>
-    <Header />
-    <section class="hero">
-        <div class="hero-content">
-            <h1>{{ $t('hero.title') }}</h1>
-            <p>{{ $t('hero.subtitle') }}</p>
-        </div>
-    </section>
-
-    <div class="featured-container" v-if="featuredMerchant">
-        <div class="featured-image">
-            <div class="image-frame">
-                <img :src="featuredMerchant.image || defaultImage" :alt="featuredMerchant.name" />
-            </div>
-        </div>
-        <div class="featured-content">
-            <div class="premium-badge">
-                <span>{{ $t('featured.badge') }}</span>
-            </div>
-            <h2>{{ featuredMerchant.name }}</h2>
-            <p class="featured-address">{{ featuredMerchant.address }}</p>
-            <p class="featured-description">{{ featuredMerchant.description }}</p>
-            <div class="featured-cta">
-                <button class="btn-discover">{{ $t('featured.cta') }}</button>
-            </div>
-        </div>
+  <Header />
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{ $t('pages.merchants.hero.title') }}</h1>
+      <p>{{ $t('pages.merchants.hero.subtitle') }}</p>
     </div>
+  </section>
 
-    <div class="merchants-page">
-        <h2>{{ $t('section.title') }}</h2>
-        <div class="merchants-container">
-            <div v-for="merchant in merchants" 
-                 :key="merchant.id" 
-                 class="merchant-card"
-                 @click="viewMerchantDetails(merchant.id)">
-                <img :src="merchant.image || defaultImage" :alt="merchant.name" />
-                <h3>{{ merchant.name }}</h3>
-                <p class="address">{{ merchant.address }}</p>
-                <p class="description">{{ merchant.description }}</p>
-            </div>
-        </div>
+  <div class="featured-container" v-if="featuredMerchant">
+    <div class="featured-image">
+      <div class="image-frame">
+        <img :src="featuredMerchant.image || defaultImage" :alt="featuredMerchant.name" />
+      </div>
     </div>
-    <Footer />
+    <div class="featured-content">
+      <div class="premium-badge">
+        <span>{{ $t('pages.merchants.featured.badge') }}</span>
+      </div>
+      <h2>{{ featuredMerchant.name }}</h2>
+      <p class="featured-address">{{ featuredMerchant.address }}</p>
+      <p class="featured-description">{{ featuredMerchant.description }}</p>
+      <div class="featured-cta">
+        <button class="btn-discover">{{ $t('pages.merchants.featured.cta') }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="merchants-page">
+    <h2>{{ $t('pages.merchants.section.title') }}</h2>
+    <div class="merchants-container">
+      <div v-for="merchant in merchants"
+           :key="merchant.id"
+           class="merchant-card"
+           @click="viewMerchantDetails(merchant.id)">
+        <img :src="merchant.image || defaultImage" :alt="merchant.name" />
+        <h3>{{ merchant.name }}</h3>
+        <p class="address">{{ merchant.address }}</p>
+        <p class="description">{{ merchant.description }}</p>
+      </div>
+    </div>
+  </div>
+  <Footer />
 </template>
 
 <script>

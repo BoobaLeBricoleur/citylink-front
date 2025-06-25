@@ -3,9 +3,9 @@
     <div class="header-container">
       <!-- Logo -->
       <div class="logo">
-        <NuxtLink to="/">
+        <NuxtLinkLocale to="/">
           <NuxtImg src="/citylink-logo.svg" alt="CityLink" height="40" />
-        </NuxtLink>
+        </NuxtLinkLocale>
       </div>
 
       <!-- Menu burger mobile -->
@@ -18,12 +18,12 @@
       <!-- Navigation -->
       <nav class="main-nav" :class="{ 'active': isMenuOpen }">
         <ul class="nav-list">
-          <li><NuxtLink to="/forum" @click="isMenuOpen = false">{{ $t('header.menu.forum') }}</NuxtLink></li>
-          <li><NuxtLink to="/merchants" @click="isMenuOpen = false">{{ $t('header.menu.merchants') }}</NuxtLink></li>
-          <li><NuxtLink to="/events" @click="isMenuOpen = false">{{ $t('header.menu.events') }}</NuxtLink></li>
-          <li><NuxtLink to="/informations" @click="isMenuOpen = false">{{ $t('header.menu.information') }}</NuxtLink></li>
-          <li><NuxtLink to="/announcements" @click="isMenuOpen = false">{{ $t('header.menu.announcements') }}</NuxtLink></li>
-          <li><NuxtLink to="/emergency" @click="isMenuOpen = false">{{ $t('header.menu.emergency') }}</NuxtLink></li>
+          <li><NuxtLinkLocale to="/forum" @click="isMenuOpen = false">{{ $t('header.menu.forum') }}</NuxtLinkLocale></li>
+          <li><NuxtLinkLocale to="/merchants" @click="isMenuOpen = false">{{ $t('header.menu.merchants') }}</NuxtLinkLocale></li>
+          <li><NuxtLinkLocale to="/events" @click="isMenuOpen = false">{{ $t('header.menu.events') }}</NuxtLinkLocale></li>
+          <li><NuxtLinkLocale to="/informations" @click="isMenuOpen = false">{{ $t('header.menu.information') }}</NuxtLinkLocale></li>
+          <li><NuxtLinkLocale to="/announcements" @click="isMenuOpen = false">{{ $t('header.menu.announcements') }}</NuxtLinkLocale></li>
+          <li><NuxtLinkLocale to="/emergency" @click="isMenuOpen = false">{{ $t('header.menu.emergency') }}</NuxtLinkLocale></li>
         </ul>
 
         <!-- Actions de connexion -->
@@ -46,16 +46,16 @@
                 </div>
 
                 <div class="dropdown-content">
-                  <NuxtLink to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
+                  <NuxtLinkLocale to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
                     <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.profile') }}
-                  </NuxtLink>
-                  <NuxtLink to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
+                  </NuxtLinkLocale>
+                  <NuxtLinkLocale to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
                     <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.dashboard') }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
 
-                  <NuxtLink to="/settings" class="dropdown-item" @click="isDropdownOpen = false">
+                  <NuxtLinkLocale to="/settings" class="dropdown-item" @click="isDropdownOpen = false">
                     <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.settings') }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
                 </div>
 
                 <div class="dropdown-footer">
@@ -69,10 +69,10 @@
 
           <!-- Si non connecté -->
           <div v-else class="auth-buttons">
-            <NuxtLink to="/account" class="login-button" @click="isMenuOpen = false">
+            <NuxtLinkLocale to="/account" class="login-button" @click="isMenuOpen = false">
               <i class="fa-solid fa-user"></i>
               <span>{{ $t('header.login') }}</span>
-            </NuxtLink>
+            </NuxtLinkLocale>
           </div>
         </div>
       </nav>

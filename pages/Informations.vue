@@ -5,8 +5,8 @@
     <section class="hero-section">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>{{ $t('hero.title') }}</h1>
-        <p>{{ $t('hero.subtitle') }}</p>
+        <h1>{{ $t('pages.informations.hero.title') }}</h1>
+        <p>{{ $t('pages.informations.hero.subtitle') }}</p>
       </div>
     </section>
 
@@ -14,7 +14,7 @@
       <div class="search-bar">
         <input
             type="text"
-            :placeholder="$t('search.placeholder')"
+            :placeholder="$t('pages.informations.search.placeholder')"
             v-model="searchTerm"
         />
         <button class="search-button">
@@ -29,7 +29,7 @@
             :class="{ active: currentFilter === filter.key }"
             @click="setFilter(filter.key)"
         >
-          {{ $t(filter.label) }}
+          {{ $t('pages.informations.' + filter.label) }}
         </button>
       </div>
     </section>
@@ -43,13 +43,13 @@
             :class="{ premium: announcement.isPremium }"
         >
           <div class="card-header">
-            <span class="category">{{ $t(announcement.categoryKey) }}</span>
+            <span class="category">{{ $t('pages.informations.' + announcement.categoryKey) }}</span>
             <span class="date">{{ announcement.date }}</span>
           </div>
           <h3>{{ announcement.title }}</h3>
           <p>{{ announcement.description }}</p>
           <div class="card-footer">
-            <button class="read-more">{{ $t('card.readMore') }}</button>
+            <button class="read-more">{{ $t('pages.informations.card.readMore') }}</button>
             <span class="views"><i class="fas fa-eye"></i> {{ announcement.views }}</span>
           </div>
         </div>
@@ -58,11 +58,11 @@
 
     <section class="newsletter-section">
       <div class="newsletter-container">
-        <h2>{{ $t('newsletter.title') }}</h2>
-        <p>{{ $t('newsletter.description') }}</p>
+        <h2>{{ $t('pages.informations.newsletter.title') }}</h2>
+        <p>{{ $t('pages.informations.newsletter.description') }}</p>
         <div class="newsletter-form">
-          <input type="email" :placeholder="$t('newsletter.emailPlaceholder')" />
-          <button class="subscribe-button">{{ $t('newsletter.subscribe') }}</button>
+          <input type="email" :placeholder="$t('pages.informations.newsletter.emailPlaceholder')" />
+          <button class="subscribe-button">{{ $t('pages.informations.newsletter.subscribe') }}</button>
         </div>
       </div>
     </section>
@@ -170,7 +170,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.$t('meta.description')
+          content: this.$t('pages.informations.meta.description')
         }
       ]
     }

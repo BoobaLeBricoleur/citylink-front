@@ -5,15 +5,15 @@
     <section class="hero-section">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>{{ $t('hero.title') }}</h1>
-        <p>{{ $t('hero.subtitle') }}</p>
+        <h1>{{ $t('pages.announcements.hero.title') }}</h1>
+        <p>{{ $t('pages.announcements.hero.subtitle') }}</p>
       </div>
     </section>
 
     <!-- Section pour les annonces mises en valeur -->
     <section v-if="featuredAnnouncements.length > 0" class="featured-announcement-section">
       <div v-for="announcement in featuredAnnouncements" :key="announcement.id" class="featured-announcement">
-        <div class="featured-badge">{{ $t('featured.badge') }}</div>
+        <div class="featured-badge">{{ $t('pages.announcements.featured.badge') }}</div>
         <h2>{{ announcement.title }}</h2>
         <p class="featured-date">{{ formatDate(announcement.publication_date) }}</p>
         <p class="featured-description">{{ announcement.content }}</p>
@@ -21,7 +21,7 @@
     </section>
 
     <section class="announcements-list-section">
-      <h2>{{ $t('recent.title') }}</h2>
+      <h2>{{ $t('pages.announcements.recent.title') }}</h2>
       <ul class="announcements-list">
         <li v-for="announcement in regularAnnouncements" :key="announcement.id" class="announcement-item">
           <div class="announcement-content">
