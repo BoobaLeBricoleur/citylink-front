@@ -9,7 +9,7 @@
       </div>
 
       <!-- Menu burger mobile -->
-      <button class="burger-button" @click="toggleMenu" :class="{ 'active': isMenuOpen }" aria-label="Menu de navigation">
+      <button class="burger-button" @click="toggleMenu" :class="{ 'active': isMenuOpen }" :aria-label="$t('header.navigation_menu')">
         <span class="burger-line"></span>
         <span class="burger-line"></span>
         <span class="burger-line"></span>
@@ -18,14 +18,14 @@
       <!-- Navigation -->
       <nav class="main-nav" :class="{ 'active': isMenuOpen }">
         <ul class="nav-list">
-          <li><NuxtLink to="/forum" @click="isMenuOpen = false">Forum</NuxtLink></li>
-          <li><NuxtLink to="/merchants" @click="isMenuOpen = false">Commerces</NuxtLink></li>
-          <li><NuxtLink to="/events" @click="isMenuOpen = false">Événements</NuxtLink></li>
-          <li><NuxtLink to="/informations" @click="isMenuOpen = false">Informations</NuxtLink></li>
-          <li><NuxtLink to="/announcements" @click="isMenuOpen = false">Annonces</NuxtLink></li>
-          <li><NuxtLink to="/emergency" @click="isMenuOpen = false">Urgences</NuxtLink></li>
+          <li><NuxtLink to="/forum" @click="isMenuOpen = false">{{ $t('header.menu.forum') }}</NuxtLink></li>
+          <li><NuxtLink to="/merchants" @click="isMenuOpen = false">{{ $t('header.menu.merchants') }}</NuxtLink></li>
+          <li><NuxtLink to="/events" @click="isMenuOpen = false">{{ $t('header.menu.events') }}</NuxtLink></li>
+          <li><NuxtLink to="/informations" @click="isMenuOpen = false">{{ $t('header.menu.information') }}</NuxtLink></li>
+          <li><NuxtLink to="/announcements" @click="isMenuOpen = false">{{ $t('header.menu.announcements') }}</NuxtLink></li>
+          <li><NuxtLink to="/emergency" @click="isMenuOpen = false">{{ $t('header.menu.emergency') }}</NuxtLink></li>
         </ul>
-        
+
         <!-- Actions de connexion -->
         <div class="auth-actions">
           <!-- Si connecté -->
@@ -34,7 +34,7 @@
               <i class="fa-solid fa-user"></i>
             </div>
             <span class="user-name hide-mobile">{{ userData.firstname }}</span>
-            
+
             <!-- Menu déroulant -->
             <transition name="dropdown">
               <div class="dropdown-menu" v-if="isDropdownOpen">
@@ -44,34 +44,34 @@
                     <div class="dropdown-email">{{ userData.email }}</div>
                   </div>
                 </div>
-                
+
                 <div class="dropdown-content">
                   <NuxtLink to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
-                    <i class="fa-solid fa-user"></i> Mon profil
+                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.profile') }}
                   </NuxtLink>
                   <NuxtLink to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
-                    <i class="fa-solid fa-user"></i> Tableau de bord
+                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.dashboard') }}
                   </NuxtLink>
 
                   <NuxtLink to="/settings" class="dropdown-item" @click="isDropdownOpen = false">
-                    <i class="fa-solid fa-user"></i>Paramètres
+                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.settings') }}
                   </NuxtLink>
                 </div>
-                
+
                 <div class="dropdown-footer">
                   <button @click="logout" class="dropdown-item logout">
-                    <i class="fa-solid fa-user"></i> Déconnexion
+                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.logout') }}
                   </button>
                 </div>
               </div>
             </transition>
           </div>
-          
+
           <!-- Si non connecté -->
           <div v-else class="auth-buttons">
             <NuxtLink to="/account" class="login-button" @click="isMenuOpen = false">
               <i class="fa-solid fa-user"></i>
-              <span>Se connecter</span>
+              <span>{{ $t('header.login') }}</span>
             </NuxtLink>
           </div>
         </div>

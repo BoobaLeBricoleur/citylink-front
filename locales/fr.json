@@ -1,1 +1,23 @@
-{}
+{
+  "footer": {
+    "copyright": "© 2025 CityLink. Tous droits réservés."
+  },
+  "header": {
+    "navigation_menu": "Menu de navigation",
+    "menu": {
+      "forum": "Forum",
+      "merchants": "Commerçants",
+      "events": "Événements",
+      "information": "Informations",
+      "announcements": "Annonces",
+      "emergency": "Urgences"
+    },
+    "dropdown": {
+      "profile": "Profil",
+      "dashboard": "Tableau de bord",
+      "settings": "Paramètres",
+      "logout": "Déconnexion"
+    },
+    "login": "Connexion"
+  }
+}

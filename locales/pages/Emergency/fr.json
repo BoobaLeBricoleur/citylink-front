@@ -1,0 +1,46 @@
+{
+  "title": "Services d'Urgence",
+  "intro": "En cas d'urgence, contactez immédiatement les services appropriés ci-dessous.",
+  "numbers": {
+    "samu": {
+      "name": "SAMU",
+      "description": "Service d'Aide Médicale d'Urgence"
+    },
+    "police": {
+      "name": "Police",
+      "description": "Police Nationale / Gendarmerie"
+    },
+    "firefighters": {
+      "name": "Pompiers",
+      "description": "Sapeurs-Pompiers"
+    },
+    "europe": {
+      "name": "Europe",
+      "description": "Numéro d'Urgence Européen"
+    }
+  },
+  "report": {
+    "title": "Signaler une Urgence",
+    "form": {
+      "type": {
+        "label": "Type d'urgence*",
+        "placeholder": "Sélectionner le type d'urgence",
+        "options": {
+          "medical": "Médicale",
+          "security": "Sécurité",
+          "fire": "Incendie",
+          "other": "Autre"
+        }
+      },
+      "description": {
+        "label": "Description de l'urgence*",
+        "placeholder": "Décrivez la situation d'urgence en détail..."
+      },
+      "submit": "Signaler l'urgence"
+    }
+  },
+  "alerts": {
+    "success": "Votre signalement d'urgence a été envoyé avec succès",
+    "error": "Une erreur est survenue lors de l'envoi du signalement"
+  }
+}

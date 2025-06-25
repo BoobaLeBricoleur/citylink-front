@@ -1,1 +1,32 @@
-{}
+{
+  "hero": {
+    "title": "Restez informé de la vie locale",
+    "subtitle": "Découvrez les dernières actualités, événements et travaux dans votre ville"
+  },
+  "search": {
+    "placeholder": "Rechercher une information..."
+  },
+  "filters": {
+    "all": "Tout",
+    "events": "Événements",
+    "works": "Travaux",
+    "news": "Actualités"
+  },
+  "categories": {
+    "event": "Événement",
+    "works": "Travaux",
+    "news": "Actualité"
+  },
+  "card": {
+    "readMore": "Lire plus"
+  },
+  "newsletter": {
+    "title": "Abonnez-vous à notre newsletter",
+    "description": "Recevez les dernières informations et mises à jour directement dans votre boîte mail",
+    "emailPlaceholder": "Votre adresse email",
+    "subscribe": "S'abonner"
+  },
+  "meta": {
+    "description": "Consultez les dernières informations, événements et actualités de votre ville sur CityLink"
+  }
+}
