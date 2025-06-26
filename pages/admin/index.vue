@@ -11,22 +11,22 @@
 
       <!-- Dynamic feature shortcuts -->
       <div class="feature-grid">
-        <nuxt-link to="/admin/users" class="feature-card">
+        <NuxtLinkLocale to="/admin/users" class="feature-card">
           <h3>{{ $t('pages.admin.dashboard.features.users.title') }}</h3>
           <p>{{ $t('pages.admin.dashboard.features.users.description') }}</p>
-        </nuxt-link>
-        <nuxt-link to="/admin/business" class="feature-card">
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/admin/business" class="feature-card">
           <h3>{{ $t('pages.admin.dashboard.features.business.title') }}</h3>
           <p>{{ $t('pages.admin.dashboard.features.business.description') }}</p>
-        </nuxt-link>
-        <nuxt-link to="/admin/events" class="feature-card">
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/admin/events" class="feature-card">
           <h3>{{ $t('pages.admin.dashboard.features.events.title') }}</h3>
           <p>{{ $t('pages.admin.dashboard.features.events.description') }}</p>
-        </nuxt-link>
-        <nuxt-link to="/admin/announcements" class="feature-card">
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/admin/announcements" class="feature-card">
           <h3>{{ $t('pages.admin.dashboard.features.announcements.title') }}</h3>
           <p>{{ $t('pages.admin.dashboard.features.announcements.description') }}</p>
-        </nuxt-link>
+        </NuxtLinkLocale>
       </div>
     </div>
   </div>
