@@ -1,50 +1,50 @@
 <template>
-    <div class="admin-portal">
-        <AdminSidebar />
-        <div class="main">
-            <AdminHeader />
-            <div class="intro">
-                <h1>Liste des Utilisateurs</h1>
-                <p>Ci-dessous, vous trouverez tous les comptes enregistrés.</p>
-            </div>
+  <div class="admin-portal">
+    <AdminSidebar />
+    <div class="main">
+      <AdminHeader />
+      <div class="intro">
+        <h1>{{ $t('pages.admin.users.title') }}</h1>
+        <p>{{ $t('pages.admin.users.subtitle') }}</p>
+      </div>
 
-            <!-- Barre de recherche -->
-            <div class="search-bar">
-                <div class="search-input-wrapper">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <input 
-                        type="text"
-                        v-model="searchQuery"
-                        placeholder="Rechercher un utilisateur..."
-                        class="search-input"
-                    >
-                </div>
-            </div>
-
-            <!-- Users list avec navigation au clic -->
-            <div class="user-list">
-                <div v-if="filteredUsers.length === 0" class="no-users">
-                    Aucun utilisateur trouvé.
-                </div>
-                <ul v-else>
-                    <li 
-                        v-for="(item, index) in filteredUsers" 
-                        :key="index" 
-                        class="user-item"
-                        @click="goToUserDetail(item.id)"
-                    >
-                        <div class="user-info">
-                            <strong>{{ item.firstname }} {{ item.lastname }}</strong>
-                            <span> - {{ item.email }}</span>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </li>
-                </ul>
-            </div>
+      <!-- Barre de recherche -->
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input
+              type="text"
+              v-model="searchQuery"
+              :placeholder="$t('pages.admin.users.searchPlaceholder')"
+              class="search-input"
+          >
         </div>
+      </div>
+
+      <!-- Users list avec navigation au clic -->
+      <div class="user-list">
+        <div v-if="filteredUsers.length === 0" class="no-users">
+          {{ $t('pages.admin.users.noResults') }}
+        </div>
+        <ul v-else>
+          <li
+              v-for="(item, index) in filteredUsers"
+              :key="index"
+              class="user-item"
+              @click="goToUserDetail(item.id)"
+          >
+            <div class="user-info">
+              <strong>{{ item.firstname }} {{ item.lastname }}</strong>
+              <span> - {{ item.email }}</span>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

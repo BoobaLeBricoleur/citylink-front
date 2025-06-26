@@ -8,78 +8,78 @@
       <AdminHeader />
       <div class="intro">
         <div class="intro-header">
-          <h1>Liste des Annonces</h1>
+          <h1>{{ $t('pages.admin.announcements.title') }}</h1>
           <button @click="showCreateModal = true" class="btn btn-primary">
-            <font-awesome-icon icon="plus" /> Nouvelle annonce
+            <font-awesome-icon icon="plus" /> {{ $t('pages.admin.announcements.newButton') }}
           </button>
         </div>
-        <p>Ci-dessous, vous trouverez toutes les annonces publiées sur la plateforme.</p>
+        <p>{{ $t('pages.admin.announcements.subtitle') }}</p>
       </div>
 
       <div class="search-bar">
-          <div class="search-input-wrapper">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <input 
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input
               type="text"
               v-model="searchQuery"
-              placeholder="Rechercher une annonce..."
+              :placeholder="$t('pages.admin.announcements.searchPlaceholder')"
               class="search-input"
-            >
-          </div>
+          >
+        </div>
       </div>
 
-        <!-- Modal de création d'annonce -->
-        <div v-if="showCreateModal" class="modal">
+      <!-- Modal de création d'annonce -->
+      <div v-if="showCreateModal" class="modal">
         <div class="modal-content">
           <div class="modal-header">
-            <h2>Créer une nouvelle annonce</h2>
+            <h2>{{ $t('pages.admin.announcements.modal.title') }}</h2>
             <button class="close-btn" @click="showCreateModal = false">×</button>
           </div>
           <form @submit.prevent="createAnnouncement" class="announcement-form">
             <div class="form-group">
-              <label for="title">Titre*</label>
-              <input 
-                type="text" 
-                id="title" 
-                v-model="newAnnouncement.title" 
-                required 
-                class="form-control"
+              <label for="title">{{ $t('pages.admin.announcements.form.titleLabel') }}</label>
+              <input
+                  type="text"
+                  id="title"
+                  v-model="newAnnouncement.title"
+                  required
+                  class="form-control"
               >
             </div>
             <div class="form-group">
-              <label for="content">Contenu*</label>
-              <textarea 
-                id="content" 
-                v-model="newAnnouncement.content" 
-                required 
-                class="form-control"
-                rows="4"
+              <label for="content">{{ $t('pages.admin.announcements.form.contentLabel') }}</label>
+              <textarea
+                  id="content"
+                  v-model="newAnnouncement.content"
+                  required
+                  class="form-control"
+                  rows="4"
               ></textarea>
             </div>
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                id="is_featured" 
-                v-model="newAnnouncement.is_featured"
+              <input
+                  type="checkbox"
+                  id="is_featured"
+                  v-model="newAnnouncement.is_featured"
               >
-              <label for="is_featured">Mettre en avant</label>
+              <label for="is_featured">{{ $t('pages.admin.announcements.form.featuredLabel') }}</label>
             </div>
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                id="is_active" 
-                v-model="newAnnouncement.is_active"
+              <input
+                  type="checkbox"
+                  id="is_active"
+                  v-model="newAnnouncement.is_active"
               >
-              <label for="is_active">Activer immédiatement</label>
+              <label for="is_active">{{ $t('pages.admin.announcements.form.activeLabel') }}</label>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" @click="showCreateModal = false">
-                Annuler
+                {{ $t('pages.admin.announcements.buttons.cancel') }}
               </button>
               <button type="submit" class="btn btn-primary">
-                Créer l'annonce
+                {{ $t('pages.admin.announcements.buttons.create') }}
               </button>
             </div>
           </form>
@@ -89,7 +89,7 @@
       <!-- Announcements list -->
       <div class="announcement-list">
         <div v-if="filteredAnnouncements.length === 0" class="no-announcements">
-          Aucune annonce trouvée.
+          {{ $t('pages.admin.announcements.noResults') }}
         </div>
         <ul v-else>
           <li v-for="(item, index) in filteredAnnouncements"
@@ -102,8 +102,8 @@
             </div>
             <div class="announcement-content">{{ item.content }}</div>
             <div class="announcement-footer">
-              <div class="announcement-author">Par: {{ item.firstname }} {{ item.lastname }}</div>
-              <div class="view-details">Voir détails <i class="fas fa-chevron-right"></i></div>
+              <div class="announcement-author">{{ $t('pages.admin.announcements.authorPrefix') }} {{ item.firstname }} {{ item.lastname }}</div>
+              <div class="view-details">{{ $t('pages.admin.announcements.viewDetails') }} <i class="fas fa-chevron-right"></i></div>
             </div>
           </li>
         </ul>
@@ -138,11 +138,11 @@ export default {
   computed: {
     filteredAnnouncements() {
       if (!this.searchQuery) return this.announcements;
-      
+
       const query = this.searchQuery.toLowerCase();
-      return this.announcements.filter(announcement => 
-        announcement.title.toLowerCase().includes(query) ||
-        announcement.content.toLowerCase().includes(query)
+      return this.announcements.filter(announcement =>
+          announcement.title.toLowerCase().includes(query) ||
+          announcement.content.toLowerCase().includes(query)
       );
     }
   },
@@ -155,15 +155,15 @@ export default {
       try {
         const token = localStorage.getItem('token');
         await axios.post(
-          `${this.API_URL}/announcements/`, 
-          this.newAnnouncement,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
+            `${this.API_URL}/announcements/`,
+            this.newAnnouncement,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
             }
-          }
         );
-        
+
         // Réinitialiser le formulaire
         this.newAnnouncement = {
           title: '',
@@ -171,13 +171,13 @@ export default {
           is_featured: false,
           is_active: true
         };
-        
+
         // Fermer le modal
         this.showCreateModal = false;
-        
+
         // Rafraîchir la liste
         await this.fetchAnnouncements();
-        
+
       } catch (error) {
         console.error('Erreur lors de la création de l\'annonce:', error);
       }

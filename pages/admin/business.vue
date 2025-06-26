@@ -1,188 +1,188 @@
 <template>
-    <div class="admin-portal">
-        <AdminSidebar />
-        <div class="main">
-            <AdminHeader />
-            <div class="intro">
-                <div class="intro-header">
-                    <h1>Liste des Commerces</h1>
-                    <button @click="showCreateModal = true" class="btn btn-primary">
-                        <font-awesome-icon icon="plus" /> Nouveau commerce
-                    </button>
-                </div>
-                <p>Ci-dessous, vous trouverez tous les commerces repertoriés sur la plateforme.</p>
-            </div>
-
-            <div class="search-bar">
-                <div class="search-input-wrapper">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <input 
-                        type="text"
-                        v-model="searchQuery"
-                        placeholder="Rechercher un commerce..."
-                        class="search-input"
-                    >
-                </div>
-            </div>
-
-            <!-- Modal de création -->
-            <div v-if="showCreateModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Créer un nouveau commerce</h2>
-                        <button class="close-btn" @click="showCreateModal = false">×</button>
-                    </div>
-                    <form @submit.prevent="createBusiness" class="business-form">
-    <div class="form-group">
-      <label for="name">Titre*</label>
-      <input 
-        type="text" 
-        id="name" 
-        v-model="newBusiness.name" 
-        required 
-        class="form-control"
-        placeholder="Nom du commerce"
-      >
-    </div>
-    <div class="form-group">
-      <label for="description">Description*</label>
-      <textarea 
-        id="description" 
-        v-model="newBusiness.description" 
-        required 
-        class="form-control"
-        rows="4"
-        placeholder="Description détaillée du commerce"
-      ></textarea>
-    </div>
-    <div class="form-group">
-      <label for="category_id">Catégorie*</label>
-      <select 
-        id="category_id" 
-        v-model="newBusiness.category_id" 
-        required 
-        class="form-control"
-      >
-        <option value="">Sélectionner une catégorie</option>
-        <option v-for="(name, id) in categories" 
-                :key="id" 
-                :value="Number(id)">
-          {{ name }}
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="user_id">Propriétaire*</label>
-      <select 
-        id="user_id" 
-        v-model="newBusiness.user_id" 
-        required 
-        class="form-control"
-      >
-        <option value="">Sélectionner un utilisateur</option>
-        <option 
-          v-for="user in users" 
-          :key="user.id" 
-          :value="user.id"
-        >
-          {{ user.firstname }} {{ user.lastname }} ({{ user.email }})
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="address">Adresse*</label>
-      <input 
-        type="text" 
-        id="address" 
-        v-model="newBusiness.address" 
-        required 
-        class="form-control"
-        placeholder="Adresse complète"
-      >
-    </div>
-    <div class="form-row">
-      <div class="form-group half">
-        <label for="phone">Téléphone*</label>
-        <input 
-          type="tel" 
-          id="phone" 
-          v-model="newBusiness.phone_number" 
-          required 
-          class="form-control"
-          placeholder="0123456789"
-        >
-      </div>
-      <div class="form-group half">
-        <label for="email">Email*</label>
-        <input 
-          type="email" 
-          id="email" 
-          v-model="newBusiness.email" 
-          required 
-          class="form-control"
-          placeholder="email@exemple.com"
-        >
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="website">Site web</label>
-      <input 
-        type="url" 
-        id="website" 
-        v-model="newBusiness.website_url" 
-        class="form-control"
-        placeholder="https://www.exemple.com"
-      >
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" @click="showCreateModal = false">
-        Annuler
-      </button>
-      <button type="submit" class="btn btn-primary">
-        <font-awesome-icon icon="plus" /> Créer le commerce
-      </button>
-    </div>
-  </form>
-                </div>
-            </div>
-
-            <!-- Liste des commerces -->
-            <div class="business-list">
-                <div v-if="filteredBusiness.length === 0" class="no-business">
-                    Aucun commerce trouvé.
-                </div>
-                <ul v-else>
-                    <li v-for="(item, index) in filteredBusiness"
-                        :key="index"
-                        class="business-item"
-                        @click="viewBusinessDetails(item.id)">
-                        <div class="business-header">
-                            <strong>{{ item.name }}</strong>
-                            <span class="category-badge">{{ getCategoryName(item.category_id) }}</span>
-                        </div>
-                        <div class="business-content">{{ item.description }}</div>
-                        <div class="business-footer">
-                            <div class="business-info">
-                                <div class="business-contact">
-                                    <span>Adresse :  {{ item.address }}</span>
-                                    <span>Numéro de téléphone : {{ item.phone_number }}</span>
-                                    <span>E-mail : {{ item.email }}</span>
-                                </div>
-                                <div class="business-owner">
-                                    Géré par: {{ item.firstname }} {{ item.lastname }}
-                                </div>
-                            </div>
-                            <div class="view-details">
-                                Voir détails
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+  <div class="admin-portal">
+    <AdminSidebar />
+    <div class="main">
+      <AdminHeader />
+      <div class="intro">
+        <div class="intro-header">
+          <h1>{{ $t('pages.admin.business.title') }}</h1>
+          <button @click="showCreateModal = true" class="btn btn-primary">
+            <font-awesome-icon icon="plus" /> {{ $t('pages.admin.business.newButton') }}
+          </button>
         </div>
+        <p>{{ $t('pages.admin.business.subtitle') }}</p>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+              type="text"
+              v-model="searchQuery"
+              :placeholder="$t('pages.admin.business.searchPlaceholder')"
+              class="search-input"
+          >
+        </div>
+      </div>
+
+      <!-- Modal de création -->
+      <div v-if="showCreateModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>{{ $t('pages.admin.business.modal.title') }}</h3>
+            <button class="close-btn" @click="showCreateModal = false">&times;</button>
+          </div>
+          <form @submit.prevent="createBusiness" class="business-form">
+            <div class="form-group">
+              <label for="name">{{ $t('pages.admin.business.form.nameLabel') }}</label>
+              <input
+                  type="text"
+                  id="name"
+                  v-model="newBusiness.name"
+                  required
+                  class="form-control"
+                  placeholder="Nom du commerce"
+              >
+            </div>
+            <div class="form-group">
+              <label for="description">{{ $t('pages.admin.business.form.descriptionLabel') }}</label>
+              <textarea
+                  id="description"
+                  v-model="newBusiness.description"
+                  required
+                  class="form-control"
+                  rows="4"
+                  placeholder="Description détaillée du commerce"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="category_id">{{ $t('pages.admin.business.form.categoryLabel') }}</label>
+              <select
+                  id="category_id"
+                  v-model="newBusiness.category_id"
+                  required
+                  class="form-control"
+              >
+                <option value="">Sélectionner une catégorie</option>
+                <option v-for="(name, id) in categories"
+                        :key="id"
+                        :value="Number(id)">
+                  {{ name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="user_id">{{ $t('pages.admin.business.form.ownerLabel') }}</label>
+              <select
+                  id="user_id"
+                  v-model="newBusiness.user_id"
+                  required
+                  class="form-control"
+              >
+                <option value="">Sélectionner un utilisateur</option>
+                <option
+                    v-for="user in users"
+                    :key="user.id"
+                    :value="user.id"
+                >
+                  {{ user.firstname }} {{ user.lastname }} ({{ user.email }})
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="address">{{ $t('pages.admin.business.form.addressLabel') }}</label>
+              <input
+                  type="text"
+                  id="address"
+                  v-model="newBusiness.address"
+                  required
+                  class="form-control"
+                  placeholder="Adresse complète"
+              >
+            </div>
+            <div class="form-row">
+              <div class="form-group half">
+                <label for="phone">Téléphone*</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    v-model="newBusiness.phone_number"
+                    required
+                    class="form-control"
+                    placeholder="0123456789"
+                >
+              </div>
+              <div class="form-group half">
+                <label for="email">Email*</label>
+                <input
+                    type="email"
+                    id="email"
+                    v-model="newBusiness.email"
+                    required
+                    class="form-control"
+                    placeholder="email@exemple.com"
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="website">{{ $t('pages.admin.business.form.websiteLabel') }}</label>
+              <input
+                  type="url"
+                  id="website"
+                  v-model="newBusiness.website_url"
+                  class="form-control"
+                  placeholder="https://www.exemple.com"
+              >
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" @click="showCreateModal = false">
+                {{ $t('pages.admin.business.buttons.cancel') }}
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <font-awesome-icon icon="plus" /> {{ $t('pages.admin.business.buttons.create') }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Liste des commerces -->
+      <div class="business-list">
+        <div v-if="filteredBusiness.length === 0" class="no-business">
+          {{ $t('pages.admin.business.noResults') }}
+        </div>
+        <ul v-else>
+          <li v-for="(item, index) in filteredBusiness"
+              :key="index"
+              class="business-item"
+              @click="viewBusinessDetails(item.id)">
+            <div class="business-header">
+              <strong>{{ item.name }}</strong>
+              <span class="category-badge">{{ getCategoryName(item.category_id) }}</span>
+            </div>
+            <div class="business-content">{{ item.description }}</div>
+            <div class="business-footer">
+              <div class="business-info">
+                <div class="business-contact">
+                  <span>Adresse : {{ item.address }}</span>
+                  <span>Numéro de téléphone : {{ item.phone_number }}</span>
+                  <span>E-mail : {{ item.email }}</span>
+                </div>
+                <div class="business-owner">
+                  Géré par: {{ item.firstname }} {{ item.lastname }}
+                </div>
+              </div>
+              <div class="view-details">
+                {{ $t('pages.admin.business.viewDetails') }}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

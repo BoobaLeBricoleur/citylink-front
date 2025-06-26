@@ -364,6 +364,198 @@
           "delete_account": "Erreur lors de la suppression du compte"
         }
       }
+    },
+    "admin": {
+      "dashboard": {
+        "title": "Tableau de Bord Admin",
+        "welcome": "Bienvenue, {name} !",
+        "email": "Email :",
+        "company": "Entreprise :",
+        "features": {
+          "users": {
+            "title": "Utilisateurs",
+            "description": "Gérer et visualiser la liste des utilisateurs de la ville."
+          },
+          "business": {
+            "title": "Commerçants",
+            "description": "Gérer et visualiser les commerçants partenaires."
+          },
+          "events": {
+            "title": "Événements",
+            "description": "Créer et gérer les événements pour la communauté urbaine."
+          },
+          "announcements": {
+            "title": "Annonces",
+            "description": "Publier des annonces et informer les citoyens."
+          }
+        }
+      },
+      "announcements": {
+        "title": "Liste des Annonces",
+        "newButton": "Nouvelle annonce",
+        "subtitle": "Ci-dessous, vous trouverez toutes les annonces publiées sur la plateforme.",
+        "searchPlaceholder": "Rechercher une annonce...",
+        "modal": {
+          "title": "Créer une nouvelle annonce"
+        },
+        "form": {
+          "titleLabel": "Titre*",
+          "contentLabel": "Contenu*",
+          "featuredLabel": "Mettre en avant",
+          "activeLabel": "Activer immédiatement"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer l'annonce"
+        },
+        "noResults": "Aucune annonce trouvée.",
+        "authorPrefix": "Par:",
+        "viewDetails": "Voir détails"
+      },
+      "announcementsDetails": {
+        "backToList": "Retour à la liste",
+        "buttons": {
+          "preview": "Visualiser",
+          "edit": "Modifier"
+        },
+        "status": {
+          "published": "Publiée"
+        },
+        "publishedOn": "Publiée le",
+        "id": "ID",
+        "author": "Auteur",
+        "unknownDate": "Date inconnue",
+        "statistics": {
+          "title": "Statistiques",
+          "views": "Vues",
+          "interactions": "Interactions",
+          "shares": "Partages",
+          "positive": "Positive",
+          "activitySincePublication": "Activité depuis publication"
+        },
+        "tabs": {
+          "comments": "Commentaires",
+          "history": "Historique",
+          "media": "Médias"
+        },
+        "comments": {
+          "recentComments": "Commentaires récents",
+          "daysAgo": "Il y a {days} jours",
+          "sampleComment1": "Excellente initiative ! Je participerai avec plaisir à cet événement.",
+          "sampleComment2": "Est-ce que l'événement est ouvert aux enfants également ?",
+          "noMoreComments": "Aucun autre commentaire pour cette annonce."
+        },
+        "adminActions": {
+          "title": "Actions administratives",
+          "hide": "Masquer l'annonce",
+          "delete": "Supprimer l'annonce",
+          "feature": "Mettre en avant",
+          "disableComments": "Désactiver commentaires"
+        }
+      },
+      "business": {
+        "title": "Liste des Commerces",
+        "newButton": "Nouveau commerce",
+        "subtitle": "Ci-dessous, vous trouverez tous les commerces repertoriés sur la plateforme.",
+        "searchPlaceholder": "Rechercher un commerce...",
+        "viewDetails": "Voir détails",
+        "modal": {
+          "title": "Créer un nouveau commerce"
+        },
+        "form": {
+          "nameLabel": "Titre*",
+          "descriptionLabel": "Description*",
+          "categoryLabel": "Catégorie*",
+          "ownerLabel": "Propriétaire*",
+          "addressLabel": "Adresse*",
+          "websiteLabel": "Site web"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer le commerce"
+        }
+      },
+      "events": {
+        "title": "Liste des Événements",
+        "newButton": "Nouvel événement",
+        "subtitle": "Ci-dessous, vous trouverez tous les événements repertoriés sur la plateforme.",
+        "searchPlaceholder": "Rechercher un événement...",
+        "modal": {
+          "title": "Créer un nouvel événement"
+        },
+        "form": {
+          "titleLabel": "Titre*",
+          "descriptionLabel": "Description*",
+          "dateLabel": "Date*",
+          "timeLabel": "Heure*",
+          "featuredLabel": "Mettre en avant"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer l'événement"
+        },
+        "noResults": "Aucun événement trouvé.",
+        "featured": "À la une",
+        "viewDetails": "Voir détails"
+      },
+      "userDetail": {
+        "backToList": "Retour à la liste",
+        "buttons": {
+          "message": "Message",
+          "edit": "Modifier"
+        },
+        "status": {
+          "active": "Actif",
+          "inactive": "Inactif"
+        },
+        "id": "ID:",
+        "memberSince": "Membre depuis:",
+        "unknown": "Inconnu",
+        "statistics": {
+          "title": "Statistiques d'activité",
+          "logins": "Connexions",
+          "events": "Événements",
+          "favoriteBusinesses": "Commerces favoris",
+          "profileCompletion": "Profil complété",
+          "monthlyActivity": "Activité mensuelle"
+        },
+        "tabs": {
+          "preferences": "Préférences",
+          "recentActivities": "Activités récentes",
+          "settings": "Paramètres"
+        },
+        "userPreferences": {
+          "title": "Préférences utilisateur",
+          "notificationsEmail": "Notifications par email",
+          "language": "Langue",
+          "privacySettings": "Paramètres de confidentialité",
+          "location": "Localisation",
+          "enabled": "Activé",
+          "french": "Français",
+          "public": "Public",
+          "interestCategories": "Catégories d'intérêt",
+          "categories": {
+            "culture": "Culture",
+            "sports": "Sports",
+            "technology": "Technologie",
+            "education": "Éducation",
+            "environment": "Environnement"
+          }
+        },
+        "adminActions": {
+          "title": "Actions administratives",
+          "suspend": "Suspendre le compte",
+          "delete": "Supprimer le compte",
+          "resetPassword": "Réinitialiser mot de passe",
+          "verifyIdentity": "Vérifier l'identité"
+        }
+      },
+      "users": {
+        "title": "Liste des Utilisateurs",
+        "subtitle": "Ci-dessous, vous trouverez tous les comptes enregistrés.",
+        "searchPlaceholder": "Rechercher un utilisateur...",
+        "noResults": "Aucun utilisateur trouvé."
+      }
     }
   }
 }

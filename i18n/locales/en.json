@@ -364,6 +364,198 @@
           "delete_account": "Error deleting account"
         }
       }
+    },
+    "admin": {
+      "dashboard": {
+        "title": "Admin Dashboard",
+        "welcome": "Welcome, {name}!",
+        "email": "Email:",
+        "company": "Company:",
+        "features": {
+          "users": {
+            "title": "Users",
+            "description": "Manage and view the city's user list."
+          },
+          "business": {
+            "title": "Merchants",
+            "description": "Manage and view partner merchants."
+          },
+          "events": {
+            "title": "Events",
+            "description": "Create and manage events for the urban community."
+          },
+          "announcements": {
+            "title": "Announcements",
+            "description": "Publish announcements and inform citizens."
+          }
+        }
+      },
+      "announcements": {
+        "title": "Announcements List",
+        "newButton": "New announcement",
+        "subtitle": "Below, you will find all announcements published on the platform.",
+        "searchPlaceholder": "Search for an announcement...",
+        "modal": {
+          "title": "Create a new announcement"
+        },
+        "form": {
+          "titleLabel": "Title*",
+          "contentLabel": "Content*",
+          "featuredLabel": "Feature this announcement",
+          "activeLabel": "Activate immediately"
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create announcement"
+        },
+        "noResults": "No announcements found.",
+        "authorPrefix": "By:",
+        "viewDetails": "View details"
+      },
+      "announcementsDetails": {
+        "backToList": "Back to list",
+        "buttons": {
+          "preview": "Preview",
+          "edit": "Edit"
+        },
+        "status": {
+          "published": "Published"
+        },
+        "publishedOn": "Published on",
+        "id": "ID",
+        "author": "Author",
+        "unknownDate": "Unknown date",
+        "statistics": {
+          "title": "Statistics",
+          "views": "Views",
+          "interactions": "Interactions",
+          "shares": "Shares",
+          "positive": "Positive",
+          "activitySincePublication": "Activity since publication"
+        },
+        "tabs": {
+          "comments": "Comments",
+          "history": "History",
+          "media": "Media"
+        },
+        "comments": {
+          "recentComments": "Recent comments",
+          "daysAgo": "{days} days ago",
+          "sampleComment1": "Great initiative! I would be happy to participate in this event.",
+          "sampleComment2": "Is the event also open to children?",
+          "noMoreComments": "No more comments for this announcement."
+        },
+        "adminActions": {
+          "title": "Administrative actions",
+          "hide": "Hide announcement",
+          "delete": "Delete announcement",
+          "feature": "Feature announcement",
+          "disableComments": "Disable comments"
+        }
+      },
+      "business": {
+        "title": "Business List",
+        "newButton": "New business",
+        "subtitle": "Below, you will find all businesses listed on the platform.",
+        "searchPlaceholder": "Search for a business...",
+        "viewDetails": "View details",
+        "modal": {
+          "title": "Create a new business"
+        },
+        "form": {
+          "nameLabel": "Title*",
+          "descriptionLabel": "Description*",
+          "categoryLabel": "Category*",
+          "ownerLabel": "Owner*",
+          "addressLabel": "Address*",
+          "websiteLabel": "Website"
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create business"
+        }
+      },
+      "events": {
+        "title": "Events List",
+        "newButton": "New event",
+        "subtitle": "Below, you will find all events listed on the platform.",
+        "searchPlaceholder": "Search for an event...",
+        "modal": {
+          "title": "Create a new event"
+        },
+        "form": {
+          "titleLabel": "Title*",
+          "descriptionLabel": "Description*",
+          "dateLabel": "Date*",
+          "timeLabel": "Time*",
+          "featuredLabel": "Feature this event"
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create event"
+        },
+        "noResults": "No events found.",
+        "featured": "Featured",
+        "viewDetails": "View details"
+      },
+      "userDetail": {
+        "backToList": "Back to list",
+        "buttons": {
+          "message": "Message",
+          "edit": "Edit"
+        },
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "id": "ID:",
+        "memberSince": "Member since:",
+        "unknown": "Unknown",
+        "statistics": {
+          "title": "Activity Statistics",
+          "logins": "Logins",
+          "events": "Events",
+          "favoriteBusinesses": "Favorite Businesses",
+          "profileCompletion": "Profile Completed",
+          "monthlyActivity": "Monthly Activity"
+        },
+        "tabs": {
+          "preferences": "Preferences",
+          "recentActivities": "Recent Activities",
+          "settings": "Settings"
+        },
+        "userPreferences": {
+          "title": "User Preferences",
+          "notificationsEmail": "Email Notifications",
+          "language": "Language",
+          "privacySettings": "Privacy Settings",
+          "location": "Location",
+          "enabled": "Enabled",
+          "french": "French",
+          "public": "Public",
+          "interestCategories": "Interest Categories",
+          "categories": {
+            "culture": "Culture",
+            "sports": "Sports",
+            "technology": "Technology",
+            "education": "Education",
+            "environment": "Environment"
+          }
+        },
+        "adminActions": {
+          "title": "Administrative Actions",
+          "suspend": "Suspend Account",
+          "delete": "Delete Account",
+          "resetPassword": "Reset Password",
+          "verifyIdentity": "Verify Identity"
+        }
+      },
+      "users": {
+        "title": "Users List",
+        "subtitle": "Below, you will find all registered accounts.",
+        "searchPlaceholder": "Search for a user...",
+        "noResults": "No users found."
+      }
     }
-  },
+  }
 }

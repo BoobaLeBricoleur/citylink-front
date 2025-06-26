@@ -1,16 +1,16 @@
 <template>
-    <div class="admin-portal">
-        <AdminSidebar />
-        <div class="main">
-            <AdminHeader />
+  <div class="admin-portal">
+    <AdminSidebar />
+    <div class="main">
+      <AdminHeader />
       <!-- Header avec retour et actions -->
       <div class="page-header">
         <div class="back-button" @click="$router.push('/admin/users')">
-          <span>Retour à la liste</span>
+          <span>{{ $t('pages.admin.userDetail.backToList') }}</span>
         </div>
         <div class="actions">
-          <button class="btn btn-secondary"><i class="fas fa-envelope"></i> Message</button>
-          <button class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
+          <button class="btn btn-secondary"><i class="fas fa-envelope"></i> {{ $t('pages.admin.userDetail.buttons.message') }}</button>
+          <button class="btn btn-primary"><i class="fas fa-edit"></i> {{ $t('pages.admin.userDetail.buttons.edit') }}</button>
         </div>
       </div>
 
@@ -23,13 +23,13 @@
               <span>{{ user.firstname ? user.firstname[0] : '' }}{{ user.lastname ? user.lastname[0] : '' }}</span>
             </div>
             <div class="user-status" :class="user.active ? 'active' : 'inactive'">
-              {{ user.active ? 'Actif' : 'Inactif' }}
+              {{ user.active ? $t('pages.admin.userDetail.status.active') : $t('pages.admin.userDetail.status.inactive') }}
             </div>
           </div>
-          
+
           <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
-          <p class="user-id">ID: {{ $route.query.id }}</p>
-          
+          <p class="user-id">{{ $t('pages.admin.userDetail.id') }} {{ $route.query.id }}</p>
+
           <div class="contact-info">
             <div class="info-item">
               <i class="fas fa-envelope"></i>
@@ -44,37 +44,37 @@
               <p>{{ user.address }}</p>
             </div>
           </div>
-          
+
           <div class="member-since">
-            <span class="label">Membre depuis:</span>
-            <span class="value">{{ user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Inconnu' }}</span>
+            <span class="label">{{ $t('pages.admin.userDetail.memberSince') }}</span>
+            <span class="value">{{ user.createdAt ? new Date(user.createdAt).toLocaleDateString() : $t('pages.admin.userDetail.unknown') }}</span>
           </div>
         </div>
-        
+
         <!-- Statistiques -->
         <div class="profile-card stats-card">
-          <h3>Statistiques d'activité</h3>
+          <h3>{{ $t('pages.admin.userDetail.statistics.title') }}</h3>
           <div class="stats-grid">
             <div class="stat-item">
               <div class="stat-value">25</div>
-              <div class="stat-label">Connexions</div>
+              <div class="stat-label">{{ $t('pages.admin.userDetail.statistics.logins') }}</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">12</div>
-              <div class="stat-label">Événements</div>
+              <div class="stat-label">{{ $t('pages.admin.userDetail.statistics.events') }}</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">5</div>
-              <div class="stat-label">Commerces favoris</div>
+              <div class="stat-label">{{ $t('pages.admin.userDetail.statistics.favoriteBusinesses') }}</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">89%</div>
-              <div class="stat-label">Profil complété</div>
+              <div class="stat-label">{{ $t('pages.admin.userDetail.statistics.profileCompletion') }}</div>
             </div>
           </div>
-          
+
           <div class="activity-graph">
-            <h4>Activité mensuelle</h4>
+            <h4>{{ $t('pages.admin.userDetail.statistics.monthlyActivity') }}</h4>
             <div class="graph-placeholder">
               <div class="bar" style="height: 30%"></div>
               <div class="bar" style="height: 50%"></div>
@@ -86,60 +86,72 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Onglets d'information supplémentaire -->
       <div class="tabs-container">
         <div class="tabs-header">
-          <div class="tab active">Préférences</div>
-          <div class="tab">Activités récentes</div>
-          <div class="tab">Paramètres</div>
+          <div class="tab active">{{ $t('pages.admin.userDetail.tabs.preferences') }}</div>
+          <div class="tab">{{ $t('pages.admin.userDetail.tabs.recentActivities') }}</div>
+          <div class="tab">{{ $t('pages.admin.userDetail.tabs.settings') }}</div>
         </div>
-        
+
         <div class="tab-content">
           <div class="preferences-section">
-            <h3>Préférences utilisateur</h3>
-            
+            <h3>{{ $t('pages.admin.userDetail.userPreferences.title') }}</h3>
+
             <div class="preferences-grid">
               <div class="pref-item">
-                <span class="pref-label">Notifications par email</span>
-                <div class="toggle active"></div>
+                <div class="pref-icon"><i class="fas fa-bell"></i></div>
+                <div class="pref-content">
+                  <h5>{{ $t('pages.admin.userDetail.userPreferences.notificationsEmail') }}</h5>
+                  <p>{{ $t('pages.admin.userDetail.userPreferences.enabled') }}</p>
+                </div>
               </div>
               <div class="pref-item">
-                <span class="pref-label">Notifications push</span>
-                <div class="toggle active"></div>
+                <div class="pref-icon"><i class="fas fa-language"></i></div>
+                <div class="pref-content">
+                  <h5>{{ $t('pages.admin.userDetail.userPreferences.language') }}</h5>
+                  <p>{{ $t('pages.admin.userDetail.userPreferences.french') }}</p>
+                </div>
               </div>
               <div class="pref-item">
-                <span class="pref-label">Partage de position</span>
-                <div class="toggle"></div>
+                <div class="pref-icon"><i class="fas fa-user-shield"></i></div>
+                <div class="pref-content">
+                  <h5>{{ $t('pages.admin.userDetail.userPreferences.privacySettings') }}</h5>
+                  <p>{{ $t('pages.admin.userDetail.userPreferences.public') }}</p>
+                </div>
               </div>
               <div class="pref-item">
-                <span class="pref-label">Recommandations</span>
-                <div class="toggle active"></div>
+                <div class="pref-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="pref-content">
+                  <h5>{{ $t('pages.admin.userDetail.userPreferences.location') }}</h5>
+                  <p>{{ $t('pages.admin.userDetail.userPreferences.enabled') }}</p>
+                </div>
               </div>
             </div>
-            
+
             <div class="categories-section">
-              <h4>Catégories d'intérêt</h4>
+              <h4>{{ $t('pages.admin.userDetail.userPreferences.interestCategories') }}</h4>
               <div class="categories-container">
-                <div class="category-tag">Restaurants</div>
-                <div class="category-tag">Culture</div>
-                <div class="category-tag">Sport</div>
-                <div class="category-tag">Mode</div>
-                <div class="category-tag">Technologie</div>
+                <span class="category-tag">{{ $t('pages.admin.userDetail.userPreferences.categories.culture') }}</span>
+                <span class="category-tag">{{ $t('pages.admin.userDetail.userPreferences.categories.sports') }}</span>
+                <span class="category-tag">{{ $t('pages.admin.userDetail.userPreferences.categories.technology') }}</span>
+                <span class="category-tag">{{ $t('pages.admin.userDetail.userPreferences.categories.education') }}</span>
+                <span class="category-tag">{{ $t('pages.admin.userDetail.userPreferences.categories.environment') }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Actions administratives -->
       <div class="admin-actions">
-        <h3>Actions administratives</h3>
+        <h3>{{ $t('pages.admin.userDetail.adminActions.title') }}</h3>
         <div class="actions-grid">
-          <button class="action-btn"><i class="fas fa-ban"></i> Suspendre le compte</button>
-          <button class="action-btn"><i class="fas fa-trash"></i> Supprimer le compte</button>
-          <button class="action-btn"><i class="fas fa-key"></i> Réinitialiser mot de passe</button>
-          <button class="action-btn"><i class="fas fa-shield-alt"></i> Vérifier l'identité</button>
+          <button class="action-btn"><i class="fas fa-ban"></i> {{ $t('pages.admin.userDetail.adminActions.suspend') }}</button>
+          <button class="action-btn"><i class="fas fa-trash"></i> {{ $t('pages.admin.userDetail.adminActions.delete') }}</button>
+          <button class="action-btn"><i class="fas fa-key"></i> {{ $t('pages.admin.userDetail.adminActions.resetPassword') }}</button>
+          <button class="action-btn"><i class="fas fa-shield-alt"></i> {{ $t('pages.admin.userDetail.adminActions.verifyIdentity') }}</button>
         </div>
       </div>
     </div>

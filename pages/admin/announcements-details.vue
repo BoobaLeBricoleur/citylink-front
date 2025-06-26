@@ -7,11 +7,11 @@
       <div class="page-header">
         <div class="back-button" @click="$router.push('/admin/announcements')">
           <i class="fas fa-arrow-left"></i>
-          <span>Retour à la liste</span>
+          <span>{{ $t('pages.admin.announcementsDetails.backToList') }}</span>
         </div>
         <div class="actions">
-          <button class="btn btn-secondary"><i class="fas fa-eye"></i> Visualiser</button>
-          <button class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
+          <button class="btn btn-secondary"><i class="fas fa-eye"></i> {{ $t('pages.admin.announcementsDetails.buttons.preview') }}</button>
+          <button class="btn btn-primary"><i class="fas fa-edit"></i> {{ $t('pages.admin.announcementsDetails.buttons.edit') }}</button>
         </div>
       </div>
 
@@ -22,22 +22,22 @@
           <div class="profile-header">
             <div class="announcement-status">
               <span class="status-indicator"></span>
-              Publiée
+              {{ $t('pages.admin.announcementsDetails.status.published') }}
             </div>
             <div class="publication-date">
-              Publiée le {{ formatDate(announcement.publication_date) }}
+              {{ $t('pages.admin.announcementsDetails.publishedOn') }} {{ formatDate(announcement.publication_date) }}
             </div>
           </div>
 
           <h2 class="announcement-title">{{ announcement.title }}</h2>
-          <p class="announcement-id">ID: {{ $route.query.id }}</p>
+          <p class="announcement-id">{{ $t('pages.admin.announcementsDetails.id') }}: {{ $route.query.id }}</p>
 
           <div class="announcement-content">
             <p>{{ announcement.content }}</p>
           </div>
 
           <div class="author-info">
-            <div class="author-label">Auteur :</div>
+            <div class="author-label">{{ $t('pages.admin.announcementsDetails.author') }} :</div>
             <div class="author-name">{{ announcement.firstname }} {{ announcement.lastname }}</div>
             <div class="author-email">{{ announcement.email }}</div>
           </div>
@@ -45,28 +45,28 @@
 
         <!-- Statistiques -->
         <div class="profile-card stats-card">
-          <h3>Statistiques</h3>
+          <h3>{{ $t('pages.admin.announcementsDetails.statistics.title') }}</h3>
           <div class="stats-grid">
             <div class="stat-item">
               <div class="stat-value">132</div>
-              <div class="stat-label">Vues</div>
+              <div class="stat-label">{{ $t('pages.admin.announcementsDetails.statistics.views') }}</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">24</div>
-              <div class="stat-label">Interactions</div>
+              <div class="stat-label">{{ $t('pages.admin.announcementsDetails.statistics.interactions') }}</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">8</div>
-              <div class="stat-label">Partages</div>
+              <div class="stat-label">{{ $t('pages.admin.announcementsDetails.statistics.shares') }}</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">95%</div>
-              <div class="stat-label">Positive</div>
+              <div class="stat-label">{{ $t('pages.admin.announcementsDetails.statistics.positive') }}</div>
             </div>
           </div>
 
           <div class="activity-graph">
-            <h4>Activité depuis publication</h4>
+            <h4>{{ $t('pages.admin.announcementsDetails.statistics.activitySincePublication') }}</h4>
             <div class="graph-placeholder">
               <div class="bar" style="height: 60%"></div>
               <div class="bar" style="height: 90%"></div>
@@ -82,34 +82,34 @@
       <!-- Onglets d'information supplémentaire -->
       <div class="tabs-container">
         <div class="tabs-header">
-          <div class="tab active">Commentaires</div>
-          <div class="tab">Historique</div>
-          <div class="tab">Médias</div>
+          <div class="tab active">{{ $t('pages.admin.announcementsDetails.tabs.comments') }}</div>
+          <div class="tab">{{ $t('pages.admin.announcementsDetails.tabs.history') }}</div>
+          <div class="tab">{{ $t('pages.admin.announcementsDetails.tabs.media') }}</div>
         </div>
 
         <div class="tab-content">
           <div class="comments-section">
-            <h3>Commentaires récents</h3>
+            <h3>{{ $t('pages.admin.announcementsDetails.comments.recentComments') }}</h3>
 
             <div class="comments-list">
               <div class="comment-item">
                 <div class="comment-header">
                   <div class="commenter">Marie Dupont</div>
-                  <div class="comment-date">Il y a 2 jours</div>
+                  <div class="comment-date">{{ $t('pages.admin.announcementsDetails.comments.daysAgo', { days: 2 }) }}</div>
                 </div>
-                <div class="comment-content">Excellente initiative ! Je participerai avec plaisir à cet événement.</div>
+                <div class="comment-content">{{ $t('pages.admin.announcementsDetails.comments.sampleComment1') }}</div>
               </div>
 
               <div class="comment-item">
                 <div class="comment-header">
                   <div class="commenter">Jean Martin</div>
-                  <div class="comment-date">Il y a 3 jours</div>
+                  <div class="comment-date">{{ $t('pages.admin.announcementsDetails.comments.daysAgo', { days: 3 }) }}</div>
                 </div>
-                <div class="comment-content">Est-ce que l'événement est ouvert aux enfants également ?</div>
+                <div class="comment-content">{{ $t('pages.admin.announcementsDetails.comments.sampleComment2') }}</div>
               </div>
 
               <div class="no-more-comments">
-                Aucun autre commentaire pour cette annonce.
+                {{ $t('pages.admin.announcementsDetails.comments.noMoreComments') }}
               </div>
             </div>
           </div>
@@ -118,12 +118,12 @@
 
       <!-- Actions administratives -->
       <div class="admin-actions">
-        <h3>Actions administratives</h3>
+        <h3>{{ $t('pages.admin.announcementsDetails.adminActions.title') }}</h3>
         <div class="actions-grid">
-          <button class="action-btn"><i class="fas fa-eye-slash"></i> Masquer l'annonce</button>
-          <button class="action-btn"><i class="fas fa-trash"></i> Supprimer l'annonce</button>
-          <button class="action-btn"><i class="fas fa-bullhorn"></i> Mettre en avant</button>
-          <button class="action-btn"><i class="fas fa-comment-slash"></i> Désactiver commentaires</button>
+          <button class="action-btn"><i class="fas fa-eye-slash"></i> {{ $t('pages.admin.announcementsDetails.adminActions.hide') }}</button>
+          <button class="action-btn"><i class="fas fa-trash"></i> {{ $t('pages.admin.announcementsDetails.adminActions.delete') }}</button>
+          <button class="action-btn"><i class="fas fa-bullhorn"></i> {{ $t('pages.admin.announcementsDetails.adminActions.feature') }}</button>
+          <button class="action-btn"><i class="fas fa-comment-slash"></i> {{ $t('pages.admin.announcementsDetails.adminActions.disableComments') }}</button>
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@ export default {
       }
     },
     formatDate(dateString) {
-      if (!dateString) return 'Date inconnue'
+      if (!dateString) return this.$t('pages.admin.announcementsDetails.unknownDate')
       const date = new Date(dateString)
       return date.toLocaleDateString('fr-FR', {
         day: '2-digit',

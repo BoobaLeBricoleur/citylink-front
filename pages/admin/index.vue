@@ -1,35 +1,35 @@
 <template>
-    <div class="admin-portal">
-        <AdminSidebar />
-        <div class="main">
-            <div class="intro">
-                <h1>Admin Dashboard</h1>
-                <p>Bienvenue, {{ user.firstname }} {{ user.lastname }} !</p>
-                <p v-if="user.email">Email : {{ user.email }}</p>
-                <p v-if="user.company">Entreprise : {{ user.company }}</p>
-            </div>
+  <div class="admin-portal">
+    <AdminSidebar />
+    <div class="main">
+      <div class="intro">
+        <h1>{{ $t('pages.admin.dashboard.title') }}</h1>
+        <p>{{ $t('pages.admin.dashboard.welcome', { name: user.firstname + ' ' + user.lastname }) }}</p>
+        <p v-if="user.email">{{ $t('pages.admin.dashboard.email') }} {{ user.email }}</p>
+        <p v-if="user.company">{{ $t('pages.admin.dashboard.company') }} {{ user.company }}</p>
+      </div>
 
-            <!-- Dynamic feature shortcuts -->
-            <div class="feature-grid">
-                <nuxt-link to="/admin/users" class="feature-card">
-                    <h3>Utilisateurs</h3>
-                    <p>Gérer et visualiser la liste des utilisateurs de la ville.</p>
-                </nuxt-link>
-                <nuxt-link to="/admin/business" class="feature-card">
-                    <h3>Commerçants</h3>
-                    <p>Gérer et visualiser les commerçants partenaires.</p>
-                </nuxt-link>
-                <nuxt-link to="/admin/events" class="feature-card">
-                    <h3>Événements</h3>
-                    <p>Créer et gérer les événements pour la communauté urbaine.</p>
-                </nuxt-link>
-                <nuxt-link to="/admin/announcements" class="feature-card">
-                    <h3>Annonces</h3>
-                    <p>Publier des annonces et informer les citoyens.</p>
-                </nuxt-link>
-            </div>
-        </div>
+      <!-- Dynamic feature shortcuts -->
+      <div class="feature-grid">
+        <nuxt-link to="/admin/users" class="feature-card">
+          <h3>{{ $t('pages.admin.dashboard.features.users.title') }}</h3>
+          <p>{{ $t('pages.admin.dashboard.features.users.description') }}</p>
+        </nuxt-link>
+        <nuxt-link to="/admin/business" class="feature-card">
+          <h3>{{ $t('pages.admin.dashboard.features.business.title') }}</h3>
+          <p>{{ $t('pages.admin.dashboard.features.business.description') }}</p>
+        </nuxt-link>
+        <nuxt-link to="/admin/events" class="feature-card">
+          <h3>{{ $t('pages.admin.dashboard.features.events.title') }}</h3>
+          <p>{{ $t('pages.admin.dashboard.features.events.description') }}</p>
+        </nuxt-link>
+        <nuxt-link to="/admin/announcements" class="feature-card">
+          <h3>{{ $t('pages.admin.dashboard.features.announcements.title') }}</h3>
+          <p>{{ $t('pages.admin.dashboard.features.announcements.description') }}</p>
+        </nuxt-link>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
