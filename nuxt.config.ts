@@ -1,31 +1,30 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/fonts', '@nuxt/icon', '@nuxt/image','nuxt-i18n-micro'],
+  modules: [
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/image',
+    '@nuxtjs/i18n',
+  ],
 
-  ssr: false,
-  nitro: {
-    preset: 'static',
-    serveStatic: true
-  },
+  plugins: [
+    '~/plugins/fontawesome.ts'
+  ],
 
-  app: {
-    baseURL: '/'
-  },
-
-  // Configuration I18n
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', dir: 'ltr' },
-      { code: 'fr', iso: 'fr-FR', dir: 'ltr' },
+      { code: 'en', iso: 'en-US', file: 'en.json' },
+      { code: 'fr', iso: 'fr-FR', file: 'fr.json' },
     ],
     defaultLocale: 'fr',
-    translationDir: 'locales',
-    meta: true,
+    strategy: 'prefix',
+    vueI18n: './i18n.config.ts'
   },
 
   css: [
     '@fortawesome/fontawesome-free/css/all.css',
+    '@fortawesome/fontawesome-svg-core/styles.css',
     '~/assets/main.scss'
   ],
 })

@@ -6,145 +6,145 @@
         <div class="auth-container">
           <div class="form-centered">
             <div class="auth-header">
-              <h2>{{ isLogin ? $t('welcome') : $t('join_us') }}</h2>
-              <p class="auth-subtitle">{{ isLogin ? $t('login_subtitle') : $t('register_subtitle') }}</p>
+              <h2>{{ isLogin ? $t('pages.account.welcome') : $t('pages.account.join_us') }}</h2>
+              <p class="auth-subtitle">{{ isLogin ? $t('pages.account.login_subtitle') : $t('pages.account.register_subtitle') }}</p>
             </div>
-            
+
             <div v-if="error" class="error-message">
               <span class="error-icon">!</span>
               {{ error }}
             </div>
-            
+
             <div class="form-scroll-container" :class="{ 'login-form': isLogin }">
               <form @submit.prevent="submitForm">
                 <!-- Formulaire de connexion -->
                 <template v-if="isLogin">
                   <div class="form-group">
-                    <label>{{ $t('email') }}</label>
+                    <label>{{ $t('pages.account.email') }}</label>
                     <input type="email" v-model="form.email" placeholder="votre@email.com" required class="auth-input">
                   </div>
-                  
+
                   <div class="form-group">
-                    <label>{{ $t('password') }}</label>
+                    <label>{{ $t('pages.account.password') }}</label>
                     <input type="password" v-model="form.password" placeholder="••••••••" required class="auth-input">
                   </div>
                 </template>
-                
+
                 <!-- Formulaire d'inscription -->
                 <template v-else>
                   <!-- Sélection du type de compte -->
                   <div class="account-type-selector">
-                    <button type="button" 
-                            class="account-type-btn" 
+                    <button type="button"
+                            class="account-type-btn"
                             :class="{ active: !isCompany }"
                             @click="isCompany = false">
-                      <i class="fas fa-user"></i> {{ $t('individual') }}
+                      <Icon name="heroicons:user" /> {{ $t('pages.account.individual') }}
                     </button>
-                    <button type="button" 
-                            class="account-type-btn" 
+                    <button type="button"
+                            class="account-type-btn"
                             :class="{ active: isCompany }"
                             @click="isCompany = true">
-                      <i class="fas fa-building"></i> {{ $t('professional') }}
+                      <Icon name="heroicons:building-office" /> {{ $t('pages.account.professional') }}
                     </button>
                   </div>
-                  
+
                   <!-- Informations de base -->
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>{{ $t('firstname') }}</label>
+                      <label>{{ $t('pages.account.firstname') }}</label>
                       <input type="text" v-model="form.firstname" placeholder="Votre prénom" required class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('lastname') }}</label>
+                      <label>{{ $t('pages.account.lastname') }}</label>
                       <input type="text" v-model="form.lastname" placeholder="Votre nom" required class="auth-input">
                     </div>
                   </div>
-                  
+
                   <!-- Champ entreprise (uniquement si professionnel) -->
                   <div v-if="isCompany" class="form-group">
-                    <label>{{ $t('company') }}</label>
+                    <label>{{ $t('pages.account.company') }}</label>
                     <input type="text" v-model="form.company" placeholder="Nom de votre entreprise" required class="auth-input">
                   </div>
-                  
+
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>{{ $t('email') }}</label>
+                      <label>{{ $t('pages.account.email') }}</label>
                       <input type="email" v-model="form.email" placeholder="votre@email.com" required class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('phone') }}</label>
+                      <label>{{ $t('pages.account.phone') }}</label>
                       <input type="tel" v-model="form.phone" placeholder="06 12 34 56 78" class="auth-input">
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
-                    <label>{{ $t('address') }}</label>
+                    <label>{{ $t('pages.account.address') }}</label>
                     <input type="text" v-model="form.address" placeholder="Votre adresse" class="auth-input">
                   </div>
-                  
+
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>{{ $t('postal_code') }}</label>
+                      <label>{{ $t('pages.account.postal_code') }}</label>
                       <input type="text" v-model="form.postal_code" placeholder="Code postal" class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('city') }}</label>
+                      <label>{{ $t('pages.account.city') }}</label>
                       <input type="text" v-model="form.city" placeholder="Votre ville" class="auth-input">
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
-                    <label>{{ $t('birthday') }}</label>
+                    <label>{{ $t('pages.account.birthday') }}</label>
                     <input type="date" v-model="form.birthday" class="auth-input">
                   </div>
-                  
+
                   <div class="form-grid">
                     <div class="form-group">
-                      <label>{{ $t('password') }}</label>
+                      <label>{{ $t('pages.account.password') }}</label>
                       <input type="password" v-model="form.password" placeholder="••••••••" required class="auth-input">
                     </div>
                     <div class="form-group">
-                      <label>{{ $t('confirm_password') }}</label>
+                      <label>{{ $t('pages.account.confirm_password') }}</label>
                       <input type="password" v-model="form.confirmPassword" placeholder="••••••••" required class="auth-input">
                     </div>
                   </div>
-                  
+
                   <div class="checkboxes-container">
                     <div class="form-group checkbox-group">
                       <label class="checkbox-container">
                         <input type="checkbox" v-model="form.mail_new_events" checked>
                         <span class="checkmark"></span>
-                        {{ $t('notify_new_events') }}
+                        {{ $t('pages.account.notify_new_events') }}
                       </label>
                     </div>
-                    
+
                     <div class="form-group checkbox-group">
                       <label class="checkbox-container">
                         <input type="checkbox" v-model="form.mail_events" checked>
                         <span class="checkmark"></span>
-                        {{ $t('notify_my_events') }}
+                        {{ $t('pages.account.notify_my_events') }}
                       </label>
                     </div>
-                    
+
                     <div class="form-group checkbox-group">
                       <label class="checkbox-container">
                         <input type="checkbox" v-model="form.public_profile">
                         <span class="checkmark"></span>
-                        {{ $t('public_profile') }}
+                        {{ $t('pages.account.public_profile') }}
                       </label>
                     </div>
                   </div>
                 </template>
-                
+
                 <button type="submit" class="gold-button" :disabled="loading">
                   <span v-if="loading" class="spinner"></span>
-                  {{ isLogin ? $t('login_button') : $t('register_button') }}
+                  {{ isLogin ? $t('pages.account.login_button') : $t('pages.account.register_button') }}
                 </button>
               </form>
             </div>
-            
+
             <p @click="toggleForm" class="toggle-link">
-              {{ isLogin ? $t('to_register') : $t('to_login') }}
+              {{ isLogin ? $t('pages.account.to_register') : $t('pages.account.to_login') }}
             </p>
           </div>
         </div>
@@ -236,7 +236,7 @@ export default {
         } else {
           // Vérification des mots de passe
           if (this.form.password !== this.form.confirmPassword) {
-            this.error = this.$t('errors.password_mismatch');
+            this.error = this.$t('pages.account.errors.password_mismatch');
             this.loading = false;
             return;
           }
@@ -278,7 +278,7 @@ export default {
         }
       } catch (err) {
         console.error('Erreur:', err);
-        this.error = err.response?.data?.message || this.$t('errors.default');
+        this.error = err.response?.data?.message || this.$t('pages.account.errors.default');
       } finally {
         this.loading = false;
       }

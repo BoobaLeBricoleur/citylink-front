@@ -1,7 +1,6 @@
 @use '../variables' as *;
 @use '../mixing' as *;
 
-// Ajout d'un espace pour compenser le header fixe
 body {
     padding-top: $header-height;
 }
@@ -26,7 +25,6 @@ body {
         margin-right: $spacing-md;
     }
 
-    // Navigation principale
     .main-nav {
         @include flex(row, space-between, center);
         flex-grow: 1;
@@ -394,6 +392,50 @@ body {
 
         .hide-mobile {
             display: none;
+        }
+    }
+
+    .language-selector {
+        margin-right: $spacing-md;
+    }
+
+    .language-button {
+        @include flex(row, center, center);
+        background: none;
+        border: 1px solid $color-white-overlay-medium;
+        color: $color-text-light;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-md;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition-fast;
+        gap: $spacing-xs;
+
+        &:hover {
+            background-color: $color-white-overlay-light;
+            border-color: $color-white-overlay-heavy;
+        }
+
+        i {
+            font-size: 14px;
+        }
+
+        span {
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    @include respond-to(md) {
+        .language-selector {
+            margin: $spacing-md 0;
+            width: 100%;
+
+            .language-button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     }
 }

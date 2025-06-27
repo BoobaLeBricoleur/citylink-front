@@ -8,95 +8,95 @@
           <div v-if="!user.avatar" class="profile-avatar-placeholder">
             {{ userInitials }}
           </div>
-          <img v-else :src="user.avatar" :alt="$t('profile.photo_alt')" />
+          <img v-else :src="user.avatar" :alt="$t('pages.profile.profile.photo_alt')" />
         </div>
         <h2>{{ user.firstname }} {{ user.lastname }}</h2>
         <p class="user-email">{{ user.email }}</p>
         <p v-if="user.company" class="user-company">{{ user.company }}</p>
-        
+
         <div class="profile-menu">
           <button class="profile-menu-item" :class="{ active: activeTab === 'info' }" @click="setActiveTab('info')">
-            <i class="fas fa-user"></i> {{ $t('menu.personal_info') }}
+            <Icon name="heroicons:user" /> {{ $t('pages.profile.menu.personal_info') }}
           </button>
           <button class="profile-menu-item" :class="{ active: activeTab === 'activities' }" @click="setActiveTab('activities')">
-            <i class="fas fa-calendar-alt"></i> {{ $t('menu.my_activities') }}
+            <Icon name="heroicons:calendar-days" /> {{ $t('pages.profile.menu.my_activities') }}
           </button>
           <button class="profile-menu-item" :class="{ active: activeTab === 'settings' }" @click="setActiveTab('settings')">
-            <i class="fas fa-cog"></i> {{ $t('menu.settings') }}
+            <Icon name="heroicons:cog-6-tooth" /> {{ $t('pages.profile.menu.settings') }}
           </button>
         </div>
       </div>
-      
+
       <div class="profile-content">
         <!-- Message d'alerte -->
         <div v-if="message" class="alert" :class="messageType">
           {{ message }}
         </div>
-        
+
         <!-- Informations personnelles -->
         <div v-if="activeTab === 'info'" class="profile-section">
-          <h3>{{ $t('personal_info.title') }}</h3>
+          <h3>{{ $t('pages.profile.personal_info.title') }}</h3>
           <form @submit.prevent="updateProfile" class="profile-form">
             <div class="form-grid">
               <div class="form-group">
-                <label for="firstname">{{ $t('personal_info.firstname') }}</label>
+                <label for="firstname">{{ $t('pages.profile.personal_info.firstname') }}</label>
                 <input type="text" id="firstname" v-model="form.firstname" required />
               </div>
               <div class="form-group">
-                <label for="lastname">{{ $t('personal_info.lastname') }}</label>
+                <label for="lastname">{{ $t('pages.profile.personal_info.lastname') }}</label>
                 <input type="text" id="lastname" v-model="form.lastname" required />
               </div>
             </div>
-            
+
             <div class="form-group">
-              <label for="email">{{ $t('personal_info.email') }}</label>
+              <label for="email">{{ $t('pages.profile.personal_info.email') }}</label>
               <input type="email" id="email" v-model="form.email" required />
             </div>
-            
+
             <div class="form-group">
-              <label for="company">{{ $t('personal_info.company') }}</label>
+              <label for="company">{{ $t('pages.profile.personal_info.company') }}</label>
               <input type="text" id="company" v-model="form.company" />
             </div>
-            
+
             <div class="form-actions">
               <button type="submit" class="gold-button" :disabled="loading">
                 <span v-if="loading" class="spinner"></span>
-                {{ $t('personal_info.update_button') }}
+                {{ $t('pages.profile.personal_info.update_button') }}
               </button>
             </div>
           </form>
-          
+
           <div class="password-section">
-            <h3>{{ $t('personal_info.password_section.title') }}</h3>
+            <h3>{{ $t('pages.profile.personal_info.password_section.title') }}</h3>
             <form @submit.prevent="updatePassword" class="profile-form">
               <div class="form-group">
-                <label for="currentPassword">{{ $t('personal_info.password_section.current') }}</label>
+                <label for="currentPassword">{{ $t('pages.profile.personal_info.password_section.current') }}</label>
                 <input type="password" id="currentPassword" v-model="passwords.current" required />
               </div>
-              
+
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="newPassword">{{ $t('personal_info.password_section.new') }}</label>
+                  <label for="newPassword">{{ $t('pages.profile.personal_info.password_section.new') }}</label>
                   <input type="password" id="newPassword" v-model="passwords.new" required />
                 </div>
                 <div class="form-group">
-                  <label for="confirmPassword">{{ $t('personal_info.password_section.confirm') }}</label>
+                  <label for="confirmPassword">{{ $t('pages.profile.personal_info.password_section.confirm') }}</label>
                   <input type="password" id="confirmPassword" v-model="passwords.confirm" required />
                 </div>
               </div>
               <div class="form-actions">
                 <button type="submit" class="gold-button" :disabled="passwordLoading">
                   <span v-if="passwordLoading" class="spinner"></span>
-                  {{ $t('personal_info.password_section.button') }}
+                  {{ $t('pages.profile.personal_info.password_section.button') }}
                 </button>
               </div>
             </form>
           </div>
         </div>
-        
+
         <!-- Mes activités -->
         <div v-if="activeTab === 'activities'" class="profile-section">
-          <h3>{{ $t('activities.upcoming.title') }}</h3>
+          <h3>{{ $t('pages.profile.activities.upcoming.title') }}</h3>
           <div v-if="upcomingEvents.length" class="events-list">
             <div v-for="event in upcomingEvents" :key="event.id" class="activity-card">
               <div class="activity-date">{{ formatDate(event.date) }}</div>
@@ -105,17 +105,17 @@
                 <p>{{ event.location }}</p>
               </div>
               <button class="icon-button" @click="cancelParticipation(event.id)">
-                <i class="fas fa-times"></i>
+                <Icon name="heroicons:x-mark" />
               </button>
             </div>
           </div>
           <div v-else class="empty-state">
-            <i class="fas fa-calendar-alt empty-icon"></i>
-            <p>{{ $t('activities.upcoming.empty') }}</p>
-            <router-link to="/events" class="gold-button-small">{{ $t('activities.upcoming.discover') }}</router-link>
+            <Icon name="heroicons:calendar-days" class="empty-icon" />
+            <p>{{ $t('pages.profile.activities.upcoming.empty') }}</p>
+            <router-link to="/events" class="gold-button-small">{{ $t('pages.profile.activities.upcoming.discover') }}</router-link>
           </div>
-          
-          <h3>{{ $t('activities.history.title') }}</h3>
+
+          <h3>{{ $t('pages.profile.activities.history.title') }}</h3>
           <div v-if="pastEvents.length" class="events-list">
             <div v-for="event in pastEvents" :key="event.id" class="activity-card past">
               <div class="activity-date">{{ formatDate(event.date) }}</div>
@@ -126,71 +126,71 @@
             </div>
           </div>
           <div v-else class="empty-state">
-            <i class="fas fa-history empty-icon"></i>
-            <p>{{ $t('activities.history.empty') }}</p>
+            <Icon name="heroicons:clock" class="empty-icon" />
+            <p>{{ $t('pages.profile.activities.history.empty') }}</p>
           </div>
         </div>
-        
+
         <!-- Paramètres -->
         <div v-if="activeTab === 'settings'" class="profile-section">
-          <h3>{{ $t('settings.title') }}</h3>
-          
+          <h3>{{ $t('pages.profile.settings.title') }}</h3>
+
           <div class="settings-group">
-            <h4>{{ $t('settings.notifications.title') }}</h4>
+            <h4>{{ $t('pages.profile.settings.notifications.title') }}</h4>
             <div class="setting-option">
               <label class="switch">
                 <input type="checkbox" v-model="settings.emailNotifications">
                 <span class="slider"></span>
               </label>
               <div class="setting-label">
-                <p>{{ $t('settings.notifications.email.title') }}</p>
-                <span>{{ $t('settings.notifications.email.description') }}</span>
+                <p>{{ $t('pages.profile.settings.notifications.email.title') }}</p>
+                <span>{{ $t('pages.profile.settings.notifications.email.description') }}</span>
               </div>
             </div>
-            
+
             <div class="setting-option">
               <label class="switch">
                 <input type="checkbox" v-model="settings.eventReminders">
                 <span class="slider"></span>
               </label>
               <div class="setting-label">
-                <p>{{ $t('settings.notifications.reminders.title') }}</p>
-                <span>{{ $t('settings.notifications.reminders.description') }}</span>
+                <p>{{ $t('pages.profile.settings.notifications.reminders.title') }}</p>
+                <span>{{ $t('pages.profile.settings.notifications.reminders.description') }}</span>
               </div>
             </div>
           </div>
-          
+
           <div class="settings-group">
-            <h4>{{ $t('settings.privacy.title') }}</h4>
+            <h4>{{ $t('pages.profile.settings.privacy.title') }}</h4>
             <div class="setting-option">
               <label class="switch">
                 <input type="checkbox" v-model="settings.publicProfile">
                 <span class="slider"></span>
               </label>
               <div class="setting-label">
-                <p>{{ $t('settings.privacy.public_profile.title') }}</p>
-                <span>{{ $t('settings.privacy.public_profile.description') }}</span>
+                <p>{{ $t('pages.profile.settings.privacy.public_profile.title') }}</p>
+                <span>{{ $t('pages.profile.settings.privacy.public_profile.description') }}</span>
               </div>
             </div>
           </div>
-          
+
           <div class="form-actions">
             <button class="gold-button" @click="saveSettings" :disabled="settingsLoading">
               <span v-if="settingsLoading" class="spinner"></span>
-              {{ $t('settings.save_button') }}
+              {{ $t('pages.profile.settings.save_button') }}
             </button>
           </div>
-          
+
           <div class="danger-zone">
-            <h4>{{ $t('settings.danger_zone.title') }}</h4>
+            <h4>{{ $t('pages.profile.settings.danger_zone.title') }}</h4>
             <button class="danger-button" @click="confirmDeleteAccount">
-              {{ $t('settings.danger_zone.delete_account') }}
+              {{ $t('pages.profile.settings.danger_zone.delete_account') }}
             </button>
           </div>
         </div>
       </div>
     </section>
-    
+
     <Footer />
   </div>
 </template>
@@ -357,8 +357,8 @@ export default {
       } catch (err) {
         console.error('Erreur lors de la mise à jour du profil:', err);
         this.showMessage(
-          err.response?.data?.message || this.$t('alerts.error.update_profile'), 
-          'error'
+            err.response?.data?.message || this.$t('pages.profile.alerts.error.load_profile'),
+            'error'
         );
       } finally {
         this.loading = false;
@@ -368,7 +368,7 @@ export default {
     // Changer le mot de passe
     async updatePassword() {
       if (this.passwords.new !== this.passwords.confirm) {
-        this.showMessage(this.$t('alerts.password_mismatch'), 'error');
+        this.showMessage(this.$t('pages.profile.alerts.password_mismatch'), 'error');
         return;
       }
       
@@ -386,12 +386,12 @@ export default {
         
         // Réinitialiser le formulaire
         this.passwords = { current: '', new: '', confirm: '' };
-        this.showMessage(this.$t('alerts.password_updated'));
+        this.showMessage(this.$t('pages.profile.alerts.password_updated'));
       } catch (err) {
         console.error('Erreur lors du changement de mot de passe:', err);
         this.showMessage(
-          err.response?.data?.message || this.$t('alerts.error.change_password'), 
-          'error'
+            err.response?.data?.message || this.$t('pages.profile.alerts.error.change_password'),
+            'error'
         );
       } finally {
         this.passwordLoading = false;
@@ -404,14 +404,14 @@ export default {
       // Simulation d'une API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       this.settingsLoading = false;
-      this.showMessage(this.$t('alerts.settings_saved'));
+      this.showMessage(this.$t('pages.profile.alerts.settings_saved'));
     },
     
     // Annuler la participation à un événement (simulation)
     cancelParticipation(eventId) {
       if (confirm(this.$t('alerts.confirm_cancel'))) {
         this.upcomingEvents = this.upcomingEvents.filter(event => event.id !== eventId);
-        this.showMessage(this.$t('alerts.participation_canceled'));
+        this.showMessage(this.$t('pages.profile.alerts.participation_canceled'));
       }
     },
     
@@ -430,8 +430,8 @@ export default {
         } catch (err) {
           console.error('Erreur lors de la suppression du compte:', err);
           this.showMessage(
-            err.response?.data?.message || this.$t('alerts.error.delete_account'), 
-            'error'
+              err.response?.data?.message || this.$t('pages.profile.alerts.error.delete_account'),
+              'error'
           );
         }
       }
@@ -466,27 +466,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Styles pour les alertes */
-.alert {
-  padding: 12px 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.alert.success {
-  background-color: rgba(40, 167, 69, 0.2);
-  border-left: 4px solid #28a745;
-  color: #155724;
-}
-
-.alert.error {
-  background-color: rgba(255, 69, 58, 0.2);
-  border-left: 4px solid #ff453a;
-  color: #721c24;
-}
-</style>

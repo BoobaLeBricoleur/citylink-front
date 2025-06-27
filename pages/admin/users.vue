@@ -1,30 +1,48 @@
 <template>
-    <div class="admin-portal">
-        <!-- Sidebar for navigation -->
-      <AdminSidebar />
+  <div class="admin-portal">
+    <AdminSidebar />
+    <div class="main">
+      <AdminHeader />
+      <div class="intro">
+        <h1>{{ $t('pages.admin.users.title') }}</h1>
+        <p>{{ $t('pages.admin.users.subtitle') }}</p>
+      </div>
 
-        <!-- Main content area -->
-        <div class="main">
-            <AdminHeader />
-            <div class="intro">
-                <h1>Liste des Utilisateurs</h1>
-                <p>Ci-dessous, vous trouverez tous les comptes enregistrés.</p>
-            </div>
-
-            <!-- Users list -->
-            <div class="user-list">
-                <div v-if="users.length === 0" class="no-users">
-                    Aucun utilisateur trouvé.
-                </div>
-                <ul v-else>
-                    <li v-for="(item, index) in users" :key="index" class="user-item">
-                        <strong>{{ item.firstname }} {{ item.lastname }}</strong>
-                        <span> - {{ item.email }}</span>
-                    </li>
-                </ul>
-            </div>
+      <!-- Barre de recherche -->
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <Icon name="heroicons:magnifying-glass" class="search-icon" />
+          <input
+              type="text"
+              v-model="searchQuery"
+              :placeholder="$t('pages.admin.users.searchPlaceholder')"
+              class="search-input"
+          >
         </div>
+      </div>
+
+      <!-- Users list avec navigation au clic -->
+      <div class="user-list">
+        <div v-if="filteredUsers.length === 0" class="no-users">
+          {{ $t('pages.admin.users.noResults') }}
+        </div>
+        <ul v-else>
+          <li
+              v-for="(item, index) in filteredUsers"
+              :key="index"
+              class="user-item"
+              @click="goToUserDetail(item.id)"
+          >
+            <div class="user-info">
+              <strong>{{ item.firstname }} {{ item.lastname }}</strong>
+              <span> - {{ item.email }}</span>
+            </div>
+            <Icon name="heroicons:chevron-right" />
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -40,7 +58,18 @@ export default {
         return {
             users: [],
             user: {},
+            searchQuery: '', 
             API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
+        }
+    },
+    computed: {
+        filteredUsers() {
+            if (!this.searchQuery) return this.users;
+            
+            const query = this.searchQuery.toLowerCase();
+            return this.users.filter(user => 
+                user.lastname.toLowerCase().includes(query)
+            );
         }
     },
     async mounted() {
@@ -48,6 +77,9 @@ export default {
         await this.fetchUsers()
     },
     methods: {
+        goToUserDetail(userId) {
+            this.$router.push(`/admin/user-detail?id=${userId}`);
+        },
         async initAuth() {
             const userData = await verifyAndLoadProfile(this.$router, this.API_URL)
         },
@@ -68,73 +100,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-@use '../../assets/variables.scss' as *;
-
-.admin-portal {
-    display: flex;
-    height: 100vh;
-    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 50%, $color-primary-dark 100%);
-    color: $color-text-light;
-
-    .main {
-        flex: 1;
-        padding: 2rem;
-        overflow-y: auto;
-
-        .intro {
-            background: $color-white-overlay-medium;
-            padding: 2rem;
-            border-radius: $border-radius-md;
-            box-shadow: 0 4px 12px $color-black-overlay-light;
-            margin-bottom: 2rem;
-            border: 1px solid $color-white-overlay-light;
-
-            h1 {
-                margin-top: 0;
-                margin-bottom: 1rem;
-                color: $color-text-light;
-                font-size: 1.8rem;
-            }
-
-            p {
-                margin: 0.25rem 0;
-            }
-        }
-
-        .user-list {
-            background: $color-white-overlay-medium;
-            padding: 1rem;
-            border-radius: $border-radius-md;
-            box-shadow: 0 4px 12px $color-black-overlay-light;
-            border: 1px solid $color-white-overlay-light;
-
-            .no-users {
-                text-align: center;
-                font-size: 1.1rem;
-            }
-
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-
-                .user-item {
-                    padding: 0.5rem 0;
-                    border-bottom: 1px solid $color-white-overlay-light;
-
-                    &:last-child {
-                        border-bottom: none;
-                    }
-
-                    strong {
-                        font-weight: 600;
-                    }
-                }
-            }
-        }
-    }
-}
-</style>

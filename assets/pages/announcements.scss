@@ -26,7 +26,17 @@
 }
 
 .announcements-page {
-    background-color: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    > :last-child {
+        margin-top: auto;
+    }
+
+    .main-content {
+        flex: 1;
+    }
 
     .hero-section {
         position: relative;

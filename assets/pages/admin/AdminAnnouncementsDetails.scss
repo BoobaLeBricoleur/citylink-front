@@ -1,0 +1,333 @@
+@use '../../variables.scss' as *;
+
+.admin-portal {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 50%, $color-primary-dark 100%);
+  color: $color-text-light;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+
+  .main {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+
+      .back-button {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        i {
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .actions {
+        button {
+          margin-left: 1rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          text-transform: uppercase;
+          font-weight: 600;
+          cursor: pointer;
+          padding: 0.6rem 1.2rem;
+          border: none;
+          border-radius: 4px;
+          transition: background 0.2s;
+
+          &.btn-secondary {
+            background: $color-white-overlay-light;
+            color: $color-text-dark;
+
+            &:hover {
+              background: $color-white-overlay-medium;
+            }
+          }
+
+          &.btn-primary {
+            background: $color-secondary;
+            color: #fff;
+
+            &:hover {
+              background: $color-secondary;
+            }
+          }
+        }
+      }
+    }
+
+    .profile-container {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+
+      .profile-card {
+        background: $color-white-overlay-medium;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        min-width: 300px;
+
+        &.announcement-card {
+          .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 1.5rem;
+
+            .announcement-status {
+              display: flex;
+              align-items: center;
+              font-weight: 600;
+
+              .status-indicator {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #2ecc71;
+                margin-right: 0.5rem;
+              }
+            }
+
+            .publication-date {
+              font-size: 0.85rem;
+              opacity: 0.8;
+            }
+          }
+
+          .announcement-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+          }
+
+          .announcement-id {
+            font-size: 0.85rem;
+            color: $color-text-muted;
+            margin-bottom: 1.5rem;
+          }
+
+          .announcement-content {
+            background: $color-primary-dark;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+
+            p {
+              margin: 0;
+            }
+          }
+
+          .author-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.9rem;
+
+            .author-label {
+              font-weight: 600;
+            }
+
+            .author-name {
+              margin-right: 0.5rem;
+            }
+
+            .author-email {
+              color: $color-text-muted;
+            }
+          }
+        }
+
+        &.stats-card {
+          h3 {
+            margin-bottom: 1rem;
+          }
+
+          .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+
+            .stat-item {
+              background: $color-primary-dark;
+              padding: 0.8rem;
+              border-radius: 6px;
+              text-align: center;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+              .stat-value {
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin-bottom: 0.3rem;
+              }
+
+              .stat-label {
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                color: $color-text-muted;
+              }
+            }
+          }
+
+          .activity-graph {
+            margin-top: 1.5rem;
+
+            h4 {
+              margin-bottom: 0.5rem;
+            }
+
+            .graph-placeholder {
+              display: flex;
+              align-items: flex-end;
+              gap: 0.3rem;
+              height: 150px;
+              background: $color-white-overlay-light;
+              padding: 0.5rem;
+              border-radius: 6px;
+
+              .bar {
+                flex: 1;
+                background: $color-secondary;
+                border-radius: 3px;
+                transition: height 0.3s ease;
+              }
+
+              .bar:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .tabs-container {
+      background: $color-white-overlay-medium;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      .tabs-header {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1rem;
+
+        .tab {
+          padding-bottom: 0.3rem;
+          cursor: pointer;
+          position: relative;
+          font-weight: 600;
+          text-transform: uppercase;
+
+          &.active {
+            color: $color-secondary;
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -2px;
+              left: 0;
+              right: 0;
+              height: 2px;
+              background: $color-secondary;
+            }
+          }
+        }
+      }
+
+      .tab-content {
+        .comments-section {
+          h3 {
+            margin-bottom: 1rem;
+          }
+
+          .comments-list {
+            .comment-item {
+              background: $color-primary-dark;
+              padding: 1rem;
+              border-radius: 4px;
+              margin-bottom: 1rem;
+
+              .comment-header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+
+                .commenter {
+                  font-weight: 600;
+                }
+
+                .comment-date {
+                  font-size: 0.85rem;
+                  color: $color-text-muted;
+                }
+              }
+
+              .comment-content {
+                line-height: 1.4;
+              }
+            }
+
+            .no-more-comments {
+              text-align: center;
+              padding: 1rem;
+              color: $color-text-muted;
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+
+    .admin-actions {
+      background: $color-white-overlay-medium;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        margin-bottom: 1rem;
+      }
+
+      .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+
+        .action-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.8rem 1rem;
+          background: $color-primary-dark;
+          color: $color-text-light;
+          border: none;
+          border-radius: 4px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.3s;
+
+          i {
+            font-size: 1rem;
+          }
+
+        }
+      }
+    }
+  }
+}

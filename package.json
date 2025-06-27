@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@nuxt/fonts": "^0.11.0",
     "@nuxt/icon": "^1.11.0",
     "@nuxt/image": "^1.10.0",
+    "@nuxtjs/i18n": "^9.5.5",
     "axios": "^1.8.4",
     "nuxt": "^3.16.2",
-    "nuxt-i18n-micro": "^1.84.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

@@ -6,6 +6,8 @@
 // Import des composants
 @use 'components/footer';
 @use 'components/header';
+@use 'components/sidebaradmin';
+@use 'components/headeradmin';
 
 // Import des pages
 @use 'pages/account';
@@ -16,6 +18,16 @@
 @use 'pages/index';
 @use 'pages/informations';
 @use 'pages/merchants';
+@use 'pages/emergency.scss';
+
+@use 'pages/admin/AdminIndex.scss';
+@use 'pages/admin/AdminAnnouncements.scss';
+@use 'pages/admin/AdminAnnouncementsDetails.scss';
+@use 'pages/admin/Adminuser.scss';
+@use 'pages/admin/AdminBusiness.scss';
+@use 'pages/admin/AdminEvents.scss';
+@use 'pages/admin/AdminUserDetails.scss';
+
 
 // Sert de test pour savoir si le scss est bien prit en compte
 //body {

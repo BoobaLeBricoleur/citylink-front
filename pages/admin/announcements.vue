@@ -7,17 +7,90 @@
     <div class="main">
       <AdminHeader />
       <div class="intro">
-        <h1>Liste des Annonces</h1>
-        <p>Ci-dessous, vous trouverez toutes les annonces publiées sur la plateforme.</p>
+        <div class="intro-header">
+          <h1>{{ $t('pages.admin.announcements.title') }}</h1>
+          <button @click="showCreateModal = true" class="btn btn-primary">
+            <Icon name="heroicons:plus" /> {{ $t('pages.admin.announcements.newButton') }}
+          </button>
+        </div>
+        <p>{{ $t('pages.admin.announcements.subtitle') }}</p>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <Icon name="heroicons:magnifying-glass" class="search-icon" />
+          <input
+              type="text"
+              v-model="searchQuery"
+              :placeholder="$t('pages.admin.announcements.searchPlaceholder')"
+              class="search-input"
+          >
+        </div>
+      </div>
+
+      <!-- Modal de création d'annonce -->
+      <div v-if="showCreateModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>{{ $t('pages.admin.announcements.modal.title') }}</h2>
+            <button class="close-btn" @click="showCreateModal = false">×</button>
+          </div>
+          <form @submit.prevent="createAnnouncement" class="announcement-form">
+            <div class="form-group">
+              <label for="title">{{ $t('pages.admin.announcements.form.titleLabel') }}</label>
+              <input
+                  type="text"
+                  id="title"
+                  v-model="newAnnouncement.title"
+                  required
+                  class="form-control"
+              >
+            </div>
+            <div class="form-group">
+              <label for="content">{{ $t('pages.admin.announcements.form.contentLabel') }}</label>
+              <textarea
+                  id="content"
+                  v-model="newAnnouncement.content"
+                  required
+                  class="form-control"
+                  rows="4"
+              ></textarea>
+            </div>
+            <div class="form-check">
+              <input
+                  type="checkbox"
+                  id="is_featured"
+                  v-model="newAnnouncement.is_featured"
+              >
+              <label for="is_featured">{{ $t('pages.admin.announcements.form.featuredLabel') }}</label>
+            </div>
+            <div class="form-check">
+              <input
+                  type="checkbox"
+                  id="is_active"
+                  v-model="newAnnouncement.is_active"
+              >
+              <label for="is_active">{{ $t('pages.admin.announcements.form.activeLabel') }}</label>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" @click="showCreateModal = false">
+                {{ $t('pages.admin.announcements.buttons.cancel') }}
+              </button>
+              <button type="submit" class="btn btn-primary">
+                {{ $t('pages.admin.announcements.buttons.create') }}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
       <!-- Announcements list -->
       <div class="announcement-list">
-        <div v-if="announcements.length === 0" class="no-announcements">
-          Aucune annonce trouvée.
+        <div v-if="filteredAnnouncements.length === 0" class="no-announcements">
+          {{ $t('pages.admin.announcements.noResults') }}
         </div>
         <ul v-else>
-          <li v-for="(item, index) in announcements"
+          <li v-for="(item, index) in filteredAnnouncements"
               :key="index"
               class="announcement-item"
               @click="viewAnnouncementDetails(item.id)">
@@ -27,9 +100,8 @@
             </div>
             <div class="announcement-content">{{ item.content }}</div>
             <div class="announcement-footer">
-              <div class="announcement-author">Par: {{ item.firstname }} {{ item.lastname }}</div>
-              <div class="view-details">Voir détails <i class="fas fa-chevron-right"></i></div>
-            </div>
+              <div class="announcement-author">{{ $t('pages.admin.announcements.authorPrefix') }} {{ item.firstname }} {{ item.lastname }}</div>
+              <div class="view-details">{{ $t('pages.admin.announcements.viewDetails') }} <Icon name="heroicons:chevron-right" /></div>            </div>
           </li>
         </ul>
       </div>
@@ -49,7 +121,29 @@ export default {
   data() {
     return {
       announcements: [],
+
+      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api',
+      showCreateModal: false,
+      searchQuery: '',
+      newAnnouncement: {
+        title: '',
+        content: '',
+        is_featured: false,
+        is_active: true
+      }
+    }
+  },
+  computed: {
+    filteredAnnouncements() {
+      if (!this.searchQuery) return this.announcements;
+
+      const query = this.searchQuery.toLowerCase();
+      return this.announcements.filter(announcement =>
+          announcement.title.toLowerCase().includes(query) ||
+          announcement.content.toLowerCase().includes(query)
+      );
       API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
+
     }
   },
   async mounted() {
@@ -57,6 +151,37 @@ export default {
     await this.fetchAnnouncements()
   },
   methods: {
+    async createAnnouncement() {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.post(
+            `${this.API_URL}/announcements/`,
+            this.newAnnouncement,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+        );
+
+        // Réinitialiser le formulaire
+        this.newAnnouncement = {
+          title: '',
+          content: '',
+          is_featured: false,
+          is_active: true
+        };
+
+        // Fermer le modal
+        this.showCreateModal = false;
+
+        // Rafraîchir la liste
+        await this.fetchAnnouncements();
+
+      } catch (error) {
+        console.error('Erreur lors de la création de l\'annonce:', error);
+      }
+    },
     async initAuth() {
       const userData = await verifyAndLoadProfile(this.$router, this.API_URL)
     },
@@ -88,126 +213,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@use '../../assets/variables.scss' as *;
-
-.admin-portal {
-  display: flex;
-  height: 100vh;
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 50%, $color-primary-dark 100%);
-  color: $color-text-light;
-
-  .main {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-
-    .intro {
-      background: $color-white-overlay-medium;
-      padding: 2rem;
-      border-radius: $border-radius-md;
-      box-shadow: 0 4px 12px $color-black-overlay-light;
-      margin-bottom: 2rem;
-      border: 1px solid $color-white-overlay-light;
-
-      h1 {
-        margin-top: 0;
-        margin-bottom: 1rem;
-        color: $color-text-light;
-        font-size: 1.8rem;
-      }
-
-      p {
-        margin: 0.25rem 0;
-      }
-    }
-
-    .announcement-list {
-      background: $color-white-overlay-medium;
-      padding: 1rem;
-      border-radius: $border-radius-md;
-      box-shadow: 0 4px 12px $color-black-overlay-light;
-      border: 1px solid $color-white-overlay-light;
-
-      .no-announcements {
-        text-align: center;
-        font-size: 1.1rem;
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-
-        .announcement-item {
-          padding: 1rem;
-          margin-bottom: 1rem;
-          border-bottom: 1px solid $color-white-overlay-light;
-          cursor: pointer;
-          transition: background-color 0.2s ease;
-          border-radius: 4px;
-
-          &:hover {
-            background-color: $color-primary-dark;
-          }
-
-          &:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-          }
-
-          .announcement-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-
-            strong {
-              font-weight: 600;
-              font-size: 1.1rem;
-            }
-
-            .date {
-              font-size: 0.85rem;
-              opacity: 0.8;
-            }
-          }
-
-          .announcement-content {
-            margin: 0.5rem 0;
-            line-height: 1.4;
-            max-height: 3em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          }
-
-          .announcement-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.5rem;
-
-            .announcement-author {
-              font-size: 0.85rem;
-              font-style: italic;
-            }
-
-            .view-details {
-              font-size: 0.85rem;
-              color: $color-secondary;
-              display: flex;
-              align-items: center;
-              gap: 0.3rem;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>
