@@ -16,13 +16,13 @@
 
         <div class="profile-menu">
           <button class="profile-menu-item" :class="{ active: activeTab === 'info' }" @click="setActiveTab('info')">
-            <i class="fas fa-user"></i> {{ $t('pages.profile.menu.personal_info') }}
+            <Icon name="heroicons:user" /> {{ $t('pages.profile.menu.personal_info') }}
           </button>
           <button class="profile-menu-item" :class="{ active: activeTab === 'activities' }" @click="setActiveTab('activities')">
-            <i class="fas fa-calendar-alt"></i> {{ $t('pages.profile.menu.my_activities') }}
+            <Icon name="heroicons:calendar-days" /> {{ $t('pages.profile.menu.my_activities') }}
           </button>
           <button class="profile-menu-item" :class="{ active: activeTab === 'settings' }" @click="setActiveTab('settings')">
-            <i class="fas fa-cog"></i> {{ $t('pages.profile.menu.settings') }}
+            <Icon name="heroicons:cog-6-tooth" /> {{ $t('pages.profile.menu.settings') }}
           </button>
         </div>
       </div>
@@ -105,12 +105,12 @@
                 <p>{{ event.location }}</p>
               </div>
               <button class="icon-button" @click="cancelParticipation(event.id)">
-                <i class="fas fa-times"></i>
+                <Icon name="heroicons:x-mark" />
               </button>
             </div>
           </div>
           <div v-else class="empty-state">
-            <i class="fas fa-calendar-alt empty-icon"></i>
+            <Icon name="heroicons:calendar-days" class="empty-icon" />
             <p>{{ $t('pages.profile.activities.upcoming.empty') }}</p>
             <router-link to="/events" class="gold-button-small">{{ $t('pages.profile.activities.upcoming.discover') }}</router-link>
           </div>
@@ -126,7 +126,7 @@
             </div>
           </div>
           <div v-else class="empty-state">
-            <i class="fas fa-history empty-icon"></i>
+            <Icon name="heroicons:clock" class="empty-icon" />
             <p>{{ $t('pages.profile.activities.history.empty') }}</p>
           </div>
         </div>

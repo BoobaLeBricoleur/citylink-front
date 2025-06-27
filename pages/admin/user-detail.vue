@@ -9,8 +9,8 @@
           <span>{{ $t('pages.admin.userDetail.backToList') }}</span>
         </div>
         <div class="actions">
-          <button class="btn btn-secondary"><i class="fas fa-envelope"></i> {{ $t('pages.admin.userDetail.buttons.message') }}</button>
-          <button class="btn btn-primary"><i class="fas fa-edit"></i> {{ $t('pages.admin.userDetail.buttons.edit') }}</button>
+          <button class="btn btn-secondary"><Icon name="heroicons:envelope" /> {{ $t('pages.admin.userDetail.buttons.message') }}</button>
+          <button class="btn btn-primary"><Icon name="heroicons:pencil" /> {{ $t('pages.admin.userDetail.buttons.edit') }}</button>
         </div>
       </div>
 
@@ -32,15 +32,15 @@
 
           <div class="contact-info">
             <div class="info-item">
-              <i class="fas fa-envelope"></i>
+              <Icon name="heroicons:envelope" />
               <p>{{ user.email }}</p>
             </div>
             <div class="info-item" v-if="user.phone">
-              <i class="fas fa-phone"></i>
+              <Icon name="heroicons:phone" />
               <p>{{ user.phone }}</p>
             </div>
             <div class="info-item" v-if="user.address">
-              <i class="fas fa-map-marker-alt"></i>
+              <Icon name="heroicons:map-pin" />
               <p>{{ user.address }}</p>
             </div>
           </div>
@@ -76,7 +76,7 @@
           <div class="activity-graph">
             <h4>{{ $t('pages.admin.userDetail.statistics.monthlyActivity') }}</h4>
             <div class="graph-placeholder">
-              <div class="bar" style="height: 30%"></div>
+              <div class="bar" style="sheight: 30%"></div>
               <div class="bar" style="height: 50%"></div>
               <div class="bar" style="height: 80%"></div>
               <div class="bar" style="height: 60%"></div>
@@ -101,28 +101,28 @@
 
             <div class="preferences-grid">
               <div class="pref-item">
-                <div class="pref-icon"><i class="fas fa-bell"></i></div>
+                <div class="pref-icon"><Icon name="heroicons:bell" /></div>
                 <div class="pref-content">
                   <h5>{{ $t('pages.admin.userDetail.userPreferences.notificationsEmail') }}</h5>
                   <p>{{ $t('pages.admin.userDetail.userPreferences.enabled') }}</p>
                 </div>
               </div>
               <div class="pref-item">
-                <div class="pref-icon"><i class="fas fa-globe"></i></div>
+                <div class="pref-icon"><Icon name="heroicons:globe-alt" /></div>
                 <div class="pref-content">
                   <h5>{{ $t('pages.admin.userDetail.userPreferences.language') }}</h5>
                   <p>{{ $t('pages.admin.userDetail.userPreferences.french') }}</p>
                 </div>
               </div>
               <div class="pref-item">
-                <div class="pref-icon"><i class="fas fa-lock"></i></div>
+                <div class="pref-icon"><Icon name="heroicons:lock-closed" /></div>
                 <div class="pref-content">
                   <h5>{{ $t('pages.admin.userDetail.userPreferences.privacySettings') }}</h5>
                   <p>{{ $t('pages.admin.userDetail.userPreferences.public') }}</p>
                 </div>
               </div>
               <div class="pref-item">
-                <div class="pref-icon"><i class="fas fa-map-marker"></i></div>
+                <div class="pref-icon"><Icon name="heroicons:map-pin" /></div>
                 <div class="pref-content">
                   <h5>{{ $t('pages.admin.userDetail.userPreferences.location') }}</h5>
                   <p>{{ $t('pages.admin.userDetail.userPreferences.enabled') }}</p>
@@ -147,10 +147,10 @@
       <div class="admin-actions">
         <h3>{{ $t('pages.admin.userDetail.adminActions.title') }}</h3>
         <div class="actions-grid">
-          <button class="action-btn"><i class="fas fa-ban"></i> {{ $t('pages.admin.userDetail.adminActions.suspend') }}</button>
-          <button class="action-btn"><i class="fas fa-trash"></i> {{ $t('pages.admin.userDetail.adminActions.delete') }}</button>
-          <button class="action-btn"><i class="fas fa-key"></i> {{ $t('pages.admin.userDetail.adminActions.resetPassword') }}</button>
-          <button class="action-btn"><i class="fas fa-shield-alt"></i> {{ $t('pages.admin.userDetail.adminActions.verifyIdentity') }}</button>
+          <button class="action-btn"><Icon name="heroicons:no-symbol" /> {{ $t('pages.admin.userDetail.adminActions.suspend') }}</button>
+          <button class="action-btn"><Icon name="heroicons:trash" /> {{ $t('pages.admin.userDetail.adminActions.delete') }}</button>
+          <button class="action-btn"><Icon name="heroicons:key" /> {{ $t('pages.admin.userDetail.adminActions.resetPassword') }}</button>
+          <button class="action-btn"><Icon name="heroicons:shield-check" /> {{ $t('pages.admin.userDetail.adminActions.verifyIdentity') }}</button>
         </div>
       </div>
     </div>

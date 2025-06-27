@@ -11,9 +11,7 @@
       <!-- Barre de recherche -->
       <div class="search-bar">
         <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+          <Icon name="heroicons:magnifying-glass" class="search-icon" />
           <input
               type="text"
               v-model="searchQuery"
@@ -39,7 +37,7 @@
               <strong>{{ item.firstname }} {{ item.lastname }}</strong>
               <span> - {{ item.email }}</span>
             </div>
-            <i class="fas fa-chevron-right"></i>
+            <Icon name="heroicons:chevron-right" />
           </li>
         </ul>
       </div>

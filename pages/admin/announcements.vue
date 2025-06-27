@@ -10,7 +10,7 @@
         <div class="intro-header">
           <h1>{{ $t('pages.admin.announcements.title') }}</h1>
           <button @click="showCreateModal = true" class="btn btn-primary">
-            <font-awesome-icon icon="plus" /> {{ $t('pages.admin.announcements.newButton') }}
+            <Icon name="heroicons:plus" /> {{ $t('pages.admin.announcements.newButton') }}
           </button>
         </div>
         <p>{{ $t('pages.admin.announcements.subtitle') }}</p>
@@ -18,9 +18,7 @@
 
       <div class="search-bar">
         <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+          <Icon name="heroicons:magnifying-glass" class="search-icon" />
           <input
               type="text"
               v-model="searchQuery"
@@ -103,8 +101,7 @@
             <div class="announcement-content">{{ item.content }}</div>
             <div class="announcement-footer">
               <div class="announcement-author">{{ $t('pages.admin.announcements.authorPrefix') }} {{ item.firstname }} {{ item.lastname }}</div>
-              <div class="view-details">{{ $t('pages.admin.announcements.viewDetails') }} <i class="fas fa-chevron-right"></i></div>
-            </div>
+              <div class="view-details">{{ $t('pages.admin.announcements.viewDetails') }} <Icon name="heroicons:chevron-right" /></div>            </div>
           </li>
         </ul>
       </div>

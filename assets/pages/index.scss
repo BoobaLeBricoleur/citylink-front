@@ -189,18 +189,19 @@
     text-align: center;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
     transition: transform var(--transition-speed) ease;
+
+    .feature-icon {
+      span {
+        font-size: 2rem;
+      }
+    }
     
     &:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       
       .feature-icon {
-        background: linear-gradient(90deg, var(--cl-gold), var(--cl-light-gold));
         transform: scale(1.1);
-        
-        i {
-          color: var(--cl-dark);
-        }
       }
     }
     

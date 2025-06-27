@@ -38,13 +38,13 @@
                             class="account-type-btn"
                             :class="{ active: !isCompany }"
                             @click="isCompany = false">
-                      <i class="fas fa-user"></i> {{ $t('pages.account.individual') }}
+                      <Icon name="heroicons:user" /> {{ $t('pages.account.individual') }}
                     </button>
                     <button type="button"
                             class="account-type-btn"
                             :class="{ active: isCompany }"
                             @click="isCompany = true">
-                      <i class="fas fa-building"></i> {{ $t('pages.account.professional') }}
+                      <Icon name="heroicons:building-office" /> {{ $t('pages.account.professional') }}
                     </button>
                   </div>
 

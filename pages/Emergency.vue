@@ -13,25 +13,25 @@
         <!-- Numéros d'urgence -->
         <div class="emergency-numbers">
           <div class="emergency-card">
-            <font-awesome-icon :icon="['fas', 'ambulance']" />
+            <Icon name="heroicons:truck" />
             <h3>{{ $t('pages.emergency.numbers.samu.name') }}</h3>
             <div class="number">15</div>
             <p>{{ $t('pages.emergency.numbers.samu.description') }}</p>
           </div>
           <div class="emergency-card">
-            <font-awesome-icon :icon="['fas', 'shield-alt']" />
+            <Icon name="heroicons:shield-check" />
             <h3>{{ $t('pages.emergency.numbers.police.name') }}</h3>
             <div class="number">17</div>
             <p>{{ $t('pages.emergency.numbers.police.description') }}</p>
           </div>
           <div class="emergency-card">
-            <font-awesome-icon :icon="['fas', 'fire-extinguisher']" />
+            <Icon name="heroicons:fire" />
             <h3>{{ $t('pages.emergency.numbers.firefighters.name') }}</h3>
             <div class="number">18</div>
             <p>{{ $t('pages.emergency.numbers.firefighters.description') }}</p>
           </div>
           <div class="emergency-card">
-            <font-awesome-icon :icon="['fas', 'phone']" />
+            <Icon name="heroicons:phone" />
             <h3>{{ $t('pages.emergency.numbers.europe.name') }}</h3>
             <div class="number">112</div>
             <p>{{ $t('pages.emergency.numbers.europe.description') }}</p>
