@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/fontawesome.ts'
   ],
-  // Configuration for Nuxt I18nm Micro
+
   i18n: {
     locales: [
       { code: 'en', iso: 'en-US', file: 'en.json' },
@@ -21,8 +21,7 @@ export default defineNuxtConfig({
     strategy: 'prefix',
     vueI18n: './i18n.config.ts'
   },
-  
-  // Configuration CSS
+
   css: [
     '@fortawesome/fontawesome-free/css/all.css',
     '@fortawesome/fontawesome-svg-core/styles.css',

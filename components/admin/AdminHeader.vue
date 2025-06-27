@@ -23,10 +23,12 @@
         <div class="header-actions">
             <div class="user-profile">
                 <div class="avatar">
-                    <span>{{ (this.user.firstname[0] + this.user.lastname[0])}}</span>
+<!--                    <span>{{ (this.user.firstname[0] + this.user.lastname[0])}}</span>-->
+                    <span>t t</span>
                 </div>
                 <div class="user-info">
-                    <span class="user-name">{{this.user.firstname}} {{this.user.lastname}}</span>
+<!--                    <span class="user-name">{{this.user.firstname}} {{this.user.lastname}}</span>-->
+                    <span class="user-name">test test</span>
 
                     <!-- TODO: remplacer avec le role dynamiquement -->
                     <span class="user-role">Administrator</span>
@@ -67,7 +69,7 @@ export default {
         // Pour être plus cohérent avec les autres composants,
         // vous pourriez utiliser verifyAndLoadProfile ici
         try {
-          const API_URL = process.env.API_URL || 'http://localhost:3000/api'
+          API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
           const token = localStorage.getItem('token')
           if (token) {
             const response = await axios.get(`${API_URL}/users/profile`, {
@@ -85,4 +87,3 @@ export default {
       }
     }
 }
-</script>
