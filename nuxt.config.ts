@@ -18,8 +18,8 @@ export default defineNuxtConfig({
       { code: 'fr', iso: 'fr-FR', file: 'fr.json' },
     ],
     defaultLocale: 'fr',
-    // translationDir: 'locales',
-    // meta: true,
+    strategy: 'prefix',
+    vueI18n: './i18n.config.ts'
   },
   
   // Configuration CSS

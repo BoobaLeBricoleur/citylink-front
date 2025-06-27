@@ -29,7 +29,7 @@
         <!-- Sélecteur de langue -->
         <div class="language-selector">
           <button @click="switchLanguage" class="language-button" :title="$t('header.language.switch')">
-            <i class="fa-solid fa-globe"></i>
+            <Icon name="ph:globe" />
             <span>{{ currentLanguage.toUpperCase() }}</span>
           </button>
         </div>
@@ -39,7 +39,7 @@
           <!-- Si connecté -->
           <div v-if="isLoggedIn" class="user-profile" @click="toggleDropdown">
             <div class="avatar-circle">
-              <i class="fa-solid fa-user"></i>
+              <Icon name="ph:user" />
             </div>
             <span class="user-name hide-mobile">{{ userData.firstname }}</span>
 
@@ -55,14 +55,14 @@
 
                 <div class="dropdown-content">
                   <NuxtLinkLocale to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
-                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.profile') }}
+                    <Icon name="ph:user" /> {{ $t('header.dropdown.profile') }}
                   </NuxtLinkLocale>
                   <NuxtLinkLocale to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
-                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.dashboard') }}
+                    <Icon name="ph:squares-four" /> {{ $t('header.dropdown.dashboard') }}
                   </NuxtLinkLocale>
 
                   <NuxtLinkLocale to="/settings" class="dropdown-item" @click="isDropdownOpen = false">
-                    <i class="fa-solid fa-user"></i> {{ $t('header.dropdown.settings') }}
+                    <Icon name="ph:gear" /> {{ $t('header.dropdown.settings') }}
                   </NuxtLinkLocale>
                 </div>
 
@@ -89,84 +89,71 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 
-const router = useRouter();
-const route = useRoute();
-const { locale } = useI18n();
-const isMenuOpen = ref(false);
-const isDropdownOpen = ref(false);
-const isLoggedIn = ref(false);
-const userData = ref({});
-const isScrolled = ref(false);
-const currentLanguage = computed(() => locale.value);
+const router = useRouter()
+const route = useRoute()
 
+const { locale, locales, setLocale } = useI18n()
+const isMenuOpen = ref(false)
+const isDropdownOpen = ref(false)
+const isLoggedIn = ref(false)
+const userData = ref({})
+const isScrolled = ref(false)
 
-// Détecte si l'utilisateur est connecté
+const currentLanguage = computed(() => locale.value)
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+  document.body.classList.toggle('no-scroll', isMenuOpen.value)
+}
+
+const toggleDropdown = (event) => {
+  event.stopPropagation()
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+
+const logout = () => {
+  localStorage.removeItem('user')
+  localStorage.removeItem('token')
+  isLoggedIn.value = false
+  isDropdownOpen.value = false
+  router.push('/')
+}
+
+const switchLanguage = async () => {
+  const newLocale = locale.value === 'fr' ? 'en' : 'fr'
+  await setLocale(newLocale)
+}
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10
+}
+
+const closeDropdown = (event) => {
+  if (!event.target.closest('.user-profile') && isDropdownOpen.value) {
+    isDropdownOpen.value = false
+  }
+}
+
 onMounted(() => {
   if (process.client) {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user')
     if (user) {
-      isLoggedIn.value = true;
-      userData.value = JSON.parse(user);
+      isLoggedIn.value = true
+      userData.value = JSON.parse(user)
     }
-    
-    // Détection du scroll pour effet de header transparent/opaque
-    window.addEventListener('scroll', handleScroll);
-    document.addEventListener('click', closeDropdown);
+    window.addEventListener('scroll', handleScroll)
+    document.addEventListener('click', closeDropdown)
   }
-});
+})
 
 onUnmounted(() => {
   if (process.client) {
-    window.removeEventListener('scroll', handleScroll);
-    document.removeEventListener('click', closeDropdown);
+    window.removeEventListener('scroll', handleScroll)
+    document.removeEventListener('click', closeDropdown)
   }
-});
-
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 10;
-};
-
-// Fonctions
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-  if (isMenuOpen.value) {
-    document.body.classList.add('no-scroll');
-  } else {
-    document.body.classList.remove('no-scroll');
-  }
-};
-
-const toggleDropdown = (event) => {
-  event.stopPropagation();
-  isDropdownOpen.value = !isDropdownOpen.value;
-};
-
-const logout = () => {
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
-  isLoggedIn.value = false;
-  isDropdownOpen.value = false;
-  router.push('/');
-};
-
-const switchLanguage = () => {
-  const newLocale = locale.value === 'fr' ? 'en' : 'fr';
-  const currentPath = route.path;
-
-  // Remplace la langue dans l'URL actuelle
-  const newPath = currentPath.replace(`/${locale.value}`, `/${newLocale}`);
-
-  router.push(newPath);
-};
-
-// Ferme le menu quand l'utilisateur clique en dehors
-const closeDropdown = (event) => {
-  if (!event.target.closest('.user-profile') && isDropdownOpen.value) {
-    isDropdownOpen.value = false;
-  }
-};
+})
 </script>

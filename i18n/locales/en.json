@@ -12,13 +12,16 @@
       "announcements": "Announcements",
       "emergency": "Emergency"
     },
+    "language": {
+      "switch": "Switch language"
+    },
+    "login": "Login",
     "dropdown": {
       "profile": "Profile",
       "dashboard": "Dashboard",
       "settings": "Settings",
       "logout": "Logout"
-    },
-    "login": "Login"
+    }
   },
   "pages": {
     "index": {

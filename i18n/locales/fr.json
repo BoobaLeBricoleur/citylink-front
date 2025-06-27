@@ -10,15 +10,18 @@
       "events": "Événements",
       "information": "Informations",
       "announcements": "Annonces",
-      "emergency": "Urgence"
+      "emergency": "Urgences"
     },
+    "language": {
+      "switch": "Changer de langue"
+    },
+    "login": "Se connecter",
     "dropdown": {
       "profile": "Profil",
       "dashboard": "Tableau de bord",
       "settings": "Paramètres",
-      "logout": "Déconnexion"
-    },
-    "login": "Connexion"
+      "logout": "Se déconnecter"
+    }
   },
   "pages": {
     "index": {
