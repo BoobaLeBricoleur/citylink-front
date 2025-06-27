@@ -14,7 +14,7 @@
             <nuxt-link to="/admin/announcements">Annonces</nuxt-link>
         </nav>
         <div class="back-to-site">
-            <nuxt-link to="/">  
+            <nuxt-link to="/">
                 Retour au site
             </nuxt-link>
         </div>

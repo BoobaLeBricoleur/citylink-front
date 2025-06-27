@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       announcements: [],
-      API_URL: process.env.API_URL || 'http://localhost:3000/api',
+      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
       showCreateModal: false,
       searchQuery: '',
       newAnnouncement: {
@@ -141,6 +141,7 @@ export default {
           announcement.title.toLowerCase().includes(query) ||
           announcement.content.toLowerCase().includes(query)
       );
+      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
     }
   },
   async mounted() {

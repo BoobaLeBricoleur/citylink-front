@@ -58,16 +58,16 @@ export default {
         return {
             users: [],
             user: {},
-            searchQuery: '', 
-            API_URL: process.env.API_URL || 'http://localhost:3000/api'
+            searchQuery: '',
+          API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
         }
     },
     computed: {
         filteredUsers() {
             if (!this.searchQuery) return this.users;
-            
+
             const query = this.searchQuery.toLowerCase();
-            return this.users.filter(user => 
+            return this.users.filter(user =>
                 user.lastname.toLowerCase().includes(query)
             );
         }
