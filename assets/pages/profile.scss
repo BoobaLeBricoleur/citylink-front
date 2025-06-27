@@ -1,3 +1,24 @@
+.alert {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.alert.success {
+  background-color: rgba(40, 167, 69, 0.2);
+  border-left: 4px solid #28a745;
+  color: #155724;
+}
+
+.alert.error {
+  background-color: rgba(255, 69, 58, 0.2);
+  border-left: 4px solid #ff453a;
+  color: #721c24;
+}
+
 .profile-page {
     min-height: 100vh;
     display: flex;

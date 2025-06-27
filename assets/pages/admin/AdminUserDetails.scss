@@ -58,6 +58,10 @@
           &.btn-primary {
             background: $color-secondary;
             color: #fff;
+
+            &:hover {
+              background: $color-secondary;
+            }
           }
         }
       }
@@ -297,6 +301,12 @@
                   transition: 0.4s;
                 }
 
+                &.active {
+                  &::before {
+                    transform: translateX(20px);
+                    background: $color-primary;
+                  }
+                }
               }
             }
           }
@@ -367,6 +377,9 @@
             font-size: 1rem;
           }
 
+          &:hover {
+            background: $color-primary-dark;
+          }
         }
       }
     }
