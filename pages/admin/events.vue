@@ -7,7 +7,7 @@
         <div class="intro-header">
           <h1>{{ $t('pages.admin.events.title') }}</h1>
           <button @click="showCreateModal = true" class="btn btn-primary">
-            <font-awesome-icon icon="plus" /> {{ $t('pages.admin.events.newButton') }}
+            <Icon name="heroicons:plus" /> {{ $t('pages.admin.events.newButton') }}
           </button>
         </div>
         <p>{{ $t('pages.admin.events.subtitle') }}</p>
@@ -15,9 +15,7 @@
 
       <div class="search-bar">
         <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+          <Icon name="heroicons:magnifying-glass" class="search-icon" />
           <input
               type="text"
               v-model="searchQuery"
@@ -90,7 +88,7 @@
                 {{ $t('pages.admin.events.buttons.cancel') }}
               </button>
               <button type="submit" class="btn btn-primary">
-                <font-awesome-icon icon="plus" /> {{ $t('pages.admin.events.buttons.create') }}
+                <Icon name="heroicons:plus" /> {{ $t('pages.admin.events.newButton') }}
               </button>
             </div>
           </form>
@@ -114,11 +112,11 @@
             <div class="event-content">{{ item.description }}</div>
             <div class="event-footer">
               <div class="event-info">
-                <span><i class="fas fa-calendar"></i> {{ formatDate(item.event_date) }}</span>
-                <span><i class="fas fa-users"></i> {{ item.participants_count || 0 }}</span>
+                <span><Icon name="heroicons:calendar-days" /> {{ formatDate(item.event_date) }}</span>
+                <span><Icon name="heroicons:users" /> {{ item.participants_count || 0 }}</span>
               </div>
               <div class="view-details">
-                {{ $t('pages.admin.events.viewDetails') }} <i class="fas fa-chevron-right"></i>
+                {{ $t('pages.admin.events.viewDetails') }} <Icon name="heroicons:chevron-right" />
               </div>
             </div>
           </li>

@@ -7,7 +7,7 @@
         <div class="intro-header">
           <h1>{{ $t('pages.admin.business.title') }}</h1>
           <button @click="showCreateModal = true" class="btn btn-primary">
-            <font-awesome-icon icon="plus" /> {{ $t('pages.admin.business.newButton') }}
+            <Icon name="heroicons:plus" /> {{ $t('pages.admin.business.newButton') }}
           </button>
         </div>
         <p>{{ $t('pages.admin.business.subtitle') }}</p>
@@ -15,9 +15,8 @@
 
       <div class="search-bar">
         <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+          <Icon name="heroicons:magnifying-glass" class="search-icon" />
+
           <input
               type="text"
               v-model="searchQuery"
@@ -141,7 +140,7 @@
                 {{ $t('pages.admin.business.buttons.cancel') }}
               </button>
               <button type="submit" class="btn btn-primary">
-                <font-awesome-icon icon="plus" /> {{ $t('pages.admin.business.buttons.create') }}
+                <Icon name="heroicons:plus" /> {{ $t('pages.admin.business.buttons.create') }}
               </button>
             </div>
           </form>

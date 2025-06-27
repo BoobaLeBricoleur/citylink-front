@@ -28,7 +28,7 @@
         <div class="feature-cards">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-calendar-alt"></i>
+              <Icon name="heroicons:calendar-days" />
             </div>
             <h3>{{ $t('pages.index.about.features.connect.title') }}</h3>
             <p>{{ $t('pages.index.about.features.connect.description') }}</p>
@@ -36,7 +36,7 @@
 
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-calendar-alt"></i>
+              <Icon name="heroicons:squares-plus" />
             </div>
             <h3>{{ $t('pages.index.about.features.centralize.title') }}</h3>
             <p>{{ $t('pages.index.about.features.centralize.description') }}</p>
@@ -44,7 +44,7 @@
 
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-calendar-alt"></i>
+              <Icon name="heroicons:user-group" />
             </div>
             <h3>{{ $t('pages.index.about.features.participate.title') }}</h3>
             <p>{{ $t('pages.index.about.features.participate.description') }}</p>
@@ -71,9 +71,9 @@
             <div class="section-divider light"></div>
             <p>{{ $t('pages.index.shop.description') }}</p>
             <ul class="benefits-list">
-              <li><i class="fas fa-check-circle"></i> {{ $t('pages.index.shop.benefits.profile') }}</li>
-              <li><i class="fas fa-check-circle"></i> {{ $t('pages.index.shop.benefits.share') }}</li>
-              <li><i class="fas fa-check-circle"></i> {{ $t('pages.index.shop.benefits.reach') }}</li>
+              <li><Icon name="heroicons:check-circle" /> {{ $t('pages.index.shop.benefits.profile') }}</li>
+              <li><Icon name="heroicons:check-circle" /> {{ $t('pages.index.shop.benefits.share') }}</li>
+              <li><Icon name="heroicons:check-circle" /> {{ $t('pages.index.shop.benefits.reach') }}</li>
             </ul>
             <NuxtLink to="/merchants" class="shop-cta-button">
               {{ $t('pages.index.shop.discover_button') }}

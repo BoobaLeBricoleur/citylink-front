@@ -18,7 +18,7 @@
             v-model="searchTerm"
         />
         <button class="search-button">
-          <i class="fas fa-search"></i>
+          <Icon name="heroicons:magnifying-glass" />
         </button>
       </div>
       <div class="filter-options">
@@ -50,7 +50,7 @@
           <p>{{ announcement.description }}</p>
           <div class="card-footer">
             <button class="read-more">{{ $t('pages.informations.card.readMore') }}</button>
-            <span class="views"><i class="fas fa-eye"></i> {{ announcement.views }}</span>
+            <span class="views"><Icon name="heroicons:eye" /> {{ announcement.views }}</span>
           </div>
         </div>
       </div>

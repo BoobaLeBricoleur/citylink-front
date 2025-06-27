@@ -6,12 +6,12 @@
       <!-- Header avec retour et actions -->
       <div class="page-header">
         <div class="back-button" @click="$router.push('/admin/announcements')">
-          <i class="fas fa-arrow-left"></i>
+          <Icon name="heroicons:arrow-left" />
           <span>{{ $t('pages.admin.announcementsDetails.backToList') }}</span>
         </div>
         <div class="actions">
-          <button class="btn btn-secondary"><i class="fas fa-eye"></i> {{ $t('pages.admin.announcementsDetails.buttons.preview') }}</button>
-          <button class="btn btn-primary"><i class="fas fa-edit"></i> {{ $t('pages.admin.announcementsDetails.buttons.edit') }}</button>
+          <button class="btn btn-secondary"><Icon name="heroicons:eye" /> {{ $t('pages.admin.announcementsDetails.buttons.preview') }}</button>
+          <button class="btn btn-primary"><Icon name="heroicons:pencil" /> {{ $t('pages.admin.announcementsDetails.buttons.edit') }}</button>
         </div>
       </div>
 
@@ -120,11 +120,10 @@
       <div class="admin-actions">
         <h3>{{ $t('pages.admin.announcementsDetails.adminActions.title') }}</h3>
         <div class="actions-grid">
-          <button class="action-btn"><i class="fas fa-eye-slash"></i> {{ $t('pages.admin.announcementsDetails.adminActions.hide') }}</button>
-          <button class="action-btn"><i class="fas fa-trash"></i> {{ $t('pages.admin.announcementsDetails.adminActions.delete') }}</button>
-          <button class="action-btn"><i class="fas fa-bullhorn"></i> {{ $t('pages.admin.announcementsDetails.adminActions.feature') }}</button>
-          <button class="action-btn"><i class="fas fa-comment-slash"></i> {{ $t('pages.admin.announcementsDetails.adminActions.disableComments') }}</button>
-        </div>
+          <button class="action-btn"><Icon name="heroicons:eye-slash" /> {{ $t('pages.admin.announcementsDetails.adminActions.hide') }}</button>
+          <button class="action-btn"><Icon name="heroicons:trash" /> {{ $t('pages.admin.announcementsDetails.adminActions.delete') }}</button>
+          <button class="action-btn"><Icon name="heroicons:megaphone" /> {{ $t('pages.admin.announcementsDetails.adminActions.feature') }}</button>
+          <button class="action-btn"><Icon name="heroicons:chat-bubble-left-ellipsis" /> {{ $t('pages.admin.announcementsDetails.adminActions.disableComments') }}</button>        </div>
       </div>
     </div>
   </div>
