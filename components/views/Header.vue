@@ -26,6 +26,14 @@
           <li><NuxtLinkLocale to="/emergency" @click="isMenuOpen = false">{{ $t('header.menu.emergency') }}</NuxtLinkLocale></li>
         </ul>
 
+        <!-- Sélecteur de langue -->
+        <div class="language-selector">
+          <button @click="switchLanguage" class="language-button" :title="$t('header.language.switch')">
+            <i class="fa-solid fa-globe"></i>
+            <span>{{ currentLanguage.toUpperCase() }}</span>
+          </button>
+        </div>
+
         <!-- Actions de connexion -->
         <div class="auth-actions">
           <!-- Si connecté -->
@@ -83,15 +91,18 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 const router = useRouter();
-
-// État du menu mobile
+const route = useRoute();
+const { locale } = useI18n();
 const isMenuOpen = ref(false);
 const isDropdownOpen = ref(false);
 const isLoggedIn = ref(false);
 const userData = ref({});
 const isScrolled = ref(false);
+const currentLanguage = computed(() => locale.value);
+
 
 // Détecte si l'utilisateur est connecté
 onMounted(() => {
@@ -100,7 +111,6 @@ onMounted(() => {
     if (user) {
       isLoggedIn.value = true;
       userData.value = JSON.parse(user);
-    
     }
     
     // Détection du scroll pour effet de header transparent/opaque
@@ -141,6 +151,16 @@ const logout = () => {
   isLoggedIn.value = false;
   isDropdownOpen.value = false;
   router.push('/');
+};
+
+const switchLanguage = () => {
+  const newLocale = locale.value === 'fr' ? 'en' : 'fr';
+  const currentPath = route.path;
+
+  // Remplace la langue dans l'URL actuelle
+  const newPath = currentPath.replace(`/${locale.value}`, `/${newLocale}`);
+
+  router.push(newPath);
 };
 
 // Ferme le menu quand l'utilisateur clique en dehors
