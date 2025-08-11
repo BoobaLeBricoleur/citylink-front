@@ -19,6 +19,7 @@
 @use 'pages/informations';
 @use 'pages/merchants';
 @use 'pages/emergency.scss';
+@use 'pages/merchants/[id].scss' as merchant_details;
 
 @use 'pages/admin/AdminIndex.scss';
 @use 'pages/admin/AdminAnnouncements.scss';
