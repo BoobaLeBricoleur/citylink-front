@@ -7,10 +7,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/i18n',
   ],
-
-  plugins: [
-    '~/plugins/fontawesome.ts'
-  ],
   // Configuration for Nuxt I18nm Micro
   i18n: {
     locales: [
@@ -24,8 +20,6 @@ export default defineNuxtConfig({
   
   // Configuration CSS
   css: [
-    '@fortawesome/fontawesome-free/css/all.css',
-    '@fortawesome/fontawesome-svg-core/styles.css',
     '~/assets/main.scss'
-  ],
+  ]
 })
