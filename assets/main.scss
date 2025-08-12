@@ -20,6 +20,7 @@
 @use 'pages/merchants';
 @use 'pages/emergency.scss';
 @use 'pages/merchants/[id].scss' as merchant_details;
+@use 'pages/information/[id].scss' as information_details;
 
 @use 'pages/admin/AdminIndex.scss';
 @use 'pages/admin/AdminAnnouncements.scss';
@@ -28,3 +29,4 @@
 @use 'pages/admin/AdminBusiness.scss';
 @use 'pages/admin/AdminEvents.scss';
 @use 'pages/admin/AdminUserDetails.scss';
+@use 'pages/admin/AdminInformations.scss';
