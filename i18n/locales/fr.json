@@ -255,6 +255,9 @@
         "description": "Consultez les dernières informations, événements et actualités de votre ville sur CityLink"
       }
     },
+    "informationDetails": {
+      "about": "Détails de l'information"
+    },
     "merchants": {
       "hero": {
         "title": "Découvrez nos commerçants locaux",

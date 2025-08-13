@@ -22,13 +22,6 @@
         </div>
 
         <template v-else-if="information">
-          <div class="information-image">
-            <div class="tag-container">
-              <span v-for="tag in information.tags" :key="tag.id" class="tag">
-                {{ tag.name }}
-              </span>
-            </div>
-          </div>
 
           <div class="information-info">
             <h2>{{ $t('pages.informationDetails.about') }}</h2>
