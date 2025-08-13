@@ -23,10 +23,10 @@
         <div class="header-actions">
             <div class="user-profile">
                 <div class="avatar">
-                    <span>{{ (this.user.firstname[0] + this.user.lastname[0])}}</span>
+                    <span>{{ user && user.firstname && user.lastname ? (user.firstname[0] + user.lastname[0]) : 'UN' }}</span>
                 </div>
                 <div class="user-info">
-                    <span class="user-name">{{this.user.firstname}} {{this.user.lastname}}</span>
+                    <span class="user-name">{{ user && user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : 'Utilisateur' }}</span>
 
                     <!-- TODO: remplacer avec le role dynamiquement -->
                     <span class="user-role">Administrator</span>
@@ -50,7 +50,8 @@ export default {
     name: 'AdminHeader',
     data() {
       return {
-        user: { firstname: '', lastname: '' }
+        user: null,
+        API_URL: process.env.API_URL || 'http://localhost:3000/api'
       }
     },
     async mounted() {
@@ -58,19 +59,24 @@ export default {
     },
     methods: {
       async fetchUser() {
-        // Récupérer depuis localStorage comme fallback
-        const storedUser = localStorage.getItem('user')
-        if (storedUser) {
-          this.user = JSON.parse(storedUser)
-        }
-
-        // Pour être plus cohérent avec les autres composants,
-        // vous pourriez utiliser verifyAndLoadProfile ici
         try {
-          const API_URL = process.env.API_URL || 'http://localhost:3000/api'
+          // Récupérer depuis localStorage comme fallback
+          const storedUser = localStorage.getItem('user')
+          if (storedUser) {
+            try {
+              this.user = JSON.parse(storedUser)
+            } catch (e) {
+              console.error('Erreur lors du parsing du user stocké:', e)
+              this.user = { firstname: '', lastname: '' }
+            }
+          } else {
+            // Initialiser avec des valeurs par défaut si pas de user
+            this.user = { firstname: '', lastname: '' }
+          }
+
           const token = localStorage.getItem('token')
           if (token) {
-            const response = await axios.get(`${API_URL}/users/profile`, {
+            const response = await axios.get(`${this.API_URL}/users/profile`, {
               headers: { 'Authorization': `Bearer ${token}` }
             })
             if (response.data) {
@@ -81,6 +87,10 @@ export default {
           }
         } catch (error) {
           console.error('Erreur lors de la récupération du profil:', error)
+          // S'assurer que user n'est jamais undefined
+          if (!this.user) {
+            this.user = { firstname: '', lastname: '' }
+          }
         }
       }
     }

@@ -19,6 +19,7 @@
 @use 'pages/informations';
 @use 'pages/merchants';
 @use 'pages/emergency.scss';
+@use 'pages/surveys.scss';
 @use 'pages/merchants/[id].scss' as merchant_details;
 @use 'pages/information/[id].scss' as information_details;
 
@@ -30,3 +31,4 @@
 @use 'pages/admin/AdminEvents.scss';
 @use 'pages/admin/AdminUserDetails.scss';
 @use 'pages/admin/AdminInformations.scss';
+@use 'pages/admin/AdminSurveys.scss';

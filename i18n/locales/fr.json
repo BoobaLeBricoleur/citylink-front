@@ -258,6 +258,42 @@
     "informationDetails": {
       "about": "Détails de l'information"
     },
+    "surveys": {
+      "hero": {
+        "title": "Sondages de la Ville",
+        "subtitle": "Votre avis compte ! Aidez-nous à améliorer la vie de votre ville en répondant à nos enquêtes."
+      },
+      "search": {
+        "placeholder": "Rechercher un sondage..."
+      },
+      "loading": "Chargement des sondages...",
+      "noResults": "Aucun sondage trouvé.",
+      "buttons": {
+        "createSurvey": "Créer un sondage"
+      },
+      "card": {
+        "vote": "Voter",
+        "changeVote": "Modifier mon vote",
+        "votes": "votes"
+      },
+      "modal": {
+        "create": {
+          "title": "Créer un nouveau sondage",
+          "questionLabel": "Question",
+          "optionsLabel": "Options de réponse",
+          "addOption": "Ajouter une option",
+          "cancel": "Annuler",
+          "submit": "Créer le sondage"
+        },
+        "vote": {
+          "cancel": "Annuler",
+          "submit": "Valider mon vote"
+        }
+      },
+      "meta": {
+        "description": "Participez aux sondages de votre ville et contribuez à l'évolution de notre communauté sur CityLink"
+      }
+    },
     "merchants": {
       "hero": {
         "title": "Découvrez nos commerçants locaux",
