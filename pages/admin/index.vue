@@ -11,22 +11,33 @@
 
       <!-- Dynamic feature shortcuts -->
       <div class="feature-grid">
-        <NuxtLinkLocale to="/admin/users" class="feature-card">
-          <h3>{{ $t('pages.admin.dashboard.features.users.title') }}</h3>
-          <p>{{ $t('pages.admin.dashboard.features.users.description') }}</p>
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/admin/business" class="feature-card">
-          <h3>{{ $t('pages.admin.dashboard.features.business.title') }}</h3>
-          <p>{{ $t('pages.admin.dashboard.features.business.description') }}</p>
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/admin/events" class="feature-card">
-          <h3>{{ $t('pages.admin.dashboard.features.events.title') }}</h3>
-          <p>{{ $t('pages.admin.dashboard.features.events.description') }}</p>
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/admin/announcements" class="feature-card">
-          <h3>{{ $t('pages.admin.dashboard.features.announcements.title') }}</h3>
-          <p>{{ $t('pages.admin.dashboard.features.announcements.description') }}</p>
-        </NuxtLinkLocale>
+        <!-- Features pour les administrateurs -->
+        <template v-if="isAdmin">
+          <NuxtLinkLocale to="/admin/users" class="feature-card">
+            <h3>{{ $t('pages.admin.dashboard.features.users.title') }}</h3>
+            <p>{{ $t('pages.admin.dashboard.features.users.description') }}</p>
+          </NuxtLinkLocale>
+          <NuxtLinkLocale to="/admin/business" class="feature-card">
+            <h3>{{ $t('pages.admin.dashboard.features.business.title') }}</h3>
+            <p>{{ $t('pages.admin.dashboard.features.business.description') }}</p>
+          </NuxtLinkLocale>
+          <NuxtLinkLocale to="/admin/events" class="feature-card">
+            <h3>{{ $t('pages.admin.dashboard.features.events.title') }}</h3>
+            <p>{{ $t('pages.admin.dashboard.features.events.description') }}</p>
+          </NuxtLinkLocale>
+          <NuxtLinkLocale to="/admin/announcements" class="feature-card">
+            <h3>{{ $t('pages.admin.dashboard.features.announcements.title') }}</h3>
+            <p>{{ $t('pages.admin.dashboard.features.announcements.description') }}</p>
+          </NuxtLinkLocale>
+        </template>
+        
+        <!-- Features pour les commerçants -->
+        <template v-else-if="isBusiness">
+          <NuxtLinkLocale to="/admin/business" class="feature-card">
+            <h3>Mes Commerces</h3>
+            <p>Gérez vos commerces, modifiez leurs informations et suivez leur activité</p>
+          </NuxtLinkLocale>
+        </template>
       </div>
     </div>
   </div>
@@ -44,6 +55,14 @@ export default {
             API_URL: process.env.API_URL || 'http://localhost:3000/api'
         }
     },
+    computed: {
+        isAdmin() {
+            return this.user && this.user.role_id === 1;
+        },
+        isBusiness() {
+            return this.user && this.user.role_id === 3;
+        }
+    },
     mounted() {
         this.initAuth()
     },
@@ -55,6 +74,9 @@ export default {
                 this.form.firstname = userData.firstname || ''
                 this.form.lastname = userData.lastname || ''
                 this.form.email = userData.email || ''
+                
+                // Sauvegarder l'utilisateur dans le localStorage pour que les autres composants puissent y accéder
+                localStorage.setItem('user', JSON.stringify(userData))
             }
         }
     }

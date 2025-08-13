@@ -5,12 +5,12 @@
       <AdminHeader />
       <div class="intro">
         <div class="intro-header">
-          <h1>{{ $t('pages.admin.business.title') }}</h1>
+          <h1>{{ isBusiness ? 'Mes Commerces' : $t('pages.admin.business.title') }}</h1>
           <button @click="showCreateModal = true" class="btn btn-primary">
-            <Icon name="heroicons:plus" /> {{ $t('pages.admin.business.newButton') }}
+            <Icon name="heroicons:plus" /> {{ isBusiness ? 'Ajouter un commerce' : $t('pages.admin.business.newButton') }}
           </button>
         </div>
-        <p>{{ $t('pages.admin.business.subtitle') }}</p>
+        <p>{{ isBusiness ? 'Gérez vos commerces, modifiez leurs informations et suivez leur activité' : $t('pages.admin.business.subtitle') }}</p>
       </div>
 
       <div class="search-bar">
@@ -220,6 +220,14 @@ export default {
                 business.name.toLowerCase().includes(query) ||
                 business.description.toLowerCase().includes(query)
             );
+        },
+        isBusiness() {
+            const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+            return storedUser.role_id === 3;
+        },
+        isAdmin() {
+            const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+            return storedUser.role_id === 1;
         }
     },
     async mounted() {
@@ -244,7 +252,14 @@ export default {
         async fetchBusiness() {
             try {
                 const token = localStorage.getItem('token')
-                const response = await axios.get(`${this.API_URL}/business/`, {
+                const storedUser = JSON.parse(localStorage.getItem('user') || '{}')
+                
+                // Si c'est un commerçant, utiliser l'endpoint spécifique pour ses propres commerces
+                const endpoint = storedUser.role_id === 3 
+                    ? `${this.API_URL}/business/user/my-businesses`
+                    : `${this.API_URL}/business/`
+                    
+                const response = await axios.get(endpoint, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
