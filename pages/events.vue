@@ -76,70 +76,89 @@ export default {
             }
         },
         async fetchUserRegistrations() {
+            if (!this.isLoggedIn) {
+                this.userRegistrations = [];
+                return;
+            }
+            
             try {
-                const token = localStorage.getItem('token')
+                const token = localStorage.getItem('token');
                 const response = await axios.get(`${this.API_URL}/event-registrations/user`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                })
-                this.userRegistrations = response.data
+                    headers: { 
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                console.log('Réservations reçues:', response.data); // Debug
+                this.userRegistrations = response.data;
             } catch (error) {
-                console.error('Erreur lors de la récupération des réservations:', error)
+                console.error('Erreur lors de la récupération des réservations:', error);
+                this.userRegistrations = [];
             }
         },
         async toggleReservation(event) {
             try {
-                const token = localStorage.getItem('token')
-                const isRegistered = this.isEventReserved(event.id)
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    console.error('Token manquant');
+                    return;
+                }
+
+                const isRegistered = this.isEventReserved(event.id);
+                console.log('État de la réservation:', isRegistered); // Debug
 
                 if (isRegistered) {
-                    // Trouver l'ID de la réservation
                     const registration = this.userRegistrations.find(
-                        reg => reg.event_id === event.id && reg.reserved
-                    )
+                        reg => reg.event_id === event.id
+                    );
                     
-                    // Supprimer la réservation
+                    if (!registration) {
+                        console.error('Réservation non trouvée');
+                        return;
+                    }
+
                     await axios.delete(
                         `${this.API_URL}/event-registrations/${event.id}`,
                         {
-                            headers: { Authorization: `Bearer ${token}` }
+                            headers: { 
+                                Authorization: `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
                         }
-                    )
+                    );
                 } else {
-                    // Créer une nouvelle réservation
                     await axios.post(
                         `${this.API_URL}/event-registrations`,
-                        { 
+                        {
                             event_id: event.id,
                             reserved: true
                         },
-                        { headers: { Authorization: `Bearer ${token}` } }
-                    )
+                        { 
+                            headers: { 
+                                Authorization: `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
                 }
                 
                 // Rafraîchir les réservations
-                await this.fetchUserRegistrations()
+                await this.fetchUserRegistrations();
                 
-                // Afficher une notification
-              const message = isRegistered
-                  ? this.$t('pages.events.alerts.cancel_success')
-                  : this.$t('pages.events.alerts.reserve_success')            } catch (error) {
-                console.error('Erreur:', error)
+            } catch (error) {
+                console.error('Erreur détaillée:', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status
+                });
             }
         },
         isEventReserved(eventId) {
-            return this.userRegistrations.some(
-                reg => reg.event_id === eventId && reg.reserved
-            )
+            return this.userRegistrations.some(reg => reg.event_id === eventId);
         },
         formatDate(dateString) {
-            return new Date(dateString).toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            })
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(this.$i18n.locale, options);
         }
     },
     async mounted() {

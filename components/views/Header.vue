@@ -24,6 +24,7 @@
           <li><NuxtLinkLocale to="/informations" @click="isMenuOpen = false">{{ $t('header.menu.information') }}</NuxtLinkLocale></li>
           <li><NuxtLinkLocale to="/announcements" @click="isMenuOpen = false">{{ $t('header.menu.announcements') }}</NuxtLinkLocale></li>
           <li><NuxtLinkLocale to="/emergency" @click="isMenuOpen = false">{{ $t('header.menu.emergency') }}</NuxtLinkLocale></li>
+          <li><NuxtLinkLocale to="/surveys" @click="isMenuOpen = false">{{ $t('header.menu.surveys') }}</NuxtLinkLocale></li>
         </ul>
 
         <!-- Sélecteur de langue -->
@@ -57,7 +58,9 @@
                   <NuxtLinkLocale to="/profile" class="dropdown-item" @click="isDropdownOpen = false">
                     <Icon name="ph:user" /> {{ $t('header.dropdown.profile') }}
                   </NuxtLinkLocale>
-                  <NuxtLinkLocale to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
+                  
+                  <!-- Afficher le lien Dashboard seulement pour les admin et commerçants -->
+                  <NuxtLinkLocale v-if="isAdminOrBusiness" to="/admin" class="dropdown-item" @click="isDropdownOpen = false">
                     <Icon name="ph:squares-four" /> {{ $t('header.dropdown.dashboard') }}
                   </NuxtLinkLocale>
 
@@ -104,6 +107,9 @@ const userData = ref({})
 const isScrolled = ref(false)
 
 const currentLanguage = computed(() => locale.value)
+const isAdminOrBusiness = computed(() => {
+  return userData.value && (userData.value.role_id === 1 || userData.value.role_id === 3)
+})
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value

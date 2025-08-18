@@ -23,34 +23,54 @@
       </div>
       <div class="filter-options">
         <button
-            v-for="filter in filtersData"
-            :key="filter.key"
             class="filter-button"
-            :class="{ active: currentFilter === filter.key }"
-            @click="setFilter(filter.key)"
+            :class="{ active: currentFilter === 'all' }"
+            @click="setFilter('all')"
         >
-          {{ $t('pages.informations.' + filter.label) }}
+          {{ $t('pages.informations.filters.all') }}
+        </button>
+        <button
+            v-for="tag in allTags"
+            :key="tag.id"
+            class="filter-button"
+            :class="{ active: currentFilter === tag.id }"
+            @click="setFilter(tag.id)"
+        >
+          {{ tag.name }}
         </button>
       </div>
     </section>
 
     <section class="announcements-section">
-      <div class="announcement-grid">
+      <div v-if="loading" class="loading-indicator">
+        <p>Chargement des informations...</p>
+      </div>
+      <div v-else-if="filteredInformations.length === 0" class="no-results">
+        <p>Aucune information trouvée</p>
+      </div>
+      <div v-else class="announcement-grid">
         <div
-            v-for="(announcement, index) in filteredAnnouncements"
-            :key="index"
+            v-for="information in filteredInformations"
+            :key="information.id"
             class="announcement-card"
-            :class="{ premium: announcement.isPremium }"
+            @click="viewInformationDetails(information.id)"
         >
           <div class="card-header">
-            <span class="category">{{ $t('pages.informations.' + announcement.categoryKey) }}</span>
-            <span class="date">{{ announcement.date }}</span>
+            <div class="tags-container">
+              <span
+                  v-for="tag in information.tags"
+                  :key="tag.id"
+                  class="category"
+              >
+                {{ tag.name }}
+              </span>
+            </div>
+            <span class="date">{{ formatDate(information.publication_date) }}</span>
           </div>
-          <h3>{{ announcement.title }}</h3>
-          <p>{{ announcement.description }}</p>
+          <h3>{{ information.title }}</h3>
+          <p>{{ information.summary || truncateText(information.content, 100) }}</p>
           <div class="card-footer">
             <button class="read-more">{{ $t('pages.informations.card.readMore') }}</button>
-            <span class="views"><Icon name="heroicons:eye" /> {{ announcement.views }}</span>
           </div>
         </div>
       </div>
@@ -74,6 +94,7 @@
 <script>
 import Header from "../components/views/Header.vue";
 import Footer from "../components/views/Footer.vue";
+import axios from 'axios';
 
 export default {
   name: 'InformationsPage',
@@ -85,82 +106,85 @@ export default {
     return {
       currentFilter: 'all',
       searchTerm: '',
-      filtersData: [
-        { key: 'all', label: 'filters.all' },
-        { key: 'events', label: 'filters.events' },
-        { key: 'works', label: 'filters.works' },
-        { key: 'news', label: 'filters.news' }
-      ],
-      announcements: [
-        {
-          categoryKey: 'categories.event',
-          category: 'Événement',
-          date: '28 Avril 2025',
-          title: 'Festival des Arts Urbains',
-          description: 'Rejoignez-nous pour une célébration de l\'art urbain avec des artistes locaux et internationaux.',
-          views: '1.2k',
-          isPremium: true
-        },
-        {
-          categoryKey: 'categories.works',
-          category: 'Travaux',
-          date: '25 Avril 2025',
-          title: 'Modernisation du centre-ville',
-          description: 'Information sur les travaux de rénovation prévus au cœur de la ville durant le mois de mai.',
-          views: '856',
-          isPremium: false
-        },
-        {
-          categoryKey: 'categories.news',
-          category: 'Actualité',
-          date: '20 Avril 2025',
-          title: 'Nouveau partenariat commercial',
-          description: 'CityLink accueille 15 nouveaux commerçants d\'exception sur sa plateforme ce mois-ci.',
-          views: '723',
-          isPremium: false
-        },
-        {
-          categoryKey: 'categories.event',
-          category: 'Événement',
-          date: '15 Avril 2025',
-          title: 'Conférence Smart City',
-          description: 'Participez à notre conférence annuelle sur les innovations urbaines et les villes intelligentes.',
-          views: '1.5k',
-          isPremium: true
-        }
-      ]
+      loading: true,
+      informations: [],
+      allTags: [],
+      API_URL: process.env.API_URL || 'http://localhost:3000/api'
     };
   },
   computed: {
-    filteredAnnouncements() {
-      // Apply search filter
-      let filtered = this.announcements;
+    filteredInformations() {
+      // Appliquer le filtre de recherche
+      let filtered = this.informations;
 
       if (this.searchTerm.trim() !== '') {
         const term = this.searchTerm.toLowerCase();
         filtered = filtered.filter(item =>
             item.title.toLowerCase().includes(term) ||
-            item.description.toLowerCase().includes(term)
+            (item.summary && item.summary.toLowerCase().includes(term)) ||
+            item.content.toLowerCase().includes(term)
         );
       }
 
-      // Apply category filter
+      // Appliquer le filtre par tag
       if (this.currentFilter !== 'all') {
-        const categoryMapping = {
-          'events': 'categories.event',
-          'works': 'categories.works',
-          'news': 'categories.news'
-        };
-
-        filtered = filtered.filter(item => item.categoryKey === categoryMapping[this.currentFilter]);
+        filtered = filtered.filter(item =>
+            item.tags && item.tags.some(tag => tag.id === this.currentFilter)
+        );
       }
 
       return filtered;
     }
   },
+  async mounted() {
+    await this.fetchTags();
+    await this.fetchInformations();
+  },
   methods: {
+    async fetchInformations() {
+      try {
+        this.loading = true;
+        const response = await axios.get(`${this.API_URL}/information?withTags=true`);
+        this.informations = response.data || [];
+        this.loading = false;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des informations:', error);
+        this.loading = false;
+      }
+    },
+
+    async fetchTags() {
+      try {
+        const response = await axios.get(`${this.API_URL}/tags`);
+        this.allTags = response.data || [];
+      } catch (error) {
+        console.error('Erreur lors de la récupération des tags:', error);
+      }
+    },
+
     setFilter(filter) {
       this.currentFilter = filter;
+    },
+
+    viewInformationDetails(id) {
+      // Navigation vers la page de détails d'une information
+      this.$router.push(`/information/${id}`);
+    },
+
+    formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return new Intl.DateTimeFormat('fr-FR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      }).format(date);
+    },
+
+    truncateText(text, maxLength) {
+      if (!text) return '';
+      if (text.length <= maxLength) return text;
+      return text.substring(0, maxLength) + '...';
     }
   },
   head() {

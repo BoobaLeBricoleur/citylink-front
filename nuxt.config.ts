@@ -23,8 +23,6 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '@fortawesome/fontawesome-free/css/all.css',
-    '@fortawesome/fontawesome-svg-core/styles.css',
     '~/assets/main.scss'
-  ],
+  ]
 })
