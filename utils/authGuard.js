@@ -17,7 +17,8 @@ export async function verifyAndLoadProfile(router, API_URL) {
     const response = await axios.get(`${API_URL}/users/profile`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
-    if (!response.data || response.data.role_id !== 1) {
+    // Autoriser les utilisateurs avec role_id 1 (admin) ou 3 (business)
+    if (!response.data || (response.data.role_id !== 1 && response.data.role_id !== 3)) {
       router.push('/account')
       return null
     }
