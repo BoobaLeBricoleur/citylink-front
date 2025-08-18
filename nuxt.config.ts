@@ -7,7 +7,11 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/i18n',
   ],
-  // Configuration for Nuxt I18nm Micro
+
+  plugins: [
+    '~/plugins/fontawesome.ts'
+  ],
+
   i18n: {
     locales: [
       { code: 'en', iso: 'en-US', file: 'en.json' },
@@ -17,8 +21,7 @@ export default defineNuxtConfig({
     strategy: 'prefix',
     vueI18n: './i18n.config.ts'
   },
-  
-  // Configuration CSS
+
   css: [
     '~/assets/main.scss'
   ]

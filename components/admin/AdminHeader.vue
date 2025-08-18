@@ -28,6 +28,7 @@
                 <div class="user-info">
                     <span class="user-name">{{ user && user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : 'Utilisateur' }}</span>
 
+
                     <!-- TODO: remplacer avec le role dynamiquement -->
                     <span class="user-role">Administrator</span>
 
@@ -73,7 +74,9 @@ export default {
             // Initialiser avec des valeurs par défaut si pas de user
             this.user = { firstname: '', lastname: '' }
           }
-
+          
+          API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
+          
           const token = localStorage.getItem('token')
           if (token) {
             const response = await axios.get(`${this.API_URL}/users/profile`, {
