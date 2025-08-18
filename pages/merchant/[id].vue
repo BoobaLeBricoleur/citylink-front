@@ -56,7 +56,7 @@ export default {
     return {
       merchant: null,
       defaultImage,
-      API_URL: process.env.API_URL || 'http://localhost:3000/api'
+      API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
     }
   },
   async mounted() {
