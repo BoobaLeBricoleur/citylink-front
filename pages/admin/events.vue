@@ -147,7 +147,7 @@ export default {
                 business_id: '',
                 is_reservable: false
             },
-            API_URL: process.env.API_URL || 'http://localhost:3000/api'
+            API_URL: process.env.API_URL || 'https://citylink-back.onrender.com/api'
         }
     },
     computed: {
